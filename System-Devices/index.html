@@ -2,120 +2,120 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Security+ Slides</title>
+<title>CompTIA A+ 1201 — System Devices</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        max-width: 900px;
-        margin: auto;
-        padding: 20px;
-    }
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+  }
 
-    #slide {
-        border: 2px solid #ccc;
-        padding: 40px;
-        margin-bottom: 16px;
-        min-height: 200px;
-        font-size: 1.2em;
-        text-align: left;
-        background: #f9f9f9;
-    }
+  #slide {
+    border: 2px solid #ccc;
+    padding: 40px;
+    margin-bottom: 16px;
+    min-height: 200px;
+    font-size: 1.2em;
+    text-align: left;
+    background: #f9f9f9;
+  }
 
-    /* Carousel */
-    #carouselWrap {
-        border: 2px solid #ccc;
-        background: #fff;
-        padding: 16px;
-        margin-bottom: 20px;
-    }
+  /* Carousel */
+  #carouselWrap {
+    border: 2px solid #ccc;
+    background: #fff;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
 
-    .carousel {
-        display: grid;
-        gap: 10px;
-        align-items: center;
-    }
+  .carousel {
+    display: grid;
+    gap: 10px;
+    align-items: center;
+  }
 
-    .carouselTop {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-        flex-wrap: wrap;
-    }
+  .carouselTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
 
-    .carouselImgFrame {
-        border: 1px solid #ddd;
-        background: #fafafa;
-        padding: 10px;
-        display: grid;
-        place-items: center;
-        min-height: 260px;
-    }
+  .carouselImgFrame {
+    border: 1px solid #ddd;
+    background: #fafafa;
+    padding: 10px;
+    display: grid;
+    place-items: center;
+    min-height: 260px;
+  }
 
-    #carouselImg {
-        max-width: 100%;
-        height: auto;
-        display: block;
-    }
+  #carouselImg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
 
-    .carouselBtns {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        flex-wrap: wrap;
-    }
+  .carouselBtns {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
 
-    .dots {
-        display: flex;
-        gap: 6px;
-        flex-wrap: wrap;
-        align-items: center;
-    }
+  .dots {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
 
-    .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 999px;
-        border: 1px solid #666;
-        background: transparent;
-        cursor: pointer;
-        padding: 0;
-    }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    border: 1px solid #666;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+  }
 
-    .dot.active {
-        background: #4a90e2;
-        border-color: #4a90e2;
-    }
+  .dot.active {
+    background: #4a90e2;
+    border-color: #4a90e2;
+  }
 
-    .buttons {
-        margin-top: 10px;
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        flex-wrap: wrap;
-        align-items: center;
-    }
+  .buttons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
 
-    .buttons .left, .buttons .right {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        flex-wrap: wrap;
-    }
+  .buttons .left, .buttons .right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
 
-    button {
-        padding: 10px 14px;
-        cursor: pointer;
-    }
+  button {
+    padding: 10px 14px;
+    cursor: pointer;
+  }
 
-    #counter {
-        font-weight: bold;
-    }
+  #counter {
+    font-weight: bold;
+  }
 </style>
 </head>
-<body>
 
-<h1>Security+ Study Slides</h1>
+<body>
+<h1>CompTIA A+ 1201 — System Devices</h1>
 
 <div id="slide"></div>
 
@@ -138,174 +138,187 @@
 </div>
 
 <div class="buttons">
-    <div class="left">
-        <button onclick="prevSlide()">Previous</button>
-        <button onclick="nextSlide()">Next</button>
-        <span id="counter"></span>
-    </div>
+  <div class="left">
+    <button onclick="prevSlide()">Previous</button>
+    <button onclick="nextSlide()">Next</button>
+    <span id="counter"></span>
+  </div>
 
-    <div class="right">
-        <button id="enableAudioBtn" onclick="enableAudio()">Enable audio</button>
-        <button id="replayBtn" onclick="replayAudio()" disabled>Replay audio</button>
-    </div>
+  <div class="right">
+    <button id="enableAudioBtn" onclick="enableAudio()">Enable audio</button>
+    <button id="replayBtn" onclick="replayAudio()" disabled>Replay audio</button>
+  </div>
 </div>
 
 <audio id="slideAudio" preload="auto"></audio>
 
 <script>
-    // Each slide can have any number of images (0, 1, 2, 3, ...).
-    const slides = [
-      {
-        content: "<h2>CompTIA Security+ SY0-701</h2><p>Compact Study</p>",
-        images: ["images/01-1.png", "images/01-2.png", "images/01-3.png"]
-      },
-      {
-        content: "<h2>Core Security Concepts</h2>" +
-                 "<ul>" +
-                 "<li><strong>CIA:</strong> Confidentiality, Integrity, Availability</li>" +
-                 "<li><strong>AAA:</strong> Identification, Authentication, Authorization, Accounting</li>" +
-                 "<li><strong>Control types:</strong> Technical, Operational, Managerial</li>" +
-                 "<li><strong>Control function:</strong> Preventive, Detective, Corrective, Deterrent, Compensating</li>" +
-                 "<li><strong>Frameworks & baselines:</strong> NIST, ISO; policies, standards, procedures</li>" +
-                 "<li><strong>Zero trust:</strong> Never trust, always verify; continuous validation</li>" +
-                 "</ul>",
-        images: ["images/02-1.png", "images/02-2.png"] // example: 2 images
-      },
-      {
-        content: "<h2>Threats, Attacks, Vulnerabilities</h2><p>…</p>",
-        images: [] // example: no carousel shown for this slide
-      }
-      // ...continue
-    ];
+  /**
+   * Folder structure:
+   * Repo: CompTIA-APlus-1201-Slides
+   * Module folder: System-Devices/
+   *   - index.html (this file)
+   *   - audio/01.mp3, 02.mp3...
+   *   - images/01-1.png, 01-2.png...
+   *
+   * This base path auto-works whether you host this file:
+   *  - at /System-Devices/index.html (recommended), OR
+   *  - temporarily at repo root while testing.
+   */
+  const MODULE_FOLDER = "System-Devices";
+  const BASE_PATH = window.location.pathname.includes(`/${MODULE_FOLDER}/`) ? "." : MODULE_FOLDER;
 
-    let index = 0;
+  // Helper
+  const pad2 = (n) => String(n).padStart(2, "0");
 
-    // Carousel state for the CURRENT slide
-    let imgIndex = 0;
+  // ✅ Each slide can have any number of images (0, 1, 2, 3, ...)
+  // Put ONLY filenames in images[] — code will prefix with `${BASE_PATH}/images/`
+  const slides = [
+    {
+      content: "<h2>Module 3: Installing System Devices</h2><p>CompTIA A+ 1201</p>",
+      images: ["01-1.png", "01-2.png", "01-3.png"]
+    },
+    {
+      content: "<h2>Lessons</h2><ul><li>Power Supplies and Cooling</li><li>Storage Devices</li><li>System Memory</li><li>CPUs</li></ul>",
+      images: ["02-1.png", "02-2.png"]
+    },
+    {
+      content: "<h2>Power Supply Units</h2><p>PSU converts AC wall power into DC power the PC uses. Compatibility and stable rails matter.</p>",
+      images: [] // no carousel for this slide
+    }
+    // ...keep adding slides here
+  ];
 
-    // Audio state
-    let audioEnabled = false;
-    function pad2(n) { return String(n).padStart(2, '0'); }
+  // Slide state
+  let index = 0;
 
-    // Audio naming convention:
-    // Slide 1 => audio/01.mp3, Slide 2 => audio/02.mp3, etc.
-    function audioPathForCurrentSlide() {
-        return "audio/" + pad2(index + 1) + ".mp3";
+  // Carousel state (for current slide)
+  let imgIndex = 0;
+
+  // Audio state
+  let audioEnabled = false;
+
+  // Audio naming convention:
+  // Slide 1 => System-Devices/audio/01.mp3 (or ./audio/01.mp3 if you're inside the folder)
+  function audioPathForCurrentSlide() {
+    return `${BASE_PATH}/audio/${pad2(index + 1)}.mp3`;
+  }
+
+  async function playCurrentAudio() {
+    if (!audioEnabled) return;
+
+    const audio = document.getElementById("slideAudio");
+    audio.src = audioPathForCurrentSlide();
+    audio.currentTime = 0;
+
+    try {
+      await audio.play();
+    } catch (err) {
+      console.log("Audio play blocked:", err);
+    }
+  }
+
+  function enableAudio() {
+    audioEnabled = true;
+    document.getElementById("replayBtn").disabled = false;
+    playCurrentAudio();
+  }
+
+  function replayAudio() {
+    playCurrentAudio();
+  }
+
+  function renderCarousel() {
+    const wrap = document.getElementById("carouselWrap");
+    const imgEl = document.getElementById("carouselImg");
+    const dotsEl = document.getElementById("dots");
+    const imgCounter = document.getElementById("imgCounter");
+    const prevBtn = document.getElementById("prevImgBtn");
+    const nextBtn = document.getElementById("nextImgBtn");
+
+    const filenames = (slides[index].images || []).filter(Boolean);
+
+    // Hide carousel if 0 images
+    if (filenames.length === 0) {
+      wrap.style.display = "none";
+      return;
     }
 
-    async function playCurrentAudio() {
-        if (!audioEnabled) return;
+    wrap.style.display = "block";
 
-        const audio = document.getElementById('slideAudio');
-        audio.src = audioPathForCurrentSlide();
-        audio.currentTime = 0;
+    // Clamp imgIndex
+    if (imgIndex < 0) imgIndex = 0;
+    if (imgIndex > filenames.length - 1) imgIndex = filenames.length - 1;
 
-        try {
-            await audio.play();
-        } catch (err) {
-            console.log("Audio play blocked:", err);
-        }
+    const src = `${BASE_PATH}/images/${filenames[imgIndex]}`;
+    imgEl.src = src;
+
+    imgCounter.textContent = `Image ${imgIndex + 1} / ${filenames.length}`;
+
+    prevBtn.disabled = (filenames.length <= 1) || (imgIndex === 0);
+    nextBtn.disabled = (filenames.length <= 1) || (imgIndex === filenames.length - 1);
+
+    // Build dots
+    dotsEl.innerHTML = "";
+    if (filenames.length > 1) {
+      filenames.forEach((_, i) => {
+        const b = document.createElement("button");
+        b.className = "dot" + (i === imgIndex ? " active" : "");
+        b.title = `Go to image ${i + 1}`;
+        b.onclick = () => { imgIndex = i; renderCarousel(); };
+        dotsEl.appendChild(b);
+      });
     }
+  }
 
-    function enableAudio() {
-        audioEnabled = true;
-        document.getElementById('replayBtn').disabled = false;
-        playCurrentAudio();
+  function nextImage() {
+    const filenames = (slides[index].images || []).filter(Boolean);
+    if (imgIndex < filenames.length - 1) {
+      imgIndex++;
+      renderCarousel();
     }
+  }
 
-    function replayAudio() {
-        playCurrentAudio();
+  function prevImage() {
+    if (imgIndex > 0) {
+      imgIndex--;
+      renderCarousel();
     }
+  }
 
-    function renderCarousel() {
-      const wrap = document.getElementById('carouselWrap');
-      const imgEl = document.getElementById('carouselImg');
-      const dotsEl = document.getElementById('dots');
-      const imgCounter = document.getElementById('imgCounter');
-      const prevBtn = document.getElementById('prevImgBtn');
-      const nextBtn = document.getElementById('nextImgBtn');
+  function showSlide() {
+    document.getElementById("slide").innerHTML = slides[index].content;
+    document.getElementById("counter").textContent = `Slide ${index + 1} / ${slides.length}`;
 
-      const imgs = (slides[index].images || []).filter(Boolean);
+    // Reset carousel on slide change
+    imgIndex = 0;
+    renderCarousel();
 
-      // Hide carousel if 0 images
-      if (imgs.length === 0) {
-        wrap.style.display = "none";
-        return;
-      }
+    // Play slide audio (if enabled)
+    playCurrentAudio();
+  }
 
-      // Show carousel
-      wrap.style.display = "block";
-
-      // Clamp imgIndex
-      if (imgIndex < 0) imgIndex = 0;
-      if (imgIndex > imgs.length - 1) imgIndex = imgs.length - 1;
-
-      imgEl.src = imgs[imgIndex];
-      imgCounter.textContent = `Image ${imgIndex + 1} / ${imgs.length}`;
-
-      prevBtn.disabled = (imgs.length <= 1) || (imgIndex === 0);
-      nextBtn.disabled = (imgs.length <= 1) || (imgIndex === imgs.length - 1);
-
-      // Build dots
-      dotsEl.innerHTML = "";
-      if (imgs.length > 1) {
-        imgs.forEach((_, i) => {
-          const b = document.createElement("button");
-          b.className = "dot" + (i === imgIndex ? " active" : "");
-          b.title = `Go to image ${i + 1}`;
-          b.onclick = () => { imgIndex = i; renderCarousel(); };
-          dotsEl.appendChild(b);
-        });
-      }
-    }
-
-    function nextImage() {
-      const imgs = (slides[index].images || []).filter(Boolean);
-      if (imgIndex < imgs.length - 1) {
-        imgIndex++;
-        renderCarousel();
-      }
-    }
-
-    function prevImage() {
-      if (imgIndex > 0) {
-        imgIndex--;
-        renderCarousel();
-      }
-    }
-
-    function showSlide() {
-        document.getElementById('slide').innerHTML = slides[index].content;
-        document.getElementById('counter').textContent = `Slide ${index + 1} / ${slides.length}`;
-
-        // Reset carousel to first image whenever the slide changes
-        imgIndex = 0;
-        renderCarousel();
-
-        playCurrentAudio();
-    }
-
-    function nextSlide() {
-        if (index < slides.length - 1) index++;
-        showSlide();
-    }
-
-    function prevSlide() {
-        if (index > 0) index--;
-        showSlide();
-    }
-
-    // Keyboard:
-    // Left/Right = slide nav
-    // A/D = image nav
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowRight") nextSlide();
-        if (e.key === "ArrowLeft") prevSlide();
-        if (e.key.toLowerCase() === "d") nextImage();
-        if (e.key.toLowerCase() === "a") prevImage();
-    });
-
+  function nextSlide() {
+    if (index < slides.length - 1) index++;
     showSlide();
+  }
+
+  function prevSlide() {
+    if (index > 0) index--;
+    showSlide();
+  }
+
+  // Keyboard:
+  // Left/Right = slide nav
+  // A/D = image nav
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") nextSlide();
+    if (e.key === "ArrowLeft") prevSlide();
+    if (e.key.toLowerCase() === "d") nextImage();
+    if (e.key.toLowerCase() === "a") prevImage();
+  });
+
+  showSlide();
 </script>
 
 </body>
