@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CompTIA A+ 1201 — System Devices Quiz</title>
-  <meta name="description" content="CompTIA A+ 1201 — Module 3 Quiz (System Devices)" />
+  <meta name="description" content="CompTIA A+ 1201 System Devices Quiz" />
   <style>
     /* ======================= */
     /* KB Black/White Template */
@@ -376,7 +376,7 @@
       </div>
       <div>
         <h1>CompTIA A+ 1201 Quiz</h1>
-        <div class="subtitle">Module 3 — System Devices (3A–3D)</div>
+        <div class="subtitle">System Devices</div>
       </div>
     </div>
 
@@ -403,7 +403,7 @@
       <!-- Intro -->
       <section id="intro" class="qBox" aria-label="Intro">
         <div class="titleRow">
-          <h2 style="margin:0;">Module 3 Quiz (40 Questions)</h2>
+          <h2 style="margin:0;">System Devices Quiz (40 Questions)</h2>
           <span class="chip"><b>Timer:</b> 35 minutes</span>
         </div>
         <p class="muted" style="margin:10px 0 0;">
@@ -700,7 +700,8 @@
     const q = getCurrentQuestion();
     if (!q) return;
 
-    elSectionChip.innerHTML = `<b>Section:</b> ${escapeHtml(q.section)} — ${escapeHtml(q.moduleTitle)}`;
+    // Latestet Change -v Commenting Out to remove Section from quiz until the end.
+    //elSectionChip.innerHTML = `<b>Section:</b> ${escapeHtml(q.section)} — ${escapeHtml(q.moduleTitle)}`;
     elQChip.innerHTML = `<b>Question:</b> ${cursor + 1} / ${order.length}`;
     elQText.textContent = q.prompt;
 
