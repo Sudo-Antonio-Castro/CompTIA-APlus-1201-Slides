@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CompTIA A+ 220-1201 — Module 4</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+  }
+
+  #slide {
+    border: 2px solid #ccc;
+    padding: 40px;
+    margin-bottom: 16px;
+    min-height: 200px;
+    font-size: 1.2em;
+    text-align: left;
+    background: #f9f9f9;
+  }
+
+  /* Carousel */
+  #carouselWrap {
+    border: 2px solid #ccc;
+    background: #fff;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  .carousel {
+    display: grid;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .carouselTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .carouselImgFrame {
+    border: 1px solid #ddd;
+    background: #fafafa;
+    padding: 10px;
+    display: grid;
+    place-items: center;
+    min-height: 260px;
+  }
+
+  #carouselImg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .carouselBtns {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .dots {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    border: 1px solid #666;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .dot.active {
+    background: #4a90e2;
+    border-color: #4a90e2;
+  }
+
+  .buttons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .buttons .left, .buttons .right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  button, a.homeLink {
+    padding: 10px 14px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #bbb;
+    background: #fff;
+    display: inline-block;
+  }
+
+  button:hover, a.homeLink:hover {
+    background: #f1f1f1;
+  }
+
+  #counter {
+    font-weight: bold;
+  }
+
+  .summaryBox {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-left: 5px solid #4a90e2;
+    background: #fff;
+  }
+</style>
+</head>
+
+<body>
+<h1>CompTIA A+ 220-1201 — Module 4: Troubleshooting System Devices</h1>
+
+<div id="slide"></div>
+
+<!-- Carousel container (auto-hides if no images) -->
+<div id="carouselWrap" style="display:none;">
+  <div class="carousel">
+    <div class="carouselTop">
+      <div class="carouselBtns">
+        <button id="prevImgBtn" onclick="prevImage()">◀ Image</button>
+        <button id="nextImgBtn" onclick="nextImage()">Image ▶</button>
+        <span id="imgCounter" style="font-weight:bold;"></span>
+      </div>
+      <div class="dots" id="dots"></div>
+    </div>
+
+    <div class="carouselImgFrame">
+      <img id="carouselImg" alt="Slide image" />
+    </div>
+  </div>
+</div>
+
+<div class="buttons">
+  <div class="left">
+    <button onclick="goHome()">Return Home</button>
+    <button onclick="goToFirstSlide()">First Slide</button>
+    <button onclick="prevSlide()">Previous</button>
+    <button onclick="nextSlide()">Next</button>
+    <span id="counter"></span>
+  </div>
+
+  <div class="right">
+    <button id="enableAudioBtn" onclick="enableAudio()">Enable audio</button>
+    <button id="replayBtn" onclick="replayAudio()" disabled>Replay audio</button>
+  </div>
+</div>
+
+<audio id="slideAudio" preload="auto"></audio>
+
+<script>
+  // Place this file at: Module-4/index.html
+  // Audio files at: Module-4/audio/01.mp3, 02.mp3, ...
+  // Image files at: Module-4/images/<filename>
+  // Add image filenames per slide in the "images" array to enable the carousel.
+
+  const pad2 = (n) => String(n).padStart(2, "0");
+
+  const slides = [
+    {
+      "content": "<h2>Module 4: Troubleshooting System Devices</h2><p>CompTIA A+ 220-1201</p><div class='summaryBox'><b>How to use:</b> Read the bullets, then read the summary out loud. If you can explain the summary in your own words, you&#39;re in great shape for the exam.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Sections</h2><ul><li><b>4A</b> — BIOS/UEFI Configuration</li><li><b>4B</b> — Power and Disk Issues</li><li><b>4C</b> — System and Display Issues</li></ul>",
+      "images": []
+    },
+
+    { "content": "<h2>Lesson 4A — BIOS/UEFI Configuration</h2>", "images": [] },
+
+    {
+      "content": "<h2>BIOS and UEFI</h2><ul><li>BIOS/UEFI is firmware that initializes hardware, runs early checks (POST), and starts the boot process.</li><li>UEFI is the modern replacement for legacy BIOS and usually includes stronger security features and more flexible boot management.</li><li>You enter firmware setup using a startup key (commonly shown briefly, like F2/DEL), and many systems also allow entry through advanced startup/recovery options.</li><li>Firmware setup is where you configure boot priority, enable/disable devices, and confirm the system recognizes installed hardware before the OS loads.</li></ul><div class='summaryBox'><b>Summary:</b> BIOS/UEFI is the control center that powers up hardware and decides how the computer starts. UEFI is newer and is often tied to security and modern boot features. If a PC fails before Windows loads, checking firmware settings is one of the fastest ways to identify misconfiguration or missing hardware detection. Being comfortable getting into setup is a common exam and real-world troubleshooting skill.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Boot and Device Options</h2><ul><li>The boot option sequence determines the order the system checks devices to find something bootable.</li><li>Common boot targets include internal storage, USB, optical media, and network/PXE boot (often used for imaging in managed environments).</li><li>Many systems provide a one-time boot menu so you can boot from USB temporarily without permanently changing boot order.</li><li>If the system won&#39;t boot (or boots to the wrong device), verify boot order and confirm the expected device is detected and enabled.</li></ul><div class='summaryBox'><b>Summary:</b> Boot options control where the system looks first to start an operating system. A wrong boot order can create confusing symptoms even when the OS drive is healthy. One-time boot menus are a clean way to run installers or recovery tools without leaving the system misconfigured afterward. Exam questions here usually test that you can pick the correct boot device for a scenario.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>USB Permissions</h2><ul><li>Firmware can enable/disable controllers and ports, including USB, which affects whether USB devices work before the OS loads.</li><li>Restricting USB can reduce risk from unauthorized boot media and unknown devices (helpful in managed or public environments).</li><li>If a keyboard/mouse doesn&#39;t work at boot or a bootable USB won&#39;t show up, confirm USB controllers/ports and USB boot settings are enabled.</li><li>During troubleshooting, temporarily disabling unused controllers can help isolate conflicts, but remember to restore required devices after testing.</li></ul><div class='summaryBox'><b>Summary:</b> USB permissions are a firmware-level way to control external device access. They matter for security (blocking unauthorized USB boot) and for troubleshooting (explaining why input devices or installer media aren&#39;t detected). When USB problems happen before the OS loads, firmware configuration is often the missing piece. On the exam, USB permissions usually tie to security and device availability.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Fan Considerations</h2><ul><li>Reliable cooling starts with basics: clean dust from vents/heatsinks, maintain balanced airflow (intake + exhaust), and keep cabling from blocking airflow paths.</li><li>Many systems allow fan profiles/curves (balanced/cool/quiet/custom) that trade noise for temperature control.</li><li>Use temperature sensors and monitoring tools to confirm whether overheating is real instead of guessing from &#34;it feels warm.&#34;</li><li>A failed/jammed CPU fan or poor heatsink contact (including bad thermal compound) can cause throttling, crashes, and unexpected shutdowns under load.</li></ul><div class='summaryBox'><b>Summary:</b> Fan setup is both a hardware and settings issue: airflow, cleanliness, and fan profiles all affect stability. Temperature monitoring helps you confirm whether heat is the cause of symptoms like shutdowns or slow performance. Many issues are solved by restoring airflow (cleaning dust) and ensuring the CPU cooler is correctly installed. On the exam, overheating scenarios commonly point to fan operation, airflow, and temperature checks.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Boot Passwords and Secure Boot</h2><ul><li>Firmware passwords typically include a supervisor/admin/setup password (blocks changing firmware settings) and a user/system password (blocks boot without authentication).</li><li>These controls help prevent tampering, like changing boot order to run unauthorized USB tools.</li><li>Secure Boot is a UEFI feature that only allows trusted, digitally signed bootloaders, helping prevent boot-level malware.</li><li>Secure Boot can block some older OS installs or unsigned recovery tools, so it&#39;s a key setting to check when boot media won&#39;t start.</li></ul><div class='summaryBox'><b>Summary:</b> Boot passwords protect firmware configuration and can prevent unauthorized system use at startup. Secure Boot adds another layer by blocking untrusted bootloaders, which reduces bootkit risk. In troubleshooting, Secure Boot can be the reason a recovery USB won&#39;t load until settings are adjusted or proper signed media is used. For the exam, be sure you can distinguish a setup password from a system password.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Trusted Platform Modules (TPM)</h2><ul><li>A TPM is a hardware security component that stores cryptographic keys/certificates and supports secure authentication and encryption.</li><li>It&#39;s commonly tied to full-disk encryption (for example, protecting data even if the drive is removed from the PC).</li><li>TPM-backed security works best when the system can verify a trusted boot state, helping prevent key access if startup is compromised.</li><li>Firmware/hardware changes can sometimes trigger recovery prompts for encrypted drives because the trusted state changed.</li></ul><div class='summaryBox'><b>Summary:</b> A TPM provides hardware-rooted protection for encryption keys and other sensitive secrets. This makes it harder for attackers to extract credentials or decrypt data by simply stealing the drive. TPM features often work alongside secure boot checks to confirm the system hasn&#39;t been tampered with. On the exam, TPM usually signals &#34;hardware-backed encryption and trust.&#34;</div>",
+      "images": []
+    },
+
+    { "content": "<h2>Lesson 4B — Power and Disk Issues</h2>", "images": [] },
+
+    {
+      "content": "<h2>Troubleshoot Power Issues</h2><ul><li>Start with the simplest checks: verify the outlet works, inspect/replace the power cable, and confirm PSU and motherboard power connections are seated.</li><li>Look for signs of life (fans/LEDs). If there&#39;s no response, reduce the system to minimum hardware to rule out shorts or overloads.</li><li>Disconnect nonessential peripherals to isolate a failing device drawing too much power or shorting the system.</li><li>If basics don&#39;t resolve it, test the PSU (or swap in a known-good PSU) to confirm stable DC output.</li></ul><div class='summaryBox'><b>Summary:</b> Power troubleshooting is about isolating the failure point in a safe, logical order. Many &#34;dead&#34; PCs are caused by something simple like a bad cable, loose connector, or faulty outlet. Stripping to minimum components helps identify shorts or overloaded configurations. For the exam, the best next step is usually the simplest verification before replacing parts.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Troubleshoot POST Issues</h2><ul><li>POST happens before the OS loads and confirms core hardware is functional enough to continue booting.</li><li>If the system powers on but won&#39;t POST, start with recent changes and re-check basic connections (RAM, GPU, CPU power, front-panel headers).</li><li>Remove external devices and nonessential internal components to isolate the failure source and attempt a minimal POST.</li><li>If it still fails, suspect PSU instability, motherboard/CPU issues, or firmware problems (and use vendor diagnostics when available).</li></ul><div class='summaryBox'><b>Summary:</b> POST failures are hardware-first problems because the OS isn&#39;t involved yet. The quickest wins come from reseating components and simplifying to a minimal configuration. If the system still can&#39;t complete POST, power stability and motherboard/CPU faults become more likely. Exam questions typically reward a methodical hardware isolation approach.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Troubleshoot Boot Issues</h2><ul><li>After POST, the system looks for a bootable device based on boot order; if the OS drive isn&#39;t detected or isn&#39;t first, boot can fail.</li><li>Confirm the drive has power/activity and check data connections (SATA cable/port, or reseat M.2/NVMe drives).</li><li>Verify the drive is enabled and recognized in firmware, and confirm settings like SATA mode and Secure Boot aren&#39;t blocking boot.</li><li>Use a one-time boot menu or reorder boot priority temporarily for repair media, then restore normal order after troubleshooting.</li></ul><div class='summaryBox'><b>Summary:</b> Boot issues often come down to detection and configuration: is the drive visible, and is the system trying to boot from it? Physical checks (power/cables/seating) are the fastest first step when a drive isn&#39;t detected. Firmware settings can also prevent boot even when the drive is healthy. On the exam, match the symptom to whether it&#39;s a detection issue or a boot configuration issue.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Troubleshoot Boot Sector Issues</h2><ul><li>Boot sector/boot record problems happen when the drive is detected but startup code or boot configuration is corrupted or mismatched.</li><li>Common causes include disk errors, sudden power loss, multi-boot misconfigurations, or boot-level malware.</li><li>Symptoms often look like &#34;OS not found&#34; or repeated boot loops even though the disk appears in firmware.</li><li>Typical fixes use recovery/startup repair tools (or antivirus boot media if malware is suspected) to rebuild boot records and configuration.</li></ul><div class='summaryBox'><b>Summary:</b> Boot sector issues are usually &#34;the drive exists, but it can&#39;t start the OS.&#34; The key skill is separating this from a drive-detection problem so you don&#39;t replace hardware unnecessarily. Recovery tools are commonly used to repair boot records and boot configuration. On the exam, look for clues that the disk is detected but startup still fails.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Troubleshoot OS Errors and Crash Screens (BSOD)</h2><ul><li>Blue screens and crash loops often point to drivers, corrupted system files, failing hardware (RAM/storage), overheating, or power instability.</li><li>Collect evidence first: note the stop code/message, check event logs, and use memory dumps when available for deeper analysis.</li><li>Start with recent changes (new driver, update, new hardware) and reverse or update them if the timing matches the failures.</li><li>Run targeted diagnostics (memory test, disk health/SMART checks, temperature monitoring) to confirm the suspected root cause.</li></ul><div class='summaryBox'><b>Summary:</b> Crash screens are high-signal errors that should guide your troubleshooting, not be treated like random bad luck. The best approach is evidence-driven: capture the stop code and look for patterns, then test the most likely causes. Drivers and heat are common real-world culprits, but failing RAM and storage can also trigger repeated BSODs. Exam questions usually reward &#34;gather info first, then take a targeted action.&#34;</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Troubleshoot Drive Availability</h2><ul><li>Availability issues include missing drives, read/write errors, no LED activity, constant disk thrashing, or unusual HDD noises.</li><li>Differentiate &#34;not detected&#34; (power/cable/port/firmware) from &#34;detected but not accessible&#34; (partition/file system/OS configuration).</li><li>Check physical connections first, then confirm the drive appears in firmware and in OS tools like Disk Management.</li><li>Unexpected shutdowns and power loss can corrupt data on both HDDs and SSDs, so system history matters when diagnosing.</li></ul><div class='summaryBox'><b>Summary:</b> Drive availability troubleshooting starts with one question: does the system see the drive at all? If it doesn&#39;t, you focus on power, cables, seating, and firmware detection. If it does, you focus on OS-level visibility and errors like partitions or file system problems. On the exam, choose the step that best fits whether the issue is detection or access.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Troubleshoot Drive Reliability and Performance</h2><ul><li>SMART is a built-in monitoring system that can warn about drive failure conditions; it&#39;s a key source of evidence in storage troubleshooting.</li><li>Slow performance can come from high system load, low free space, fragmentation (HDD), or failing sectors/blocks (HDD/SSD).</li><li>Reliability problems may show up as file corruption, I/O errors, timeouts, or repeated crashes tied to storage access.</li><li>When SMART/diagnostics indicate degradation, prioritize backups and plan for replacement rather than repeatedly &#34;repairing&#34; a failing drive.</li></ul><div class='summaryBox'><b>Summary:</b> Reliability and performance issues often appear before a drive fully dies, giving you a chance to save data. SMART warnings and disk diagnostics are the evidence that separates a busy system from a failing drive. If errors persist or health metrics look bad, the right move is to back up and replace the drive. Exam questions commonly connect SMART warnings with proactive replacement planning.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Troubleshoot RAID Failure</h2><ul><li>RAID problems typically appear as a degraded array (one disk failed but data still accessible) or an array failure (too many disks or controller failed).</li><li>Use RAID management tools/firmware to check status and identify the failed disk, then replace it carefully (pulling the wrong disk can destroy the array).</li><li>After replacement, rebuild/resync may take time and performance may be reduced until it completes.</li><li>If the array is missing or the controller fails, backups and recovery procedures are usually required—RAID improves uptime but does not replace backups.</li></ul><div class='summaryBox'><b>Summary:</b> RAID troubleshooting starts by identifying whether the failure is a disk problem or an array/controller problem. Degraded arrays can often be repaired by replacing the failed disk and rebuilding, but you must confirm which disk is bad before removing anything. Controller failures can make healthy disks appear dead, so checking RAID status tools is essential. For the exam, remember: RAID helps availability, but you still need backups.</div>",
+      "images": []
+    },
+
+    { "content": "<h2>Lesson 4C — System and Display Issues</h2>", "images": [] },
+
+    {
+      "content": "<h2>Troubleshoot Component Issues</h2><ul><li>Symptoms like lockups, random reboots, and crashes can be caused by software/corruption/malware or by failing hardware, so start by ruling out software causes first.</li><li>Look for patterns (only under load, only after warm-up, only after updates) and correlate symptoms with recent changes.</li><li>Verify power stability and reseat common culprits (RAM, GPU, power connectors) before assuming a rare component failure.</li><li>Use built-in or vendor diagnostics when available to reduce guesswork and avoid unnecessary part swaps.</li></ul><div class='summaryBox'><b>Summary:</b> Component troubleshooting is most successful when you follow a structured process rather than replacing parts randomly. First eliminate software causes, then isolate hardware by simplifying the system and testing one variable at a time. Power and heat frequently mimic other failures, so they&#39;re high-priority checks. Exam scenarios usually reward the most logical next diagnostic step.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Overheating</h2><ul><li>Warning signs include a hot chassis, thermal throttling, random shutdowns, burning smell, or smoke—shut down and inspect immediately if extreme signs appear.</li><li>Common causes include dust-clogged vents/heatsinks, failed fans, poor airflow, and improper heatsink/thermal paste installation.</li><li>Confirm temperatures using sensors/monitoring tools; don&#39;t rely only on touch.</li><li>Fixes usually focus on restoring airflow (cleaning), ensuring all fans operate, and reseating the CPU cooler with proper thermal compound.</li></ul><div class='summaryBox'><b>Summary:</b> Overheating can cause instability and permanent hardware damage, so it should be treated as urgent. Most fixes are simple: clean dust, restore airflow, and confirm the CPU cooler is correctly installed. Temperature sensors help you verify the problem and confirm the fix. On the exam, overheating answers usually center on airflow, fan function, and proper heatsink contact.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Physical Damage</h2><ul><li>Physical damage can include liquid spills, broken ports, scorch marks, cracked boards, bent pins, or swollen/bulging capacitors.</li><li>Dust buildup can also contribute to failure by blocking airflow and increasing heat, so it&#39;s treated as a physical/maintenance issue.</li><li>If motherboard damage is suspected, diagnostics and careful inspection often provide better direction than swapping random &#34;known-good&#34; parts.</li><li>Once physical damage is confirmed, replacement is frequently the correct fix—continuing to power damaged hardware can worsen the problem.</li></ul><div class='summaryBox'><b>Summary:</b> Physical damage troubleshooting is mainly about confirming damage safely and preventing further harm. Clear visual issues (liquid, scorch marks, bulging capacitors) usually mean repair or replacement rather than settings changes. Dust and heat-related wear can be a root cause, so address the environment too. For the exam, obvious physical damage typically points to replacing the affected component.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Troubleshoot Performance Issues</h2><ul><li>&#34;Slow performance&#34; has many causes, so start by defining when it happens and checking for simple culprits like overheating, low disk space, and runaway background apps.</li><li>Compare performance against a baseline using system tools (CPU/RAM/disk usage) to identify the actual bottleneck.</li><li>If performance dropped after an upgrade, verify configuration and compatibility (for example: incorrect BIOS settings, storage running in a slower mode, or memory not running in dual-channel).</li><li>Rule out malware and unnecessary startup items before assuming hardware failure.</li></ul><div class='summaryBox'><b>Summary:</b> Performance troubleshooting is easiest when you stop guessing and measure what subsystem is actually overloaded. Heat and storage bottlenecks are common real-world causes, so they&#39;re worth checking early. Configuration mistakes after upgrades can also quietly reduce performance even if everything &#34;works.&#34; On the exam, the best answer is usually the step that identifies the bottleneck before replacing hardware.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Troubleshoot Inaccurate System Date/Time</h2><ul><li>The system clock is maintained by the real-time clock (RTC), which relies on a coin-cell (often CR2032) when the PC is powered off.</li><li>Symptoms of a failing RTC/CMOS battery include time resets, incorrect date/time at boot, and firmware settings not being retained.</li><li>Replacing the battery with the same type typically resolves recurring clock resets.</li><li>After replacement, confirm time zone and time sync settings (NTP) so the system stays accurate over time.</li></ul><div class='summaryBox'><b>Summary:</b> Incorrect date/time is a classic sign of a weak RTC/CMOS battery. If the clock resets every shutdown, software tweaks won&#39;t permanently fix it until the battery is replaced. Once replaced, the system should retain time and firmware settings normally. On the exam, repeated time resets almost always point to the coin-cell battery.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Troubleshoot Missing Video Issues</h2><ul><li>Start with basics: confirm the display has power, is not in standby, and is set to the correct input/source.</li><li>Reseat the video cable and check for damage; use a known-good cable/port when possible.</li><li>Confirm you&#39;re using the correct output (motherboard video vs dedicated GPU) and reseat the GPU if needed.</li><li>For projectors, consider device-specific causes like a failed bulb or overheating shutdown behavior.</li></ul><div class='summaryBox'><b>Summary:</b> Missing video is usually solved by eliminating simple problems first, especially power and incorrect input selection. Swapping a cable or testing with a known-good display quickly tells you whether the issue is the monitor path or the PC. Dedicated GPUs introduce another common mistake: plugging into the wrong port. Exam questions often expect you to check power and input before anything else.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Troubleshoot Video Quality Issues</h2><ul><li>Quality problems include wrong resolution/refresh rate, flicker, artifacts, discoloration, dim image, or intermittent signal.</li><li>Resolution mismatches (output not matching the display&#39;s native resolution) can look fuzzy, and refresh mismatches can cause flicker.</li><li>Artifacts and random glitches may indicate GPU overheating, unstable drivers, or failing hardware; cable bandwidth limits can also cause issues at higher resolutions/refresh rates.</li><li>Panel issues like dead pixels or burn-in are display-specific, so isolating with a second monitor can confirm whether the problem follows the display or the PC.</li></ul><div class='summaryBox'><b>Summary:</b> Video quality troubleshooting is about isolating whether the issue is settings, cabling, the GPU, or the display panel itself. Simple swaps (different cable, port, or monitor) are fast and highly diagnostic. If glitches worsen under load, suspect heat or driver instability on the GPU. On the exam, the best answer is usually the quickest isolation step that narrows the cause.</div>",
+      "images": []
+    }
+  ];
+
+  // Slide state
+  let index = 0;
+
+  // Carousel state (for current slide)
+  let imgIndex = 0;
+
+  // Audio state
+  let audioEnabled = false;
+
+  function audioPathForCurrentSlide() {
+    // Slide 1 => audio/01.mp3, Slide 2 => audio/02.mp3, etc.
+    return `audio/${pad2(index + 1)}.mp3`;
+  }
+
+  async function playCurrentAudio() {
+    if (!audioEnabled) return;
+
+    const audio = document.getElementById("slideAudio");
+    audio.src = audioPathForCurrentSlide();
+    audio.currentTime = 0;
+
+    try {
+      await audio.play();
+    } catch (err) {
+      console.log("Audio play blocked or missing file:", err);
+    }
+  }
+
+  function enableAudio() {
+    audioEnabled = true;
+    document.getElementById("replayBtn").disabled = false;
+    playCurrentAudio();
+  }
+
+  function replayAudio() {
+    playCurrentAudio();
+  }
+
+  function renderCarousel() {
+    const wrap = document.getElementById("carouselWrap");
+    const imgEl = document.getElementById("carouselImg");
+    const dotsEl = document.getElementById("dots");
+    const imgCounter = document.getElementById("imgCounter");
+    const prevBtn = document.getElementById("prevImgBtn");
+    const nextBtn = document.getElementById("nextImgBtn");
+
+    const filenames = (slides[index].images || []).filter(Boolean);
+
+    // Hide carousel if 0 images
+    if (filenames.length === 0) {
+      wrap.style.display = "none";
+      return;
+    }
+
+    wrap.style.display = "block";
+
+    // Clamp imgIndex
+    if (imgIndex < 0) imgIndex = 0;
+    if (imgIndex > filenames.length - 1) imgIndex = filenames.length - 1;
+
+    imgEl.src = `images/${filenames[imgIndex]}`;
+    imgCounter.textContent = `Image ${imgIndex + 1} / ${filenames.length}`;
+
+    prevBtn.disabled = (filenames.length <= 1) || (imgIndex === 0);
+    nextBtn.disabled = (filenames.length <= 1) || (imgIndex === filenames.length - 1);
+
+    // Build dots
+    dotsEl.innerHTML = "";
+    if (filenames.length > 1) {
+      filenames.forEach((_, i) => {
+        const b = document.createElement("button");
+        b.className = "dot" + (i === imgIndex ? " active" : "");
+        b.title = `Go to image ${i + 1}`;
+        b.onclick = () => { imgIndex = i; renderCarousel(); };
+        dotsEl.appendChild(b);
+      });
+    }
+  }
+
+  function nextImage() {
+    const filenames = (slides[index].images || []).filter(Boolean);
+    if (imgIndex < filenames.length - 1) {
+      imgIndex++;
+      renderCarousel();
+    }
+  }
+
+  function prevImage() {
+    if (imgIndex > 0) {
+      imgIndex--;
+      renderCarousel();
+    }
+  }
+
+  function showSlide() {
+    document.getElementById("slide").innerHTML = slides[index].content;
+    document.getElementById("counter").textContent = `Slide ${index + 1} / ${slides.length}`;
+
+    // Reset carousel on slide change
+    imgIndex = 0;
+    renderCarousel();
+
+    // Play slide audio (if enabled)
+    playCurrentAudio();
+  }
+
+  function nextSlide() {
+    if (index < slides.length - 1) index++;
+    showSlide();
+  }
+
+  function prevSlide() {
+    if (index > 0) index--;
+    showSlide();
+  }
+
+  // New: go to beginning/first slide
+  function goToFirstSlide() {
+    index = 0;
+    showSlide();
+  }
+
+  // New: "Return Home" goes back to repo root
+  // Example: https://.../CompTIA-APlus-1201-Slides/Module-4/  ->  https://.../CompTIA-APlus-1201-Slides/
+  function goHome() {
+    // go up one directory from Module-4/
+    window.location.href = "../";
+  }
+
+  // Keyboard:
+  // Left/Right = slide nav
+  // A/D = image nav
+  // Home = first slide
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") nextSlide();
+    if (e.key === "ArrowLeft") prevSlide();
+    if (e.key.toLowerCase() === "d") nextImage();
+    if (e.key.toLowerCase() === "a") prevImage();
+    if (e.key === "Home") goToFirstSlide();
+  });
+
+  showSlide();
+</script>
+
+</body>
+</html>
