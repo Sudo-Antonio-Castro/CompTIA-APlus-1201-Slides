@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CompTIA A+ 220-1201 — Module 4 Quiz</title>
+  <meta name="description" content="CompTIA A+ 220-1201 Module 4 Quiz — BIOS/UEFI Configuration, Power and Disk Issues, System and Display Issues." />
+  <style>
+    /* ======================= */
+    /* KB Black/White Template */
+    /* ======================= */
+
+    :root{
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --text: #0b0b0f;
+      --muted: #5b5b66;
+      --border: #e6e6ee;
+      --shadow: 0 6px 30px rgba(0,0,0,.08);
+      --accent: #111111;
+      --accent-2: #2b2b2b;
+      --chip:#f2f2f7;
+      --link:#111111;
+
+      --ok:#0f7b3b;
+      --bad:#a11212;
+
+      --focus: 0 0 0 3px rgba(0,0,0,.18);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --max: 1200px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+    }
+
+    [data-theme="dark"]{
+      --bg: #0b0b0f;
+      --panel: #101014;
+      --text: #f6f6fb;
+      --muted: #b5b5c2;
+      --border: #262633;
+      --shadow: 0 10px 40px rgba(0,0,0,.40);
+      --accent: #ffffff;
+      --accent-2: #e7e7ef;
+      --chip:#17171e;
+      --link:#f6f6fb;
+
+      --ok:#27c070;
+      --bad:#ff5a5a;
+
+      --focus: 0 0 0 3px rgba(255,255,255,.18);
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+    a{ color:var(--link); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+    :focus-visible{ outline:none; box-shadow: var(--focus); border-radius: 10px; }
+
+    /* Layout */
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 18px; }
+
+    header{
+      position: sticky;
+      top:0;
+      z-index: 30;
+      background: color-mix(in oklab, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content: space-between;
+      padding: 14px 18px;
+      max-width: var(--max);
+      margin:0 auto;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 240px;
+    }
+    .logo{
+      width:34px;height:34px;border-radius: 10px;
+      background: var(--accent);
+      box-shadow: var(--shadow);
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+    }
+    .logo svg{ width:18px; height:18px; fill: var(--bg); }
+    [data-theme="dark"] .logo svg{ fill: #0b0b0f; }
+
+    .brand h1{
+      font-size: 14px;
+      margin:0;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity:.9;
+    }
+    .subtitle{
+      font-size:12px;
+      color: var(--muted);
+      margin-top:2px;
+    }
+
+    .controls{
+      display:flex; align-items:center; gap:10px;
+      justify-content: flex-end;
+    }
+
+    .btn{
+      border:1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 12px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      box-shadow: none;
+      user-select:none;
+      font-family: var(--font);
+    }
+    .btn:hover{ border-color: color-mix(in oklab, var(--border) 70%, var(--accent)); }
+    .btn:disabled{ opacity:.55; cursor:not-allowed; }
+    .btn svg{ width:16px; height:16px; fill: var(--text); opacity:.85; }
+
+    .panel{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .panel .hd{
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .panel .hd strong{
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .panel .bd{ padding: 16px; }
+
+    .titleRow{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .titleRow h2{
+      font-size: 22px;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: var(--chip);
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .chip b{ color: var(--text); font-weight:600; }
+
+    .muted{ color: var(--muted); }
+
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    /* Quiz */
+    .qBox{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--panel);
+      padding: 18px;
+    }
+    .qMeta{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items:center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .qText{
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      margin: 6px 0 12px;
+    }
+
+    .choices{
+      display:grid;
+      gap: 10px;
+    }
+
+    .choice{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 12px;
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      cursor:pointer;
+      background: color-mix(in oklab, var(--chip) 40%, transparent);
+      transition: transform .04s ease;
+    }
+    .choice:hover{ border-color: color-mix(in oklab, var(--border) 55%, var(--accent)); }
+    .choice:active{ transform: scale(.995); }
+    .choice input{ margin-top: 3px; }
+    .choice .lbl{
+      flex:1;
+      color: color-mix(in oklab, var(--text) 92%, var(--muted));
+    }
+    .choice .tag{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 3px 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      background: var(--panel);
+    }
+
+    .divider{
+      height:1px;
+      background: var(--border);
+      margin: 14px 0;
+    }
+
+    /* Results */
+    .resultsHead{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      align-items:center;
+      margin-bottom: 10px;
+    }
+    .scoreBig{
+      font-size: 22px;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .resultItem{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: var(--panel);
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: var(--chip);
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .badge.ok{
+      border-color: color-mix(in oklab, var(--ok) 35%, var(--border));
+      background: color-mix(in oklab, var(--ok) 14%, var(--chip));
+      color: color-mix(in oklab, var(--ok) 60%, var(--text));
+    }
+    .badge.bad{
+      border-color: color-mix(in oklab, var(--bad) 35%, var(--border));
+      background: color-mix(in oklab, var(--bad) 12%, var(--chip));
+      color: color-mix(in oklab, var(--bad) 60%, var(--text));
+    }
+
+    .answers{
+      margin-top: 10px;
+      display:grid;
+      gap: 8px;
+    }
+
+    .ansLine{
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 10px;
+      background: color-mix(in oklab, var(--chip) 40%, transparent);
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      justify-content: space-between;
+    }
+    .ansLine .left{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      flex: 1;
+    }
+    .pill{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 3px 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      background: var(--panel);
+      white-space: nowrap;
+    }
+
+    .ansLine.correct{
+      border-color: color-mix(in oklab, var(--ok) 35%, var(--border));
+      background: color-mix(in oklab, var(--ok) 12%, transparent);
+    }
+    .ansLine.incorrect{
+      border-color: color-mix(in oklab, var(--bad) 35%, var(--border));
+      background: color-mix(in oklab, var(--bad) 10%, transparent);
+    }
+    .rightPills{
+      display:flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    footer{
+      margin: 18px 0 10px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align:center;
+    }
+
+    @media (max-width: 780px){
+      .topbar{ padding: 12px 14px; }
+      .wrap{ padding: 14px; }
+      .qBox{ padding: 14px; }
+      .ansLine{ flex-direction: column; }
+      .rightPills{ justify-content: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand" aria-label="Quiz header">
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-3.8 9.7-9 10-5.2-.3-9-5-9-10V6l9-4zm0 4.2L6 8.7v3.4c0 3.7 2.7 7.1 6 7.6 3.3-.5 6-3.9 6-7.6V8.7l-6-2.5z"/></svg>
+      </div>
+      <div>
+        <h1>CompTIA A+ 220-1201 Quiz</h1>
+        <div class="subtitle">Module 4 — Troubleshooting System Devices</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="themeBtn" type="button" aria-label="Toggle theme">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 18a6 6 0 110-12 6 6 0 010 12zm0 4l-1-2h2l-1 2zM12 2l1 2h-2l1-2zM2 12l2-1v2l-2-1zm20 0l-2 1v-2l2 1zM4.2 4.2l2.1.7-1.4 1.4-.7-2.1zm15.6 15.6l-2.1-.7 1.4-1.4.7 2.1zM19.8 4.2l.7 2.1-1.4-1.4 2.1-.7zM4.2 19.8l-.7-2.1 1.4 1.4-2.1.7z"/></svg>
+        <span id="themeLabel">Light</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <article class="panel" aria-label="Quiz">
+    <div class="hd">
+      <strong>Interactive Quiz</strong>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+        <span class="chip"><b>Time left:</b> <span id="timeLeft">30:00</span></span>
+        <span class="chip"><b>Progress:</b> <span id="progress">0 / 30</span></span>
+      </div>
+    </div>
+
+    <div class="bd">
+      <!-- Intro -->
+      <section id="intro" class="qBox" aria-label="Intro">
+        <div class="titleRow">
+          <h2 style="margin:0;">Module 4 Quiz (30 Questions)</h2>
+          <span class="chip"><b>Timer:</b> 30 minutes</span>
+        </div>
+        <p class="muted" style="margin:10px 0 0;">
+          Questions are randomized. One question is shown at a time.
+          When time runs out, the quiz auto-submits and shows your results.
+        </p>
+
+        <div class="divider"></div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+          <button class="btn" id="startBtn" type="button" onclick="startQuiz()">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7-11-7z"/></svg>
+            Start Quiz
+          </button>
+
+          <button class="btn" type="button" onclick="goHome()">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 8h-3v10h-5v-6H11v6H6V11H3l9-8z"/></svg>
+            Return Home
+          </button>
+
+          <span class="chip"><b>Sections:</b> 4A • 4B • 4C</span>
+        </div>
+      </section>
+
+      <!-- Quiz -->
+      <section id="quiz" class="qBox" aria-label="Quiz" style="display:none;">
+        <div class="qMeta">
+          <span class="chip" id="sectionChip"><b>Section:</b> —</span>
+          <span class="chip" id="qChip"><b>Question:</b> —</span>
+        </div>
+
+        <div class="qText" id="qText"></div>
+
+        <div class="choices" id="choices"></div>
+
+        <div class="divider"></div>
+
+        <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;">
+          <button class="btn" type="button" onclick="prevQuestion()">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.4 7.4L14 6l-6 6 6 6 1.4-1.4L10.8 12l4.6-4.6z"/></svg>
+            Previous
+          </button>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+            <button class="btn" type="button" onclick="skipQuestion()" id="skipBtn">
+              Skip
+            </button>
+            <button class="btn" type="button" onclick="nextQuestion()" id="nextBtn">
+              Next
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.6 16.6L10 18l6-6-6-6-1.4 1.4L13.2 12l-4.6 4.6z"/></svg>
+            </button>
+            <button class="btn" type="button" onclick="submitQuiz()" id="submitBtn">
+              Submit
+            </button>
+          </div>
+        </div>
+
+        <p class="muted" style="margin:12px 0 0;font-size:12px;">
+          Tip: You can change an answer any time before submitting.
+        </p>
+      </section>
+
+      <!-- Results -->
+      <section id="results" class="qBox" aria-label="Results" style="display:none;">
+        <div class="resultsHead">
+          <div>
+            <p class="scoreBig" id="scoreBig">Results</p>
+            <p class="muted" id="scoreMeta" style="margin:6px 0 0;"></p>
+          </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+            <button class="btn" type="button" onclick="restartQuiz()">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6V3L8 7l4 4V8c2.8 0 5 2.2 5 5a5 5 0 01-9.6 2H5.3A7 7 0 0019 13c0-3.9-3.1-7-7-7z"/></svg>
+              Restart (reshuffle)
+            </button>
+
+            <button class="btn" type="button" onclick="goHome()">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 8h-3v10h-5v-6H11v6H6V11H3l9-8z"/></svg>
+              Return Home
+            </button>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="grid2" id="resultsList"></div>
+
+        <div class="divider"></div>
+
+        <div class="panel" style="box-shadow:none;">
+          <div class="hd">
+            <strong>Question map (module references)</strong>
+          </div>
+          <div class="bd">
+            <p class="muted" style="margin-top:0;">
+              Each question below shows which section it belongs to. If you missed a question, review that module section.
+            </p>
+            <div id="moduleMap"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <footer>
+    Sudo-Antonio-Castro • Module-4-Quiz
+  </footer>
+</main>
+
+<script>
+  // =========================
+  // Theme toggle (persist)
+  // Default: dark unless user saved otherwise
+  // =========================
+  const themeBtn = document.getElementById("themeBtn");
+  const themeLabel = document.getElementById("themeLabel");
+  const savedTheme = localStorage.getItem("kb_theme");
+
+  if (savedTheme === "light" || savedTheme === "dark") {
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  } else {
+    document.documentElement.setAttribute("data-theme", "dark");
+  }
+  updateThemeLabel();
+
+  themeBtn.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("kb_theme", next);
+    updateThemeLabel();
+  });
+
+  function updateThemeLabel(){
+    const current = document.documentElement.getAttribute("data-theme") || "dark";
+    // Button shows what you’ll switch TO
+    themeLabel.textContent = current === "dark" ? "Light" : "Dark";
+  }
+
+  // =========================
+  // Repo navigation
+  // =========================
+  function goHome(){
+    // /Module-4-Quiz/ -> ../ (repo root)
+    window.location.href = "../";
+  }
+
+  // =========================
+  // Quiz Data (30 Questions)
+  // =========================
+
+  // Module references (where to send user when incorrect)
+  // Adjust these paths if your folder names differ.
+  const MODULE_LINKS = {
+    "4A": "../Module-4/",
+    "4B": "../Module-4/",
+    "4C": "../Module-4/"
+  };
+
+  const QUESTIONS = [
+    // 4A — BIOS/UEFI Configuration (10)
+    { id:"4A-1", section:"4A", moduleTitle:"BIOS/UEFI Configuration", prompt:"What is the primary purpose of BIOS/UEFI firmware?", choices:{A:"Store user files permanently",B:"Initialize hardware and start the boot process",C:"Provide internet access to the OS",D:"Replace the PSU during power failures"}, answer:"B" },
+    { id:"4A-2", section:"4A", moduleTitle:"BIOS/UEFI Configuration", prompt:"Which option is MOST commonly used to change the device the system boots from first?", choices:{A:"Windows Task Manager",B:"Boot option sequence / boot order in BIOS/UEFI",C:"Disk Management",D:"Device Manager"}, answer:"B" },
+    { id:"4A-3", section:"4A", moduleTitle:"BIOS/UEFI Configuration", prompt:"Which boot option is MOST associated with network-based imaging in managed environments?", choices:{A:"USB boot",B:"Optical boot",C:"PXE/network boot",D:"Thunderbolt boot"}, answer:"C" },
+    { id:"4A-4", section:"4A", moduleTitle:"BIOS/UEFI Configuration", prompt:"If a keyboard and mouse do not work before the OS loads, what BIOS/UEFI setting should you check FIRST?", choices:{A:"Secure Boot keys",B:"USB controller/USB port enablement (USB permissions)",C:"RAID level",D:"CPU virtualization"}, answer:"B" },
+    { id:"4A-5", section:"4A", moduleTitle:"BIOS/UEFI Configuration", prompt:"What is the BEST description of a Supervisor/Admin (setup) password?", choices:{A:"It prevents the OS from loading",B:"It prevents changes to BIOS/UEFI settings without authentication",C:"It encrypts the hard drive automatically",D:"It increases fan speed under load"}, answer:"B" },
+    { id:"4A-6", section:"4A", moduleTitle:"BIOS/UEFI Configuration", prompt:"What is the BEST description of a User/System password?", choices:{A:"It blocks booting until authentication is provided",B:"It only blocks changing boot order",C:"It only applies inside Windows",D:"It disables USB devices automatically"}, answer:"A" },
+    { id:"4A-7", section:"4A", moduleTitle:"BIOS/UEFI Configuration", prompt:"Secure Boot is designed to do which of the following?", choices:{A:"Speed up downloads",B:"Allow only trusted/signed bootloaders to start",C:"Overclock the CPU safely",D:"Automatically fix disk corruption"}, answer:"B" },
+    { id:"4A-8", section:"4A", moduleTitle:"BIOS/UEFI Configuration", prompt:"A technician cannot boot from a recovery USB, even though it is first in the boot order. Which feature could be preventing it?", choices:{A:"TPM",B:"Secure Boot",C:"RAM timing",D:"SATA power"}, answer:"B" },
+    { id:"4A-9", section:"4A", moduleTitle:"BIOS/UEFI Configuration", prompt:"Which statement BEST describes the role of a TPM?", choices:{A:"It increases SSD speed using cache",B:"It stores cryptographic keys/certificates to support encryption and secure authentication",C:"It provides redundant power to the motherboard",D:"It converts AC to DC"}, answer:"B" },
+    { id:"4A-10", section:"4A", moduleTitle:"BIOS/UEFI Configuration", prompt:"A user wants a quieter PC at idle, but the system is stable and temperatures are acceptable. Which BIOS/UEFI adjustment is MOST appropriate?", choices:{A:"Enable PXE boot",B:"Change the fan profile/curve to quiet/balanced",C:"Disable the SATA controller",D:"Enable a system password"}, answer:"B" },
+
+    // 4B — Power and Disk Issues (10)
+    { id:"4B-1", section:"4B", moduleTitle:"Power and Disk Issues", prompt:"A desktop shows no lights and no fans when the power button is pressed. What should be checked FIRST?", choices:{A:"BIOS boot order",B:"Wall outlet and power cable",C:"GPU drivers",D:"Windows updates"}, answer:"B" },
+    { id:"4B-2", section:"4B", moduleTitle:"Power and Disk Issues", prompt:"A PC powers on but shows no display and never reaches the OS. This is MOST likely a:", choices:{A:"POST issue",B:"Windows login issue",C:"File permission issue",D:"Browser problem"}, answer:"A" },
+    { id:"4B-3", section:"4B", moduleTitle:"Power and Disk Issues", prompt:"Which action is MOST appropriate early in power troubleshooting to isolate shorts/overloads?", choices:{A:"Install a larger SSD",B:"Disconnect nonessential peripherals/devices",C:"Change Windows theme",D:"Increase monitor brightness"}, answer:"B" },
+    { id:"4B-4", section:"4B", moduleTitle:"Power and Disk Issues", prompt:"The system completes POST, but displays “No boot device found.” What is the BEST next step?", choices:{A:"Replace the CPU",B:"Confirm the system drive is detected and boot order is correct",C:"Reinstall the OS immediately",D:"Replace the monitor"}, answer:"B" },
+    { id:"4B-5", section:"4B", moduleTitle:"Power and Disk Issues", prompt:"A system drive is detected in BIOS/UEFI, but the system reports “Operating system not found.” This MOST likely indicates:", choices:{A:"Incorrect time zone",B:"Boot sector/boot record issue",C:"Faulty keyboard",D:"Too much RAM installed"}, answer:"B" },
+    { id:"4B-6", section:"4B", moduleTitle:"Power and Disk Issues", prompt:"Which tool/feature is MOST associated with predicting or warning about drive failure?", choices:{A:"SMART",B:"Secure Boot",C:"PXE",D:"TPM"}, answer:"A" },
+    { id:"4B-7", section:"4B", moduleTitle:"Power and Disk Issues", prompt:"Which symptom MOST strongly suggests a failing HDD (mechanical issue)?", choices:{A:"No audio output",B:"Unusual clicking/grinding noises",C:"Wallpaper changes automatically",D:"Mouse lag in a browser"}, answer:"B" },
+    { id:"4B-8", section:"4B", moduleTitle:"Power and Disk Issues", prompt:"A drive is visible in BIOS/UEFI but missing in the OS. What is the BEST next tool to check in Windows?", choices:{A:"Disk Management",B:"Event Viewer only",C:"Device Manager only",D:"Control Panel → Programs"}, answer:"A" },
+    { id:"4B-9", section:"4B", moduleTitle:"Power and Disk Issues", prompt:"A RAID array is degraded but still online. What is the BEST action?", choices:{A:"Ignore it because RAID means it can’t fail",B:"Identify and replace the failed disk and allow the array to rebuild",C:"Format all drives to reset RAID",D:"Disable Secure Boot"}, answer:"B" },
+    { id:"4B-10", section:"4B", moduleTitle:"Power and Disk Issues", prompt:"Why is RAID not a replacement for backups?", choices:{A:"RAID only works with SSDs",B:"RAID does not protect against deletion, corruption, or ransomware affecting the array",C:"RAID always reduces performance",D:"RAID cannot use more than two drives"}, answer:"B" },
+
+    // 4C — System and Display Issues (10)
+    { id:"4C-1", section:"4C", moduleTitle:"System and Display Issues", prompt:"A PC randomly reboots after running for 10–15 minutes. What is the MOST likely cause category?", choices:{A:"Incorrect monitor input",B:"Overheating",C:"Missing printer driver",D:"Low screen resolution"}, answer:"B" },
+    { id:"4C-2", section:"4C", moduleTitle:"System and Display Issues", prompt:"Which is the BEST first step if a PC is hot to the touch and you smell burning?", choices:{A:"Run Disk Defragmenter",B:"Shut down the system and inspect cooling/airflow",C:"Update the BIOS",D:"Increase fanless mode"}, answer:"B" },
+    { id:"4C-3", section:"4C", moduleTitle:"System and Display Issues", prompt:"A PC becomes unstable under load and performance drops significantly. This is MOST consistent with:", choices:{A:"Thermal throttling due to overheating",B:"Wrong keyboard layout",C:"Incorrect wallpaper",D:"Too many USB ports enabled"}, answer:"A" },
+    { id:"4C-4", section:"4C", moduleTitle:"System and Display Issues", prompt:"Which physical sign MOST strongly indicates motherboard/component damage?", choices:{A:"A slightly dusty fan",B:"Bulging/swollen capacitors or scorch marks",C:"A slow internet connection",D:"A dim monitor"}, answer:"B" },
+    { id:"4C-5", section:"4C", moduleTitle:"System and Display Issues", prompt:"A user reports the system time resets whenever the PC is unplugged. Which component is MOST likely failing?", choices:{A:"PSU",B:"CMOS/RTC battery (coin-cell)",C:"CPU cooler",D:"GPU"}, answer:"B" },
+    { id:"4C-6", section:"4C", moduleTitle:"System and Display Issues", prompt:"A monitor shows “No Signal,” but the PC appears to be running. What is the BEST first check?", choices:{A:"Replace the motherboard",B:"Confirm monitor input/source is correct and the monitor is powered on",C:"Reinstall Windows",D:"Replace the SSD"}, answer:"B" },
+    { id:"4C-7", section:"4C", moduleTitle:"System and Display Issues", prompt:"A display looks fuzzy and text isn’t sharp. What is the MOST likely cause?", choices:{A:"Output resolution not matching the monitor’s native resolution",B:"Secure Boot is enabled",C:"RAID is degraded",D:"TPM is missing"}, answer:"A" },
+    { id:"4C-8", section:"4C", moduleTitle:"System and Display Issues", prompt:"The screen flickers intermittently. Which is the BEST next troubleshooting step?", choices:{A:"Replace RAM",B:"Reseat/replace the video cable and try another port",C:"Replace the RTC battery",D:"Disable USB ports"}, answer:"B" },
+    { id:"4C-9", section:"4C", moduleTitle:"System and Display Issues", prompt:"Colored blocks/visual glitches appear on-screen during gaming and get worse over time. This MOST likely indicates:", choices:{A:"GPU overheating or instability",B:"Incorrect time zone",C:"Optical drive failure",D:"USB permissions issue"}, answer:"A" },
+    { id:"4C-10", section:"4C", moduleTitle:"System and Display Issues", prompt:"A student sees a persistent ghost image on a display after leaving a static image for hours. This is MOST likely:", choices:{A:"Dead pixels",B:"Burn-in / image persistence",C:"Boot sector corruption",D:"RAID rebuild activity"}, answer:"B" },
+  ];
+
+  // =========================
+  // Quiz Engine
+  // =========================
+  const TOTAL_SECONDS = 30 * 60;
+
+  let order = [];               // randomized indices into QUESTIONS
+  let cursor = 0;               // which question in the randomized order we’re on
+  let answers = {};             // qid -> selected letter (A/B/C/D) or null
+  let startedAt = null;
+  let timer = null;
+  let secondsLeft = TOTAL_SECONDS;
+  let submitted = false;
+
+  const elIntro = document.getElementById("intro");
+  const elQuiz = document.getElementById("quiz");
+  const elResults = document.getElementById("results");
+
+  const elTimeLeft = document.getElementById("timeLeft");
+  const elProgress = document.getElementById("progress");
+  const elSectionChip = document.getElementById("sectionChip");
+  const elQChip = document.getElementById("qChip");
+  const elQText = document.getElementById("qText");
+  const elChoices = document.getElementById("choices");
+
+  const elNextBtn = document.getElementById("nextBtn");
+  const elSkipBtn = document.getElementById("skipBtn");
+  const elSubmitBtn = document.getElementById("submitBtn");
+
+  function startQuiz(){
+    // init
+    submitted = false;
+    secondsLeft = TOTAL_SECONDS;
+    startedAt = Date.now();
+    answers = {};
+
+    // shuffle order
+    order = QUESTIONS.map((_, i) => i);
+    fisherYates(order);
+
+    // initialize answers
+    QUESTIONS.forEach(q => answers[q.id] = null);
+
+    cursor = 0;
+
+    // show quiz
+    elIntro.style.display = "none";
+    elResults.style.display = "none";
+    elQuiz.style.display = "block";
+
+    updateProgress();
+    renderQuestion();
+
+    // start timer
+    stopTimer();
+    timer = setInterval(tick, 1000);
+    tick(); // immediate update
+  }
+
+  function restartQuiz(){
+    // back to intro and start over
+    stopTimer();
+    elResults.style.display = "none";
+    elQuiz.style.display = "none";
+    elIntro.style.display = "block";
+
+    // reset display chips
+    elTimeLeft.textContent = fmtTime(TOTAL_SECONDS);
+    elProgress.textContent = `0 / ${QUESTIONS.length}`;
+  }
+
+  function tick(){
+    if (submitted) return;
+    secondsLeft -= 1;
+    if (secondsLeft < 0) secondsLeft = 0;
+    elTimeLeft.textContent = fmtTime(secondsLeft);
+
+    if (secondsLeft <= 0){
+      // auto submit
+      submitQuiz(true);
+    }
+  }
+
+  function stopTimer(){
+    if (timer){
+      clearInterval(timer);
+      timer = null;
+    }
+  }
+
+  function renderQuestion(){
+    const q = getCurrentQuestion();
+    if (!q) return;
+
+    // Hide section during quiz (enable if you want):
+    // elSectionChip.innerHTML = `<b>Section:</b> ${escapeHtml(q.section)} — ${escapeHtml(q.moduleTitle)}`;
+    elSectionChip.innerHTML = `<b>Section:</b> —`;
+
+    elQChip.innerHTML = `<b>Question:</b> ${cursor + 1} / ${order.length}`;
+    elQText.textContent = q.prompt;
+
+    // render choices
+    elChoices.innerHTML = "";
+    const selected = answers[q.id];
+
+    ["A","B","C","D"].forEach(letter => {
+      const row = document.createElement("label");
+      row.className = "choice";
+      row.setAttribute("role", "button");
+
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "q_" + q.id;
+      input.value = letter;
+      input.checked = (selected === letter);
+      input.addEventListener("change", () => {
+        answers[q.id] = letter;
+        updateProgress();
+      });
+
+      const tag = document.createElement("span");
+      tag.className = "tag";
+      tag.textContent = letter;
+
+      const txt = document.createElement("div");
+      txt.className = "lbl";
+      txt.textContent = q.choices[letter];
+
+      row.appendChild(input);
+      row.appendChild(tag);
+      row.appendChild(txt);
+
+      // click anywhere selects
+      row.addEventListener("click", (e) => {
+        if (e.target && e.target.tagName && e.target.tagName.toLowerCase() === "input") return;
+        input.checked = true;
+        input.dispatchEvent(new Event("change", { bubbles:true }));
+      });
+
+      elChoices.appendChild(row);
+    });
+
+    // buttons
+    elSkipBtn.disabled = (cursor >= order.length - 1);
+    elNextBtn.disabled = (cursor >= order.length - 1);
+    elSubmitBtn.disabled = false;
+  }
+
+  function updateProgress(){
+    const answeredCount = Object.values(answers).filter(v => v !== null).length;
+    elProgress.textContent = `${answeredCount} / ${QUESTIONS.length}`;
+  }
+
+  function nextQuestion(){
+    if (cursor < order.length - 1){
+      cursor++;
+      renderQuestion();
+    }
+  }
+
+  function prevQuestion(){
+    if (cursor > 0){
+      cursor--;
+      renderQuestion();
+    }
+  }
+
+  function skipQuestion(){
+    nextQuestion();
+  }
+
+  function submitQuiz(fromTimeout=false){
+    if (submitted) return;
+    submitted = true;
+    stopTimer();
+
+    // Hide quiz, show results
+    elQuiz.style.display = "none";
+    elIntro.style.display = "none";
+    elResults.style.display = "block";
+
+    // Score and build report
+    const report = QUESTIONS.map(q => {
+      const chosen = answers[q.id]; // may be null
+      const correct = q.answer;
+      return {
+        id: q.id,
+        section: q.section,
+        moduleTitle: q.moduleTitle,
+        prompt: q.prompt,
+        chosen,
+        correct,
+        isCorrect: chosen === correct
+      };
+    });
+
+    const correctCount = report.filter(r => r.isCorrect).length;
+    const answeredCount = report.filter(r => r.chosen !== null).length;
+
+    const elapsed = startedAt ? Math.max(0, Math.floor((Date.now() - startedAt) / 1000)) : 0;
+
+    document.getElementById("scoreBig").textContent =
+      `Score: ${correctCount} / ${QUESTIONS.length}`;
+
+    document.getElementById("scoreMeta").textContent =
+      `${fromTimeout ? "Time expired — auto-submitted." : "Submitted."} Answered ${answeredCount}/${QUESTIONS.length}. ` +
+      `Time used: ${fmtTime(Math.min(elapsed, TOTAL_SECONDS))} (of ${fmtTime(TOTAL_SECONDS)}).`;
+
+    renderResults(report);
+    renderModuleMap(report);
+  }
+
+  function renderResults(report){
+    const list = document.getElementById("resultsList");
+    list.innerHTML = "";
+
+    report.forEach((r, idx) => {
+      const item = document.createElement("div");
+      item.className = "resultItem";
+
+      const top = document.createElement("div");
+      top.style.display = "flex";
+      top.style.justifyContent = "space-between";
+      top.style.alignItems = "center";
+      top.style.gap = "10px";
+      top.style.flexWrap = "wrap";
+
+      const qRef = QUESTIONS.find(q => q.id === r.id);
+
+      const left = document.createElement("div");
+      left.innerHTML = `
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+          <span class="chip"><b>#</b> ${idx + 1}</span>
+          <span class="chip"><b>ID</b> ${escapeHtml(r.id)}</span>
+          <span class="chip"><b>Section</b> ${escapeHtml(r.section)} — ${escapeHtml(r.moduleTitle)}</span>
+        </div>
+        <div style="margin-top:10px;font-weight:700;">${escapeHtml(r.prompt)}</div>
+      `;
+
+      const badge = document.createElement("span");
+      badge.className = "badge " + (r.isCorrect ? "ok" : "bad");
+      badge.textContent = r.isCorrect ? "Correct" : "Incorrect";
+
+      top.appendChild(left);
+      top.appendChild(badge);
+
+      // Answers block
+      const answersWrap = document.createElement("div");
+      answersWrap.className = "answers";
+
+      const chosenLetter = r.chosen;
+      const correctLetter = r.correct;
+
+      if (chosenLetter !== null){
+        answersWrap.appendChild(makeAnswerLine(
+          `Your answer: ${chosenLetter} — ${qRef.choices[chosenLetter]}`,
+          r.isCorrect ? "correct" : "incorrect",
+          [{ text: r.isCorrect ? "✅ correct" : "❌ incorrect", tone: r.isCorrect ? "ok" : "bad" }]
+        ));
+      } else {
+        answersWrap.appendChild(makeAnswerLine(
+          `Your answer: (no answer selected)`,
+          "incorrect",
+          [{ text: "❌ unanswered", tone: "bad" }]
+        ));
+      }
+
+      answersWrap.appendChild(makeAnswerLine(
+        `Correct answer: ${correctLetter} — ${qRef.choices[correctLetter]}`,
+        "correct",
+        [{ text: "✅ correct answer", tone: "ok" }]
+      ));
+
+      // Module reference if incorrect
+      const ref = document.createElement("div");
+      ref.style.marginTop = "10px";
+      ref.className = "muted";
+      if (!r.isCorrect){
+        const link = MODULE_LINKS[r.section] || "../Module-4/";
+        ref.innerHTML = `Review module section <b>${escapeHtml(r.section)}</b>: <a href="${link}">${escapeHtml(link)}</a>`;
+      } else {
+        ref.textContent = `Module section: ${r.section}`;
+      }
+
+      item.appendChild(top);
+      item.appendChild(document.createElement("div")).className = "divider";
+      item.appendChild(answersWrap);
+      item.appendChild(ref);
+
+      list.appendChild(item);
+    });
+  }
+
+  function makeAnswerLine(text, cls, pills){
+    const line = document.createElement("div");
+    line.className = "ansLine " + (cls || "");
+
+    const left = document.createElement("div");
+    left.className = "left";
+
+    const t = document.createElement("div");
+    t.textContent = text;
+
+    left.appendChild(t);
+
+    const right = document.createElement("div");
+    right.className = "rightPills";
+
+    (pills || []).forEach(p => {
+      const b = document.createElement("span");
+      b.className = "badge " + (p.tone || "");
+      b.textContent = p.text;
+      right.appendChild(b);
+    });
+
+    line.appendChild(left);
+    line.appendChild(right);
+    return line;
+  }
+
+  function renderModuleMap(report){
+    const wrap = document.getElementById("moduleMap");
+
+    // Group by section
+    const groups = {};
+    report.forEach(r => {
+      if (!groups[r.section]) groups[r.section] = [];
+      groups[r.section].push(r);
+    });
+
+    const sectionOrder = ["4A","4B","4C"];
+    const parts = [];
+
+    sectionOrder.forEach(sec => {
+      if (!groups[sec]) return;
+      const link = MODULE_LINKS[sec] || "../Module-4/";
+      const title = groups[sec][0].moduleTitle;
+
+      parts.push(`<div style="margin:10px 0 14px;">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;">
+          <div style="font-weight:800;letter-spacing:-0.01em;">${sec} — ${escapeHtml(title)}</div>
+          <span class="chip"><b>Link:</b> <a href="${link}">${escapeHtml(link)}</a></span>
+        </div>
+        <ul style="margin:10px 0 0 18px;color:color-mix(in oklab, var(--text) 92%, var(--muted));">
+          ${groups[sec].map(r => {
+            const icon = r.isCorrect ? "✅" : "❌";
+            const chosen = r.chosen ? ` (you: ${r.chosen}, correct: ${r.correct})` : ` (you: —, correct: ${r.correct})`;
+            return `<li><span class="pill">${icon} ${escapeHtml(r.id)}</span> ${escapeHtml(r.prompt)}<span class="muted">${escapeHtml(chosen)}</span></li>`;
+          }).join("")}
+        </ul>
+      </div>`);
+    });
+
+    wrap.innerHTML = parts.join("");
+  }
+
+  // =========================
+  // Helpers
+  // =========================
+  function fisherYates(arr){
+    for (let i = arr.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function getCurrentQuestion(){
+    const idx = order[cursor];
+    return QUESTIONS[idx];
+  }
+
+  function fmtTime(totalSeconds){
+    const m = Math.floor(totalSeconds / 60);
+    const s = totalSeconds % 60;
+    return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  // =========================
+  // Initial UI
+  // =========================
+  document.getElementById("timeLeft").textContent = fmtTime(TOTAL_SECONDS);
+  document.getElementById("progress").textContent = `0 / ${QUESTIONS.length}`;
+
+  // Optional: warn on accidental close once started
+  window.addEventListener("beforeunload", (e) => {
+    if (!submitted && timer){
+      e.preventDefault();
+      e.returnValue = "";
+    }
+  });
+</script>
+</body>
+</html>
