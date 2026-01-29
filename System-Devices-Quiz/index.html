@@ -1,0 +1,1010 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CompTIA A+ 1201 — System Devices Quiz</title>
+  <meta name="description" content="CompTIA A+ 1201 — Module 3 Quiz (System Devices)" />
+  <style>
+    /* ======================= */
+    /* KB Black/White Template */
+    /* ======================= */
+
+    :root{
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --text: #0b0b0f;
+      --muted: #5b5b66;
+      --border: #e6e6ee;
+      --shadow: 0 6px 30px rgba(0,0,0,.08);
+      --accent: #111111;
+      --accent-2: #2b2b2b;
+      --chip:#f2f2f7;
+      --link:#111111;
+
+      --ok:#0f7b3b;
+      --bad:#a11212;
+
+      --focus: 0 0 0 3px rgba(0,0,0,.18);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --max: 1200px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+    }
+
+    [data-theme="dark"]{
+      --bg: #0b0b0f;
+      --panel: #101014;
+      --text: #f6f6fb;
+      --muted: #b5b5c2;
+      --border: #262633;
+      --shadow: 0 10px 40px rgba(0,0,0,.40);
+      --accent: #ffffff;
+      --accent-2: #e7e7ef;
+      --chip:#17171e;
+      --link:#f6f6fb;
+
+      --ok:#27c070;
+      --bad:#ff5a5a;
+
+      --focus: 0 0 0 3px rgba(255,255,255,.18);
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+    a{ color:var(--link); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+    :focus-visible{ outline:none; box-shadow: var(--focus); border-radius: 10px; }
+
+    /* Layout */
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 18px; }
+
+    header{
+      position: sticky;
+      top:0;
+      z-index: 30;
+      background: color-mix(in oklab, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content: space-between;
+      padding: 14px 18px;
+      max-width: var(--max);
+      margin:0 auto;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 240px;
+    }
+    .logo{
+      width:34px;height:34px;border-radius: 10px;
+      background: var(--accent);
+      box-shadow: var(--shadow);
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+    }
+    .logo svg{ width:18px; height:18px; fill: var(--bg); }
+    [data-theme="dark"] .logo svg{ fill: #0b0b0f; }
+
+    .brand h1{
+      font-size: 14px;
+      margin:0;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity:.9;
+    }
+    .subtitle{
+      font-size:12px;
+      color: var(--muted);
+      margin-top:2px;
+    }
+
+    .controls{
+      display:flex; align-items:center; gap:10px;
+      justify-content: flex-end;
+    }
+
+    .btn{
+      border:1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 12px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      box-shadow: none;
+      user-select:none;
+      font-family: var(--font);
+    }
+    .btn:hover{ border-color: color-mix(in oklab, var(--border) 70%, var(--accent)); }
+    .btn:disabled{ opacity:.55; cursor:not-allowed; }
+    .btn svg{ width:16px; height:16px; fill: var(--text); opacity:.85; }
+
+    .panel{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .panel .hd{
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .panel .hd strong{
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .panel .bd{ padding: 16px; }
+
+    .titleRow{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .titleRow h2{
+      font-size: 22px;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: var(--chip);
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .chip b{ color: var(--text); font-weight:600; }
+
+    .muted{ color: var(--muted); }
+
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    /* Quiz */
+    .qBox{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--panel);
+      padding: 18px;
+    }
+    .qMeta{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items:center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .qText{
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      margin: 6px 0 12px;
+    }
+
+    .choices{
+      display:grid;
+      gap: 10px;
+    }
+
+    .choice{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 12px;
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      cursor:pointer;
+      background: color-mix(in oklab, var(--chip) 40%, transparent);
+      transition: transform .04s ease;
+    }
+    .choice:hover{ border-color: color-mix(in oklab, var(--border) 55%, var(--accent)); }
+    .choice:active{ transform: scale(.995); }
+    .choice input{ margin-top: 3px; }
+    .choice .lbl{
+      flex:1;
+      color: color-mix(in oklab, var(--text) 92%, var(--muted));
+    }
+    .choice .tag{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 3px 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      background: var(--panel);
+    }
+
+    .divider{
+      height:1px;
+      background: var(--border);
+      margin: 14px 0;
+    }
+
+    /* Results */
+    .resultsHead{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      align-items:center;
+      margin-bottom: 10px;
+    }
+    .scoreBig{
+      font-size: 22px;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .resultItem{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: var(--panel);
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: var(--chip);
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .badge.ok{
+      border-color: color-mix(in oklab, var(--ok) 35%, var(--border));
+      background: color-mix(in oklab, var(--ok) 14%, var(--chip));
+      color: color-mix(in oklab, var(--ok) 60%, var(--text));
+    }
+    .badge.bad{
+      border-color: color-mix(in oklab, var(--bad) 35%, var(--border));
+      background: color-mix(in oklab, var(--bad) 12%, var(--chip));
+      color: color-mix(in oklab, var(--bad) 60%, var(--text));
+    }
+
+    .answers{
+      margin-top: 10px;
+      display:grid;
+      gap: 8px;
+    }
+
+    .ansLine{
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 10px;
+      background: color-mix(in oklab, var(--chip) 40%, transparent);
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      justify-content: space-between;
+    }
+    .ansLine .left{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      flex: 1;
+    }
+    .pill{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 3px 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      background: var(--panel);
+      white-space: nowrap;
+    }
+
+    .ansLine.correct{
+      border-color: color-mix(in oklab, var(--ok) 35%, var(--border));
+      background: color-mix(in oklab, var(--ok) 12%, transparent);
+    }
+    .ansLine.incorrect{
+      border-color: color-mix(in oklab, var(--bad) 35%, var(--border));
+      background: color-mix(in oklab, var(--bad) 10%, transparent);
+    }
+    .rightPills{
+      display:flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    footer{
+      margin: 18px 0 10px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align:center;
+    }
+
+    @media (max-width: 780px){
+      .topbar{ padding: 12px 14px; }
+      .wrap{ padding: 14px; }
+      .qBox{ padding: 14px; }
+      .ansLine{ flex-direction: column; }
+      .rightPills{ justify-content: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand" aria-label="Quiz header">
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-3.8 9.7-9 10-5.2-.3-9-5-9-10V6l9-4zm0 4.2L6 8.7v3.4c0 3.7 2.7 7.1 6 7.6 3.3-.5 6-3.9 6-7.6V8.7l-6-2.5z"/></svg>
+      </div>
+      <div>
+        <h1>CompTIA A+ 1201 Quiz</h1>
+        <div class="subtitle">Module 3 — System Devices (3A–3D)</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="themeBtn" type="button" aria-label="Toggle theme">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 18a6 6 0 110-12 6 6 0 010 12zm0 4l-1-2h2l-1 2zM12 2l1 2h-2l1-2zM2 12l2-1v2l-2-1zm20 0l-2 1v-2l2 1zM4.2 4.2l2.1.7-1.4 1.4-.7-2.1zm15.6 15.6l-2.1-.7 1.4-1.4.7 2.1zM19.8 4.2l.7 2.1-1.4-1.4 2.1-.7zM4.2 19.8l-.7-2.1 1.4 1.4-2.1.7z"/></svg>
+        <span id="themeLabel">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <article class="panel" aria-label="Quiz">
+    <div class="hd">
+      <strong>Interactive Quiz</strong>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+        <span class="chip"><b>Time left:</b> <span id="timeLeft">35:00</span></span>
+        <span class="chip"><b>Progress:</b> <span id="progress">0 / 40</span></span>
+      </div>
+    </div>
+
+    <div class="bd">
+      <!-- Intro -->
+      <section id="intro" class="qBox" aria-label="Intro">
+        <div class="titleRow">
+          <h2 style="margin:0;">Module 3 Quiz (40 Questions)</h2>
+          <span class="chip"><b>Timer:</b> 35 minutes</span>
+        </div>
+        <p class="muted" style="margin:10px 0 0;">
+          Questions are randomized. One question is shown at a time.
+          When time runs out, the quiz auto-submits and shows your results.
+        </p>
+
+        <div class="divider"></div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+          <button class="btn" id="startBtn" type="button" onclick="startQuiz()">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7-11-7z"/></svg>
+            Start Quiz
+          </button>
+
+          <button class="btn" type="button" onclick="goHome()">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 8h-3v10h-5v-6H11v6H6V11H3l9-8z"/></svg>
+            Return Home
+          </button>
+
+          <span class="chip"><b>Sections:</b> 3A • 3B • 3C • 3D</span>
+        </div>
+      </section>
+
+      <!-- Quiz -->
+      <section id="quiz" class="qBox" aria-label="Quiz" style="display:none;">
+        <div class="qMeta">
+          <span class="chip" id="sectionChip"><b>Section:</b> —</span>
+          <span class="chip" id="qChip"><b>Question:</b> —</span>
+        </div>
+
+        <div class="qText" id="qText"></div>
+
+        <div class="choices" id="choices"></div>
+
+        <div class="divider"></div>
+
+        <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;">
+          <button class="btn" type="button" onclick="prevQuestion()">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.4 7.4L14 6l-6 6 6 6 1.4-1.4L10.8 12l4.6-4.6z"/></svg>
+            Previous
+          </button>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+            <button class="btn" type="button" onclick="skipQuestion()" id="skipBtn">
+              Skip
+            </button>
+            <button class="btn" type="button" onclick="nextQuestion()" id="nextBtn">
+              Next
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.6 16.6L10 18l6-6-6-6-1.4 1.4L13.2 12l-4.6 4.6z"/></svg>
+            </button>
+            <button class="btn" type="button" onclick="submitQuiz()" id="submitBtn">
+              Submit
+            </button>
+          </div>
+        </div>
+
+        <p class="muted" style="margin:12px 0 0;font-size:12px;">
+          Tip: You can change an answer any time before submitting.
+        </p>
+      </section>
+
+      <!-- Results -->
+      <section id="results" class="qBox" aria-label="Results" style="display:none;">
+        <div class="resultsHead">
+          <div>
+            <p class="scoreBig" id="scoreBig">Results</p>
+            <p class="muted" id="scoreMeta" style="margin:6px 0 0;"></p>
+          </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+            <button class="btn" type="button" onclick="restartQuiz()">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6V3L8 7l4 4V8c2.8 0 5 2.2 5 5a5 5 0 01-9.6 2H5.3A7 7 0 0019 13c0-3.9-3.1-7-7-7z"/></svg>
+              Restart (reshuffle)
+            </button>
+
+            <button class="btn" type="button" onclick="goHome()">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 8h-3v10h-5v-6H11v6H6V11H3l9-8z"/></svg>
+              Return Home
+            </button>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="grid2" id="resultsList"></div>
+
+        <div class="divider"></div>
+
+        <div class="panel" style="box-shadow:none;">
+          <div class="hd">
+            <strong>Question map (module references)</strong>
+          </div>
+          <div class="bd">
+            <p class="muted" style="margin-top:0;">
+              Each question below shows which section it belongs to. If you missed a question, review that module section.
+            </p>
+            <div id="moduleMap"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <footer>
+    Sudo-Antonio-Castro • System-Devices-Quiz
+  </footer>
+</main>
+
+<script>
+  // =========================
+  // Theme toggle (persist)
+  // =========================
+  const themeBtn = document.getElementById("themeBtn");
+  const themeLabel = document.getElementById("themeLabel");
+  const savedTheme = localStorage.getItem("kb_theme");
+  if (savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
+  updateThemeLabel();
+
+  themeBtn.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme") || "light";
+    const next = current === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("kb_theme", next);
+    updateThemeLabel();
+  });
+
+  function updateThemeLabel(){
+    const current = document.documentElement.getAttribute("data-theme") || "light";
+    themeLabel.textContent = current === "dark" ? "Light" : "Dark";
+  }
+
+  // =========================
+  // Repo navigation
+  // =========================
+  function goHome(){
+    // /System-Devices-Quiz/ -> ../ (repo root)
+    window.location.href = "../";
+  }
+
+  // =========================
+  // Quiz Data (40 Questions)
+  // =========================
+
+  // Module references (where to send user when incorrect)
+  // Adjust these if you want different URLs later.
+  const MODULE_LINKS = {
+    "3A": "../System-Devices/",
+    "3B": "../System-Devices/",
+    "3C": "../System-Devices/",
+    "3D": "../System-Devices/"
+  };
+
+  const QUESTIONS = [
+    // 3A — Power Supplies and Cooling
+    { id:"3A-1", section:"3A", moduleTitle:"Power Supplies and Cooling", prompt:"What is the primary function of a PSU in a PC?", choices:{A:"Convert DC to AC",B:"Convert AC to DC",C:"Increase CPU clock speed",D:"Store data permanently"}, answer:"B" },
+    { id:"3A-2", section:"3A", moduleTitle:"Power Supplies and Cooling", prompt:"A PC shuts off when a high-end GPU begins drawing power under load. What is the MOST likely cause?", choices:{A:"Faulty SATA data cable",B:"Insufficient PSU wattage",C:"Incorrect monitor refresh rate",D:"Too much system RAM"}, answer:"B" },
+    { id:"3A-3", section:"3A", moduleTitle:"Power Supplies and Cooling", prompt:"Which connector is MOST commonly used to power the motherboard?", choices:{A:"4-pin Molex",B:"24-pin ATX main power",C:"6-pin PCIe",D:"15-pin SATA power"}, answer:"B" },
+    { id:"3A-4", section:"3A", moduleTitle:"Power Supplies and Cooling", prompt:"Which connector is MOST commonly used to provide dedicated power to the CPU?", choices:{A:"24-pin ATX",B:"8-pin EPS/CPU power",C:"6-pin PCIe",D:"15-pin SATA power"}, answer:"B" },
+    { id:"3A-5", section:"3A", moduleTitle:"Power Supplies and Cooling", prompt:"Which voltage rail is MOST important for modern CPUs/GPUs in a desktop PC?", choices:{A:"+3.3V",B:"+5V",C:"+12V",D:"-12V"}, answer:"C" },
+    { id:"3A-6", section:"3A", moduleTitle:"Power Supplies and Cooling", prompt:"What is the primary benefit of a modular PSU?", choices:{A:"Higher FPS in games",B:"Reduced cable clutter and improved airflow",C:"Built-in battery backup",D:"Automatic RAID configuration"}, answer:"B" },
+    { id:"3A-7", section:"3A", moduleTitle:"Power Supplies and Cooling", prompt:"Redundant PSUs are MOST commonly used in:", choices:{A:"Gaming desktops",B:"Home theater PCs",C:"Servers requiring high uptime",D:"Tablets"}, answer:"C" },
+    { id:"3A-8", section:"3A", moduleTitle:"Power Supplies and Cooling", prompt:"What is the purpose of thermal paste?", choices:{A:"Reduce dust buildup on fans",B:"Improve heat transfer between CPU and heat sink",C:"Increase PSU efficiency",D:"Prevent RAM errors"}, answer:"B" },
+    { id:"3A-9", section:"3A", moduleTitle:"Power Supplies and Cooling", prompt:"A system overheats shortly after a CPU upgrade even though the fan spins. What is the BEST first action?", choices:{A:"Replace the PSU",B:"Reseat the heat sink and reapply thermal paste",C:"Replace the SSD",D:"Change SATA mode in BIOS"}, answer:"B" },
+    { id:"3A-10", section:"3A", moduleTitle:"Power Supplies and Cooling", prompt:"Which set of components is required for a typical liquid cooling solution?", choices:{A:"Pump, water block, radiator, fans",B:"Heat sink, PSU, Molex adapter, fan hub",C:"Optical drive, SATA cable, thermal pad, DIMM",D:"PCIe slot, chipset, CPU socket, BIOS chip"}, answer:"A" },
+
+    // 3B — Storage Devices
+    { id:"3B-1", section:"3B", moduleTitle:"Storage Devices", prompt:"Which storage device type has no moving parts and is typically fastest for random access?", choices:{A:"HDD",B:"SSD",C:"DVD-ROM",D:"Tape"}, answer:"B" },
+    { id:"3B-2", section:"3B", moduleTitle:"Storage Devices", prompt:"Which storage type usually provides the lowest cost per GB for large capacities?", choices:{A:"NVMe SSD",B:"SSD",C:"HDD",D:"RAM"}, answer:"C" },
+    { id:"3B-3", section:"3B", moduleTitle:"Storage Devices", prompt:"A hybrid drive (SSHD) is best described as:", choices:{A:"Two SSDs mirrored together",B:"An HDD with flash memory used as cache",C:"A removable optical disc",D:"A USB flash drive with a fan"}, answer:"B" },
+    { id:"3B-4", section:"3B", moduleTitle:"Storage Devices", prompt:"NVMe drives primarily use which interface?", choices:{A:"SATA",B:"PCIe",C:"USB 2.0",D:"HDMI"}, answer:"B" },
+    { id:"3B-5", section:"3B", moduleTitle:"Storage Devices", prompt:"SAS drives are MOST commonly found in:", choices:{A:"Consumer tablets",B:"Enterprise/server environments",C:"Digital cameras",D:"Gaming controllers"}, answer:"B" },
+    { id:"3B-6", section:"3B", moduleTitle:"Storage Devices", prompt:"Which RAID level uses striping and provides no redundancy?", choices:{A:"RAID 0",B:"RAID 1",C:"RAID 5",D:"RAID 10"}, answer:"A" },
+    { id:"3B-7", section:"3B", moduleTitle:"Storage Devices", prompt:"Which RAID level uses mirroring?", choices:{A:"RAID 0",B:"RAID 1",C:"RAID 5",D:"RAID 6"}, answer:"B" },
+    { id:"3B-8", section:"3B", moduleTitle:"Storage Devices", prompt:"What is the minimum number of drives required for RAID 5?", choices:{A:"2",B:"3",C:"4",D:"5"}, answer:"B" },
+    { id:"3B-9", section:"3B", moduleTitle:"Storage Devices", prompt:"A business needs strong performance and fault tolerance and has four drives available. Which RAID level is BEST?", choices:{A:"RAID 0",B:"RAID 1",C:"RAID 5",D:"RAID 10"}, answer:"D" },
+    { id:"3B-10", section:"3B", moduleTitle:"Storage Devices", prompt:"Which statement BEST describes RAID?", choices:{A:"RAID is always a complete replacement for backups",B:"RAID combines multiple drives to improve performance and/or fault tolerance",C:"RAID only works with optical drives",D:"RAID is required for NVMe SSDs to function"}, answer:"B" },
+
+    // 3C — System Memory
+    { id:"3C-1", section:"3C", moduleTitle:"System Memory", prompt:"RAM is best described as:", choices:{A:"Long-term storage",B:"Volatile working memory",C:"Optical media",D:"A CPU socket type"}, answer:"B" },
+    { id:"3C-2", section:"3C", moduleTitle:"System Memory", prompt:"When a system relies heavily on virtual memory, performance typically:", choices:{A:"Improves",B:"Slows down",C:"Has no change",D:"Becomes limited by monitor resolution"}, answer:"B" },
+    { id:"3C-3", section:"3C", moduleTitle:"System Memory", prompt:"Which memory form factor is MOST common in laptops?", choices:{A:"DIMM",B:"SO-DIMM",C:"ATX",D:"PCIe"}, answer:"B" },
+    { id:"3C-4", section:"3C", moduleTitle:"System Memory", prompt:"Which statement about DDR generations is TRUE?", choices:{A:"DDR3 and DDR4 are interchangeable",B:"DDR4 fits DDR3 slots",C:"DDR generations are keyed and not interchangeable",D:"DDR is only used in servers"}, answer:"C" },
+    { id:"3C-5", section:"3C", moduleTitle:"System Memory", prompt:"CAS latency is a measurement related to:", choices:{A:"How quickly the CPU executes instructions",B:"Memory timing delay before data becomes available",C:"PSU efficiency under load",D:"HDD rotational speed"}, answer:"B" },
+    { id:"3C-6", section:"3C", moduleTitle:"System Memory", prompt:"Dual-channel memory works best when:", choices:{A:"One stick is installed in any slot",B:"Two matched sticks are installed in the correct paired slots",C:"All sticks are different sizes",D:"Only ECC memory is installed"}, answer:"B" },
+    { id:"3C-7", section:"3C", moduleTitle:"System Memory", prompt:"A system has two RAM sticks installed but is running in single-channel mode. Which is the MOST likely reason?", choices:{A:"The SSD is nearly full",B:"The sticks are installed in the wrong slots",C:"The monitor cable is defective",D:"The PSU is modular"}, answer:"B" },
+    { id:"3C-8", section:"3C", moduleTitle:"System Memory", prompt:"ECC memory is designed to:", choices:{A:"Increase RGB lighting performance",B:"Detect and correct certain memory errors",C:"Improve HDD speed",D:"Convert AC to DC"}, answer:"B" },
+    { id:"3C-9", section:"3C", moduleTitle:"System Memory", prompt:"To use ECC RAM, which components typically must support it?", choices:{A:"Keyboard and mouse",B:"Monitor and GPU",C:"CPU and motherboard",D:"HDD and optical drive"}, answer:"C" },
+    { id:"3C-10", section:"3C", moduleTitle:"System Memory", prompt:"Which tool would MOST likely help confirm suspected RAM instability?", choices:{A:"Disk defragmenter",B:"Memory diagnostic test",C:"Printer calibration utility",D:"Audio driver update"}, answer:"B" },
+
+    // 3D — CPUs
+    { id:"3D-1", section:"3D", moduleTitle:"CPUs", prompt:"What is the correct order of the CPU instruction cycle?", choices:{A:"Execute → Decode → Fetch → Write-back",B:"Fetch → Decode → Execute → Write-back",C:"Decode → Fetch → Execute → Write-back",D:"Write-back → Execute → Decode → Fetch"}, answer:"B" },
+    { id:"3D-2", section:"3D", moduleTitle:"CPUs", prompt:"x64 refers to:", choices:{A:"A 32-bit architecture",B:"A 64-bit architecture",C:"A type of RAID",D:"A PSU efficiency standard"}, answer:"B" },
+    { id:"3D-3", section:"3D", moduleTitle:"CPUs", prompt:"ARM CPUs are MOST commonly associated with:", choices:{A:"Low-power mobile/embedded systems",B:"Legacy optical drives",C:"Desktop-only gaming systems",D:"Tape backup devices"}, answer:"A" },
+    { id:"3D-4", section:"3D", moduleTitle:"CPUs", prompt:"Which CPU feature is MOST important for efficient virtual machines?", choices:{A:"Virtualization extensions",B:"SATA support",C:"ECC fan control",D:"Optical media support"}, answer:"A" },
+    { id:"3D-5", section:"3D", moduleTitle:"CPUs", prompt:"“Multicore” means the CPU has:", choices:{A:"More RAM slots",B:"Multiple processing cores on one chip",C:"Multiple power supplies",D:"Multiple hard drives"}, answer:"B" },
+    { id:"3D-6", section:"3D", moduleTitle:"CPUs", prompt:"In an LGA socket, the pins are typically located:", choices:{A:"On the CPU",B:"In the motherboard socket",C:"On the RAM module",D:"On the power supply"}, answer:"B" },
+    { id:"3D-7", section:"3D", moduleTitle:"CPUs", prompt:"What does ZIF stand for?", choices:{A:"Zero Insertion Force",B:"Zoned Internal Firmware",C:"Zettabyte Interface Format",D:"Zero Idle Frequency"}, answer:"A" },
+    { id:"3D-8", section:"3D", moduleTitle:"CPUs", prompt:"A CPU fits in the socket but the system will not boot after installation. What is a likely cause?", choices:{A:"Incorrect wallpaper resolution",B:"BIOS/UEFI does not support the CPU without an update",C:"Mouse driver conflict",D:"HDMI cable is too short"}, answer:"B" },
+    { id:"3D-9", section:"3D", moduleTitle:"CPUs", prompt:"Which action BEST helps prevent CPU overheating during installation?", choices:{A:"Disable all case fans",B:"Apply thermal compound correctly and secure the cooler evenly",C:"Install more RAM",D:"Reformat the SSD"}, answer:"B" },
+    { id:"3D-10", section:"3D", moduleTitle:"CPUs", prompt:"TDP is MOST closely related to:", choices:{A:"CPU heat output / cooling requirements",B:"Drive capacity",C:"Network speed",D:"RAM form factor"}, answer:"A" },
+  ];
+
+  // =========================
+  // Quiz Engine
+  // =========================
+  const TOTAL_SECONDS = 35 * 60;
+
+  let order = [];               // randomized indices into QUESTIONS
+  let cursor = 0;               // which question in the randomized order we’re on
+  let answers = {};             // qid -> selected letter (A/B/C/D) or null
+  let startedAt = null;
+  let timer = null;
+  let secondsLeft = TOTAL_SECONDS;
+  let submitted = false;
+
+  const elIntro = document.getElementById("intro");
+  const elQuiz = document.getElementById("quiz");
+  const elResults = document.getElementById("results");
+
+  const elTimeLeft = document.getElementById("timeLeft");
+  const elProgress = document.getElementById("progress");
+  const elSectionChip = document.getElementById("sectionChip");
+  const elQChip = document.getElementById("qChip");
+  const elQText = document.getElementById("qText");
+  const elChoices = document.getElementById("choices");
+
+  const elNextBtn = document.getElementById("nextBtn");
+  const elSkipBtn = document.getElementById("skipBtn");
+  const elSubmitBtn = document.getElementById("submitBtn");
+
+  function startQuiz(){
+    // init
+    submitted = false;
+    secondsLeft = TOTAL_SECONDS;
+    startedAt = Date.now();
+    answers = {};
+
+    // shuffle order
+    order = QUESTIONS.map((_, i) => i);
+    fisherYates(order);
+
+    // initialize answers
+    QUESTIONS.forEach(q => answers[q.id] = null);
+
+    cursor = 0;
+
+    // show quiz
+    elIntro.style.display = "none";
+    elResults.style.display = "none";
+    elQuiz.style.display = "block";
+
+    updateProgress();
+    renderQuestion();
+
+    // start timer
+    stopTimer();
+    timer = setInterval(tick, 1000);
+    tick(); // immediate update
+  }
+
+  function restartQuiz(){
+    // back to intro and start over
+    stopTimer();
+    elResults.style.display = "none";
+    elQuiz.style.display = "none";
+    elIntro.style.display = "block";
+
+    // reset display chips
+    elTimeLeft.textContent = "35:00";
+    elProgress.textContent = "0 / 40";
+  }
+
+  function tick(){
+    if (submitted) return;
+    secondsLeft -= 1;
+    if (secondsLeft < 0) secondsLeft = 0;
+    elTimeLeft.textContent = fmtTime(secondsLeft);
+
+    if (secondsLeft <= 0){
+      // auto submit
+      submitQuiz(true);
+    }
+  }
+
+  function stopTimer(){
+    if (timer){
+      clearInterval(timer);
+      timer = null;
+    }
+  }
+
+  function renderQuestion(){
+    const q = getCurrentQuestion();
+    if (!q) return;
+
+    elSectionChip.innerHTML = `<b>Section:</b> ${escapeHtml(q.section)} — ${escapeHtml(q.moduleTitle)}`;
+    elQChip.innerHTML = `<b>Question:</b> ${cursor + 1} / ${order.length}`;
+    elQText.textContent = q.prompt;
+
+    // render choices
+    elChoices.innerHTML = "";
+    const selected = answers[q.id];
+
+    ["A","B","C","D"].forEach(letter => {
+      const row = document.createElement("label");
+      row.className = "choice";
+      row.setAttribute("role", "button");
+
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "q_" + q.id;
+      input.value = letter;
+      input.checked = (selected === letter);
+      input.addEventListener("change", () => {
+        answers[q.id] = letter;
+        updateProgress();
+      });
+
+      const tag = document.createElement("span");
+      tag.className = "tag";
+      tag.textContent = letter;
+
+      const txt = document.createElement("div");
+      txt.className = "lbl";
+      txt.textContent = q.choices[letter];
+
+      row.appendChild(input);
+      row.appendChild(tag);
+      row.appendChild(txt);
+
+      // click anywhere selects
+      row.addEventListener("click", (e) => {
+        // avoid double toggles
+        if (e.target && e.target.tagName && e.target.tagName.toLowerCase() === "input") return;
+        input.checked = true;
+        input.dispatchEvent(new Event("change", { bubbles:true }));
+      });
+
+      elChoices.appendChild(row);
+    });
+
+    // buttons
+    elSkipBtn.disabled = (cursor >= order.length - 1);
+    elNextBtn.disabled = (cursor >= order.length - 1);
+    elSubmitBtn.disabled = false;
+  }
+
+  function updateProgress(){
+    const answeredCount = Object.values(answers).filter(v => v !== null).length;
+    elProgress.textContent = `${answeredCount} / ${QUESTIONS.length}`;
+  }
+
+  function nextQuestion(){
+    if (cursor < order.length - 1){
+      cursor++;
+      renderQuestion();
+    }
+  }
+
+  function prevQuestion(){
+    if (cursor > 0){
+      cursor--;
+      renderQuestion();
+    }
+  }
+
+  function skipQuestion(){
+    // just go forward without forcing an answer
+    nextQuestion();
+  }
+
+  function submitQuiz(fromTimeout=false){
+    if (submitted) return;
+    submitted = true;
+    stopTimer();
+
+    // Hide quiz, show results
+    elQuiz.style.display = "none";
+    elIntro.style.display = "none";
+    elResults.style.display = "block";
+
+    // Score and build report
+    const report = QUESTIONS.map(q => {
+      const chosen = answers[q.id]; // may be null
+      const correct = q.answer;
+      return {
+        id: q.id,
+        section: q.section,
+        moduleTitle: q.moduleTitle,
+        prompt: q.prompt,
+        chosen,
+        correct,
+        isCorrect: chosen === correct
+      };
+    });
+
+    const correctCount = report.filter(r => r.isCorrect).length;
+    const answeredCount = report.filter(r => r.chosen !== null).length;
+
+    const elapsed = startedAt ? Math.max(0, Math.floor((Date.now() - startedAt) / 1000)) : 0;
+
+    document.getElementById("scoreBig").textContent =
+      `Score: ${correctCount} / ${QUESTIONS.length}`;
+
+    document.getElementById("scoreMeta").textContent =
+      `${fromTimeout ? "Time expired — auto-submitted." : "Submitted."} Answered ${answeredCount}/${QUESTIONS.length}. ` +
+      `Time used: ${fmtTime(Math.min(elapsed, TOTAL_SECONDS))} (of 35:00).`;
+
+    renderResults(report);
+    renderModuleMap(report);
+  }
+
+  function renderResults(report){
+    const list = document.getElementById("resultsList");
+    list.innerHTML = "";
+
+    report.forEach((r, idx) => {
+      const item = document.createElement("div");
+      item.className = "resultItem";
+
+      const top = document.createElement("div");
+      top.style.display = "flex";
+      top.style.justifyContent = "space-between";
+      top.style.alignItems = "center";
+      top.style.gap = "10px";
+      top.style.flexWrap = "wrap";
+
+      const left = document.createElement("div");
+      left.innerHTML = `
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+          <span class="chip"><b>#</b> ${idx + 1}</span>
+          <span class="chip"><b>ID</b> ${escapeHtml(r.id)}</span>
+          <span class="chip"><b>Section</b> ${escapeHtml(r.section)} — ${escapeHtml(r.moduleTitle)}</span>
+        </div>
+        <div style="margin-top:10px;font-weight:700;">${escapeHtml(r.prompt)}</div>
+      `;
+
+      const badge = document.createElement("span");
+      badge.className = "badge " + (r.isCorrect ? "ok" : "bad");
+      badge.textContent = r.isCorrect ? "Correct" : "Incorrect";
+
+      top.appendChild(left);
+      top.appendChild(badge);
+
+      // Answers block
+      const answersWrap = document.createElement("div");
+      answersWrap.className = "answers";
+
+      const chosenLetter = r.chosen;
+      const correctLetter = r.correct;
+
+      // Show chosen vs correct, with highlighting:
+      // - If correct: chosen line green
+      // - If incorrect: chosen line red + correct line green
+      if (chosenLetter !== null){
+        answersWrap.appendChild(makeAnswerLine(
+          `Your answer: ${chosenLetter} — ${QUESTIONS.find(q => q.id === r.id).choices[chosenLetter]}`,
+          r.isCorrect ? "correct" : "incorrect",
+          [
+            { text: r.isCorrect ? "✅ correct" : "❌ incorrect", tone: r.isCorrect ? "ok" : "bad" }
+          ]
+        ));
+      } else {
+        answersWrap.appendChild(makeAnswerLine(
+          `Your answer: (no answer selected)`,
+          "incorrect",
+          [
+            { text: "❌ unanswered", tone: "bad" }
+          ]
+        ));
+      }
+
+      // Always show correct answer in green
+      answersWrap.appendChild(makeAnswerLine(
+        `Correct answer: ${correctLetter} — ${QUESTIONS.find(q => q.id === r.id).choices[correctLetter]}`,
+        "correct",
+        [
+          { text: "✅ correct answer", tone: "ok" }
+        ]
+      ));
+
+      // Module reference if incorrect
+      const ref = document.createElement("div");
+      ref.style.marginTop = "10px";
+      ref.className = "muted";
+      if (!r.isCorrect){
+        const link = MODULE_LINKS[r.section] || "../System-Devices/";
+        ref.innerHTML = `Review module section <b>${escapeHtml(r.section)}</b>: <a href="${link}">${escapeHtml(link)}</a>`;
+      } else {
+        ref.textContent = `Module section: ${r.section}`;
+      }
+
+      item.appendChild(top);
+      item.appendChild(document.createElement("div")).className = "divider";
+      item.appendChild(answersWrap);
+      item.appendChild(ref);
+
+      list.appendChild(item);
+    });
+  }
+
+  function makeAnswerLine(text, cls, pills){
+    const line = document.createElement("div");
+    line.className = "ansLine " + (cls || "");
+
+    const left = document.createElement("div");
+    left.className = "left";
+
+    const t = document.createElement("div");
+    t.textContent = text;
+
+    left.appendChild(t);
+
+    const right = document.createElement("div");
+    right.className = "rightPills";
+
+    (pills || []).forEach(p => {
+      const b = document.createElement("span");
+      b.className = "badge " + (p.tone || "");
+      b.textContent = p.text;
+      right.appendChild(b);
+    });
+
+    line.appendChild(left);
+    line.appendChild(right);
+    return line;
+  }
+
+  function renderModuleMap(report){
+    const wrap = document.getElementById("moduleMap");
+
+    // Group by section
+    const groups = {};
+    report.forEach(r => {
+      if (!groups[r.section]) groups[r.section] = [];
+      groups[r.section].push(r);
+    });
+
+    // Build simple lists
+    const parts = [];
+    ["3A","3B","3C","3D"].forEach(sec => {
+      if (!groups[sec]) return;
+      parts.push(`<div style="margin:10px 0 14px;">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;">
+          <div style="font-weight:800;letter-spacing:-0.01em;">${sec} — ${escapeHtml(groups[sec][0].moduleTitle)}</div>
+          <span class="chip"><b>Link:</b> <a href="${MODULE_LINKS[sec] || "../System-Devices/"}">${escapeHtml(MODULE_LINKS[sec] || "../System-Devices/")}</a></span>
+        </div>
+        <ul style="margin:10px 0 0 18px;color:color-mix(in oklab, var(--text) 92%, var(--muted));">
+          ${groups[sec].map(r => {
+            const status = r.isCorrect ? "ok" : "bad";
+            const icon = r.isCorrect ? "✅" : "❌";
+            const chosen = r.chosen ? ` (you: ${r.chosen}, correct: ${r.correct})` : ` (you: —, correct: ${r.correct})`;
+            return `<li><span class="pill">${icon} ${escapeHtml(r.id)}</span> ${escapeHtml(r.prompt)}<span class="muted">${escapeHtml(chosen)}</span></li>`;
+          }).join("")}
+        </ul>
+      </div>`);
+    });
+
+    wrap.innerHTML = parts.join("");
+  }
+
+  // =========================
+  // Helpers
+  // =========================
+  function fisherYates(arr){
+    for (let i = arr.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function getCurrentQuestion(){
+    const idx = order[cursor];
+    return QUESTIONS[idx];
+  }
+
+  function fmtTime(totalSeconds){
+    const m = Math.floor(totalSeconds / 60);
+    const s = totalSeconds % 60;
+    return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  // =========================
+  // Initial UI
+  // =========================
+  document.getElementById("timeLeft").textContent = "35:00";
+  document.getElementById("progress").textContent = `0 / ${QUESTIONS.length}`;
+
+  // Optional: warn on accidental close once started
+  window.addEventListener("beforeunload", (e) => {
+    if (!submitted && timer){
+      e.preventDefault();
+      e.returnValue = "";
+    }
+  });
+</script>
+</body>
+</html>
