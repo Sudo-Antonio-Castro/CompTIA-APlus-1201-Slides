@@ -1,172 +1,408 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>CompTIA A+ 1201 — System Devices</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-  }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CompTIA A+ 1201 — System Devices</title>
+  <meta name="description" content="CompTIA A+ 1201 Slides — Module 3: Installing System Devices" />
 
-  #slide {
-    border: 2px solid #ccc;
-    padding: 40px;
-    margin-bottom: 16px;
-    min-height: 200px;
-    font-size: 1.2em;
-    text-align: left;
-    background: #f9f9f9;
-  }
+  <style>
+    /* ======================= */
+    /* KB Black/White Template */
+    /* ======================= */
 
-  /* Carousel (auto-hides if no images) */
-  #carouselWrap {
-    border: 2px solid #ccc;
-    background: #fff;
-    padding: 16px;
-    margin-bottom: 20px;
-  }
+    :root{
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --text: #0b0b0f;
+      --muted: #5b5b66;
+      --border: #e6e6ee;
+      --shadow: 0 6px 30px rgba(0,0,0,.08);
+      --accent: #111111;
+      --accent-2: #2b2b2b;
+      --chip:#f2f2f7;
+      --link:#111111;
+      --focus: 0 0 0 3px rgba(0,0,0,.18);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --max: 1200px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+    }
 
-  .carousel {
-    display: grid;
-    gap: 10px;
-    align-items: center;
-  }
+    [data-theme="dark"]{
+      --bg: #0b0b0f;
+      --panel: #101014;
+      --text: #f6f6fb;
+      --muted: #b5b5c2;
+      --border: #262633;
+      --shadow: 0 10px 40px rgba(0,0,0,.40);
+      --accent: #ffffff;
+      --accent-2: #e7e7ef;
+      --chip:#17171e;
+      --link:#f6f6fb;
+      --focus: 0 0 0 3px rgba(255,255,255,.18);
+    }
 
-  .carouselTop {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+    a{ color:var(--link); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+    :focus-visible{ outline:none; box-shadow: var(--focus); border-radius: 8px; }
 
-  .carouselImgFrame {
-    border: 1px solid #ddd;
-    background: #fafafa;
-    padding: 10px;
-    display: grid;
-    place-items: center;
-    min-height: 260px;
-  }
+    /* Layout */
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 18px; }
 
-  #carouselImg {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
+    header{
+      position: sticky;
+      top:0;
+      z-index: 30;
+      background: color-mix(in oklab, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content: space-between;
+      padding: 14px 18px;
+      max-width: var(--max);
+      margin:0 auto;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 240px;
+    }
+    .logo{
+      width:34px;height:34px;border-radius: 10px;
+      background: var(--accent);
+      box-shadow: var(--shadow);
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+    }
+    .logo svg{ width:18px; height:18px; fill: var(--bg); }
+    [data-theme="dark"] .logo svg{ fill: #0b0b0f; }
 
-  .carouselBtns {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+    .brand h1{
+      font-size: 14px;
+      margin:0;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity:.9;
+    }
+    .subtitle{
+      font-size:12px;
+      color: var(--muted);
+      margin-top:2px;
+    }
 
-  .dots {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
+    .controls{
+      display:flex; align-items:center; gap:10px;
+      justify-content: flex-end;
+    }
 
-  .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 999px;
-    border: 1px solid #666;
-    background: transparent;
-    cursor: pointer;
-    padding: 0;
-  }
+    .btn{
+      border:1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 12px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      box-shadow: none;
+      user-select:none;
+      font-family: var(--font);
+    }
+    .btn:hover{ border-color: color-mix(in oklab, var(--border) 70%, var(--accent)); }
+    .btn:disabled{ opacity:.55; cursor:not-allowed; }
+    .btn svg{ width:16px; height:16px; fill: var(--text); opacity:.85; }
 
-  .dot.active {
-    background: #4a90e2;
-    border-color: #4a90e2;
-  }
+    .panel{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .panel .hd{
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .panel .hd strong{
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .panel .bd{ padding: 16px; }
 
-  .buttons {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
+    .titleRow{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .titleRow h2{
+      font-size: 22px;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
 
-  .buttons .left, .buttons .right {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: var(--chip);
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .chip b{ color: var(--text); font-weight:600; }
 
-  button, a.homeLink {
-    padding: 10px 14px;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    border: 1px solid #bbb;
-    background: #fff;
-    display: inline-block;
-  }
+    /* Slide box (content area) */
+    #slide{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--panel);
+      padding: 22px;
+      min-height: 220px;
+    }
+    #slide h2{ margin: 0 0 10px; font-size: 22px; letter-spacing: -0.01em; }
+    #slide h3{ margin: 14px 0 8px; font-size: 16px; }
+    #slide p{ margin: 10px 0; color: color-mix(in oklab, var(--text) 92%, var(--muted)); }
+    #slide ul, #slide ol{ margin: 10px 0 10px 18px; color: color-mix(in oklab, var(--text) 92%, var(--muted)); }
+    #slide hr{ border: none; height:1px; background: var(--border); margin: 16px 0; }
 
-  button:hover, a.homeLink:hover {
-    background: #f1f1f1;
-  }
+    /* Carousel */
+    #carouselWrap{
+      margin-top: 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--panel);
+      padding: 14px;
+    }
+    .carousel{
+      display:grid;
+      gap: 10px;
+    }
+    .carouselTop{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap: wrap;
+    }
+    .carouselBtns{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap: wrap;
+    }
+    .carouselImgFrame{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: color-mix(in oklab, var(--chip) 55%, transparent);
+      padding: 10px;
+      min-height: 260px;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+    }
+    #carouselImg{
+      max-width: 100%;
+      height: auto;
+      display:block;
+      border-radius: var(--radius-sm);
+    }
 
-  #counter {
-    font-weight: bold;
-  }
-</style>
+    /* IMPORTANT: avoid collision with KB template's ".dot" usage */
+    .cDots{
+      display:flex;
+      gap:6px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
+    .cDot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in oklab, var(--border) 65%, var(--accent));
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+    }
+    .cDot.active{
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* Controls row */
+    .controlRow{
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items:center;
+      margin-top: 14px;
+    }
+    .controlRow .left,
+    .controlRow .right{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
+
+    footer{
+      margin: 18px 0 10px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align:center;
+    }
+
+    @media (max-width: 780px){
+      .topbar{ padding: 12px 14px; }
+      .wrap{ padding: 14px; }
+      #slide{ padding: 16px; }
+    }
+  </style>
 </head>
 
 <body>
-<h1>CompTIA A+ 1201 — Module 3: Installing System Devices</h1>
-
-<div id="slide"></div>
-
-<!-- Carousel container (auto-hides if no images) -->
-<div id="carouselWrap" style="display:none;">
-  <div class="carousel">
-    <div class="carouselTop">
-      <div class="carouselBtns">
-        <button id="prevImgBtn" onclick="prevImage()">◀ Image</button>
-        <button id="nextImgBtn" onclick="nextImage()">Image ▶</button>
-        <span id="imgCounter" style="font-weight:bold;"></span>
+<header>
+  <div class="topbar">
+    <div class="brand" aria-label="Slides header">
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-3.8 9.7-9 10-5.2-.3-9-5-9-10V6l9-4zm0 4.2L6 8.7v3.4c0 3.7 2.7 7.1 6 7.6 3.3-.5 6-3.9 6-7.6V8.7l-6-2.5z"/></svg>
       </div>
-      <div class="dots" id="dots"></div>
+      <div>
+        <h1>CompTIA A+ 1201 Slides</h1>
+        <div class="subtitle">System Devices — Module 3</div>
+      </div>
     </div>
 
-    <div class="carouselImgFrame">
-      <img id="carouselImg" alt="Slide image" />
+    <div class="controls">
+      <button class="btn" id="themeBtn" type="button" aria-label="Toggle theme">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 18a6 6 0 110-12 6 6 0 010 12zm0 4l-1-2h2l-1 2zM12 2l1 2h-2l1-2zM2 12l2-1v2l-2-1zm20 0l-2 1v-2l2 1zM4.2 4.2l2.1.7-1.4 1.4-.7-2.1zm15.6 15.6l-2.1-.7 1.4-1.4.7 2.1zM19.8 4.2l.7 2.1-1.4-1.4 2.1-.7zM4.2 19.8l-.7-2.1 1.4 1.4-2.1.7z"/></svg>
+        <span id="themeLabel">Dark</span>
+      </button>
     </div>
   </div>
-</div>
+</header>
 
-<div class="buttons">
-  <div class="left">
-    <button onclick="goHome()">Return Home</button>
-    <button onclick="goToFirstSlide()">First Slide</button>
-    <button onclick="prevSlide()">Previous</button>
-    <button onclick="nextSlide()">Next</button>
-    <span id="counter"></span>
-  </div>
+<main class="wrap">
+  <article class="panel" aria-label="Slides">
+    <div class="hd">
+      <strong>Slide viewer</strong>
+      <span class="chip" id="counterChip"><b>Slide:</b> <span id="counterInline">1 / 1</span></span>
+    </div>
 
-  <div class="right">
-    <button id="enableAudioBtn" onclick="enableAudio()">Enable audio</button>
-    <button id="replayBtn" onclick="replayAudio()" disabled>Replay audio</button>
-  </div>
-</div>
+    <div class="bd">
+      <div class="titleRow">
+        <h2 style="margin:0;">Installing System Devices</h2>
+        <div class="chip"><b>Audio:</b> auto-detect (01.mp3…)</div>
+      </div>
 
-<audio id="slideAudio" preload="auto"></audio>
+      <div id="slide"></div>
+
+      <!-- Carousel container (auto-hides if no images) -->
+      <div id="carouselWrap" style="display:none;">
+        <div class="carousel">
+          <div class="carouselTop">
+            <div class="carouselBtns">
+              <button class="btn" id="prevImgBtn" onclick="prevImage()">
+                ◀ Image
+              </button>
+              <button class="btn" id="nextImgBtn" onclick="nextImage()">
+                Image ▶
+              </button>
+              <span class="chip" id="imgCounter"></span>
+            </div>
+            <div class="cDots" id="dots"></div>
+          </div>
+
+          <div class="carouselImgFrame">
+            <img id="carouselImg" alt="Slide image" />
+          </div>
+        </div>
+      </div>
+
+      <div class="controlRow">
+        <div class="left">
+          <button class="btn" onclick="goHome()">Return Home</button>
+          <button class="btn" onclick="goToFirstSlide()">First Slide</button>
+          <button class="btn" onclick="prevSlide()">Previous</button>
+          <button class="btn" onclick="nextSlide()">Next</button>
+          <span class="chip" id="counter"></span>
+        </div>
+
+        <div class="right">
+          <button class="btn" id="enableAudioBtn" onclick="enableAudio()">Enable audio</button>
+          <button class="btn" id="replayBtn" onclick="replayAudio()" disabled>Replay audio</button>
+        </div>
+      </div>
+
+      <audio id="slideAudio" preload="auto"></audio>
+    </div>
+  </article>
+
+  <footer>
+    Sudo-Antonio-Castro • CompTIA-APlus-1201-Slides
+  </footer>
+</main>
 
 <script>
+  // =========================
+  // Theme toggle (persist)
+  // =========================
+  const themeBtn = document.getElementById("themeBtn");
+  const themeLabel = document.getElementById("themeLabel");
+  const savedTheme = localStorage.getItem("kb_theme");
+  if (savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
+  updateThemeLabel();
+
+  themeBtn.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme") || "light";
+    const next = current === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("kb_theme", next);
+    updateThemeLabel();
+  });
+
+  function updateThemeLabel(){
+    const current = document.documentElement.getAttribute("data-theme") || "light";
+    themeLabel.textContent = current === "dark" ? "Light" : "Dark";
+  }
+
+  // ============================================================
+  // SLIDES + AUDIO + CAROUSEL (unchanged behavior)
+  // ============================================================
+
   // Place this file at: System-Devices/index.html
   // Recommended audio naming (in System-Devices/audio/):
-  //   01.mp3, 02.mp3, 03.mp3, ... (matching slide numbers)
+  //   01.mp3, 02.mp3, 03.mp3, ...
   // This script also supports: 1.mp3, 1.wav, 01.wav, 1.m4a, etc.
   // If your audio is stored at repo root /audio instead, it will also try ../audio/.
 
@@ -183,7 +419,7 @@
   // Audio state
   let audioEnabled = false;
 
-  // ---- Audio resolution (fixes "only slide 3 plays" when filenames/extensions don't match) ----
+  // ---- Audio resolution (supports many filename styles) ----
   const AUDIO_FOLDERS = ["audio", "../audio"]; // tries System-Devices/audio first, then repo-root audio
   const AUDIO_BASES = (n) => [pad2(n), String(n), `slide-${pad2(n)}`, `slide-${n}`];
   const AUDIO_EXTS = ["mp3", "m4a", "wav", "ogg"];
@@ -192,11 +428,10 @@
 
   async function urlExists(url) {
     try {
-      // Try HEAD first (fast)
       const head = await fetch(url, { method: "HEAD", cache: "no-store" });
       if (head.ok) return true;
 
-      // Some servers don't like HEAD; try a tiny ranged GET
+      // Some hosts don’t like HEAD; try tiny ranged GET
       const get = await fetch(url, {
         method: "GET",
         headers: { "Range": "bytes=0-0" },
@@ -229,7 +464,7 @@
     }
 
     console.log(`[audio] No audio file found for slide ${slideNumber}. Tried:`, candidates);
-    return null; // don't cache null so you can add files later without refreshing JS
+    return null;
   }
 
   async function playCurrentAudio() {
@@ -240,18 +475,15 @@
     audio.currentTime = 0;
 
     // Optional per-slide override:
-    // slides[i].audio = "audio/customname.mp3"  OR  slides[i].audio = false to disable audio for that slide
+    // slides[i].audio = "audio/customname.mp3"  OR  slides[i].audio = false to disable
     let src = slides[index].audio;
-
     if (src === false) return;
 
     if (typeof src !== "string" || !src.trim()) {
       src = await resolveAudioSrc(index + 1);
     }
-
     if (!src) return;
 
-    // Only re-set src if changed (helps some browsers)
     const abs = new URL(src, window.location.href).href;
     if (audio.src !== abs) {
       audio.src = src;
@@ -286,7 +518,6 @@
 
     const filenames = (slides[index].images || []).filter(Boolean);
 
-    // Hide carousel if 0 images
     if (filenames.length === 0) {
       wrap.style.display = "none";
       return;
@@ -294,7 +525,6 @@
 
     wrap.style.display = "block";
 
-    // Clamp imgIndex
     if (imgIndex < 0) imgIndex = 0;
     if (imgIndex > filenames.length - 1) imgIndex = filenames.length - 1;
 
@@ -304,12 +534,11 @@
     prevBtn.disabled = (filenames.length <= 1) || (imgIndex === 0);
     nextBtn.disabled = (filenames.length <= 1) || (imgIndex === filenames.length - 1);
 
-    // Build dots
     dotsEl.innerHTML = "";
     if (filenames.length > 1) {
       filenames.forEach((_, i) => {
         const b = document.createElement("button");
-        b.className = "dot" + (i === imgIndex ? " active" : "");
+        b.className = "cDot" + (i === imgIndex ? " active" : "");
         b.title = `Go to image ${i + 1}`;
         b.onclick = () => { imgIndex = i; renderCarousel(); };
         dotsEl.appendChild(b);
@@ -333,15 +562,19 @@
   }
 
   // ---- Slides ----
+  function updateCounters() {
+    const t = `Slide ${index + 1} / ${slides.length}`;
+    document.getElementById("counter").textContent = t;
+    document.getElementById("counterInline").textContent = `${index + 1} / ${slides.length}`;
+  }
+
   function showSlide() {
     document.getElementById("slide").innerHTML = slides[index].content;
-    document.getElementById("counter").textContent = `Slide ${index + 1} / ${slides.length}`;
+    updateCounters();
 
-    // Reset carousel on slide change
     imgIndex = 0;
     renderCarousel();
 
-    // Play slide audio (if enabled)
     playCurrentAudio();
   }
 
@@ -360,7 +593,6 @@
     showSlide();
   }
 
-  // "Return Home" goes back to repo root
   function goHome() {
     window.location.href = "../";
   }
