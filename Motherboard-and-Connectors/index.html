@@ -1,1 +1,611 @@
 
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CompTIA A+ 1201 - Motherboards and Connectors</title>
+  <meta name="description" content="CompTIA A+ 1201 Motherboards and Connectors" />
+  <style>
+    :root{
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --text: #0b0b0f;
+      --muted: #5b5b66;
+      --border: #e6e6ee;
+      --shadow: 0 6px 30px rgba(0,0,0,.08);
+      --accent: #111111;
+      --accent-2: #2b2b2b;
+      --chip:#f2f2f7;
+      --link:#111111;
+      --focus: 0 0 0 3px rgba(0,0,0,.18);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --max: 980px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+    }
+
+    /* Dark mode (still black/white) */
+    [data-theme="dark"]{
+      --bg: #0b0b0f;
+      --panel: #101014;
+      --text: #f6f6fb;
+      --muted: #b5b5c2;
+      --border: #262633;
+      --shadow: 0 10px 40px rgba(0,0,0,.40);
+      --accent: #ffffff;
+      --accent-2: #e7e7ef;
+      --chip:#17171e;
+      --link:#f6f6fb;
+      --focus: 0 0 0 3px rgba(255,255,255,.18);
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+    a{ color:var(--link); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+    :focus-visible{ outline:none; box-shadow: var(--focus); border-radius: 8px; }
+
+    /* Header / topbar */
+    header{
+      position: sticky;
+      top:0;
+      z-index: 30;
+      background: color-mix(in oklab, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content: space-between;
+      padding: 14px 18px;
+      max-width: var(--max);
+      margin:0 auto;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 240px;
+    }
+    .logo{
+      width:34px;height:34px;border-radius: 10px;
+      background: var(--accent);
+      box-shadow: var(--shadow);
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+    }
+    .logo svg{ width:18px; height:18px; fill: var(--bg); }
+    [data-theme="dark"] .logo svg{ fill: #0b0b0f; }
+
+    .brand h1{
+      font-size: 14px;
+      margin:0;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity:.9;
+    }
+    .sub{
+      font-size:12px;
+      color: var(--muted);
+      margin-top:2px;
+    }
+
+    .controls{
+      display:flex; align-items:center; gap:10px;
+      justify-content: flex-end;
+    }
+
+    .btn{
+      border:1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 12px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      box-shadow: none;
+      user-select:none;
+      font-family: var(--font);
+    }
+    .btn:hover{ border-color: color-mix(in oklab, var(--border) 70%, var(--accent)); }
+    .btn svg{ width:16px; height:16px; fill: var(--text); opacity:.8; }
+    .btn:disabled{ opacity:.55; cursor:not-allowed; }
+
+    /* Layout */
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 18px; }
+
+    .panel{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    /* Slide panel */
+    #slide{
+      padding: 22px;
+      min-height: 240px;
+    }
+    #slide h2{
+      margin: 0 0 10px;
+      font-size: 26px;
+      letter-spacing: -0.02em;
+    }
+    #slide p, #slide ul, #slide ol{
+      color: color-mix(in oklab, var(--text) 92%, var(--muted));
+    }
+    #slide ul, #slide ol{
+      margin: 10px 0 10px 18px;
+    }
+
+    /* Summary callout */
+    .summary{
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: color-mix(in oklab, var(--chip) 70%, transparent);
+      color: color-mix(in oklab, var(--text) 92%, var(--muted));
+    }
+    .summary strong{
+      color: color-mix(in oklab, var(--text) 96%, var(--muted));
+    }
+
+    /* Carousel */
+    #carouselWrap{ margin-top: 14px; }
+    .carousel{ padding: 14px; }
+    .carouselTop{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .carouselBtns{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      flex-wrap: wrap;
+    }
+    .dots{
+      display:flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
+    .dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in oklab, var(--border) 60%, var(--accent));
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+    }
+    .dot.active{
+      background: var(--accent);
+      border-color: var(--accent);
+      opacity:.9;
+    }
+    .carouselImgFrame{
+      padding: 14px;
+      display:grid;
+      place-items:center;
+      min-height: 280px;
+      background: color-mix(in oklab, var(--chip) 65%, transparent);
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+    #carouselImg{
+      max-width:100%;
+      height:auto;
+      display:block;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--panel);
+    }
+
+    /* Bottom controls bar */
+    .bar{
+      margin-top: 14px;
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 14px;
+    }
+    .group{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    #counter{
+      font-weight:700;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: color-mix(in oklab, var(--panel) 90%, transparent);
+    }
+
+    /* Responsive */
+    @media (max-width: 720px){
+      .brand{ min-width:auto; }
+      .topbar{ padding: 12px 14px; }
+      #slide{ padding: 18px; }
+      #slide h2{ font-size: 22px; }
+    }
+
+    /* Print */
+    @media print{
+      header, .bar, #carouselWrap, audio{ display:none !important; }
+      body{ background:#fff; color:#000; }
+      .panel{ box-shadow:none; }
+      a{ color:#000; text-decoration: underline; }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand" aria-label="Slide deck header">
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-3.8 9.7-9 10-5.2-.3-9-5-9-10V6l9-4zm0 4.2L6 8.7v3.4c0 3.7 2.7 7.1 6 7.6 3.3-.5 6-3.9 6-7.6V8.7l-6-2.5z"/></svg>
+      </div>
+      <div>
+        <h1>CompTIA A+ 220-1201</h1>
+        <div class="sub">Installing Motherboards and Connectors</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="themeBtn" type="button" aria-label="Toggle theme">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 18a6 6 0 110-12 6 6 0 010 12zm0 4l-1-2h2l-1 2zM12 2l1 2h-2l1-2zM2 12l2-1v2l-2-1zm20 0l-2 1v-2l2 1zM4.2 4.2l2.1.7-1.4 1.4-.7-2.1zm15.6 15.6l-2.1-.7 1.4-1.4.7 2.1zM19.8 4.2l.7 2.1-1.4-1.4 2.1-.7zM4.2 19.8l-.7-2.1 1.4 1.4-2.1.7z"/></svg>
+        <span id="themeLabel">Light</span>
+      </button>
+      <button class="btn" id="printBtn" type="button" aria-label="Print">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V2h12v7H6zm10-5H8v3h8V4zM6 22v-5h12v5H6zm2-3v1h8v-1H8zm-4-9h20v8h-4v-3H4v3H0v-8h4z"/></svg>
+        Print
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- Slide content -->
+  <article class="panel" aria-label="Slide">
+    <div id="slide"></div>
+  </article>
+
+  <!-- Carousel container (auto-hides if no images) -->
+  <section id="carouselWrap" class="panel" style="display:none;" aria-label="Slide images">
+    <div class="carousel">
+      <div class="carouselTop">
+        <div class="carouselBtns">
+          <button class="btn" id="prevImgBtn" onclick="prevImage()">◀ Image</button>
+          <button class="btn" id="nextImgBtn" onclick="nextImage()">Image ▶</button>
+          <span id="imgCounter" style="font-weight:700;color:var(--muted);"></span>
+        </div>
+        <div class="dots" id="dots"></div>
+      </div>
+
+      <div class="carouselImgFrame">
+        <img id="carouselImg" alt="Slide image" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation / audio -->
+  <div class="panel bar" aria-label="Controls">
+    <div class="group">
+      <button class="btn" onclick="goHome()">Return Home</button>
+      <button class="btn" onclick="goToFirstSlide()">First Slide</button>
+      <button class="btn" onclick="prevSlide()">Previous</button>
+      <button class="btn" onclick="nextSlide()">Next</button>
+      <span id="counter"></span>
+    </div>
+
+    <div class="group">
+      <button class="btn" id="enableAudioBtn" onclick="enableAudio()">Enable audio</button>
+      <button class="btn" id="replayBtn" onclick="replayAudio()" disabled>Replay audio</button>
+    </div>
+  </div>
+
+  <audio id="slideAudio" preload="auto"></audio>
+</main>
+
+<script>
+  // =========================
+  // Paths:
+  // Place this file at: Module-2/index.html
+  // Audio files at: Module-2/audio/01.mp3, 02.mp3, ...
+  // Image files at: Module-2/images/<filename>
+  // Add image filenames per slide in the "images" array to enable the carousel.
+  // =========================
+
+  const $ = (sel, root=document) => root.querySelector(sel);
+
+  // Theme toggle (default dark unless user saved otherwise)
+  const themeBtn = $("#themeBtn");
+  const themeLabel = $("#themeLabel");
+  const savedTheme = localStorage.getItem("kb_theme");
+  if (savedTheme === "light" || savedTheme === "dark") {
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }
+  updateThemeLabel();
+
+  themeBtn.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("kb_theme", next);
+    updateThemeLabel();
+  });
+
+  function updateThemeLabel(){
+    const current = document.documentElement.getAttribute("data-theme") || "dark";
+    themeLabel.textContent = current === "dark" ? "Light" : "Dark";
+  }
+
+  // Print
+  $("#printBtn").addEventListener("click", () => window.print());
+
+  const pad2 = (n) => String(n).padStart(2, "0");
+
+  const slides = [
+    {
+      content: `<h2>Installing Motherboards and Connectors</h2>
+        <p>CompTIA A+ 220-1201</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Sections</h2>
+        <ul>
+          <li>Cables and Connectors</li>
+          <li>Motherboards</li>
+          <li>Legacy Cables</li>
+        </ul>`,
+      images: []
+    },
+
+    { content: `<h2>Lesson 2A: Cables and Connectors</h2>`, images: [] },
+
+    {
+      content: `<h2>Personal Computers</h2>
+        <ul>
+          <li>A personal computer is a general-purpose system that accepts input, processes data, produces output, and stores information for later use.</li>
+          <li>Inside the case you typically find the motherboard, CPU, RAM, storage (HDD/SSD), power supply, and cooling components.</li>
+          <li>External connectivity is provided through I/O ports for USB, video, audio, and networking so peripherals can communicate with the system.</li>
+          <li>Safe servicing starts with ESD precautions, good lighting/organization, and documenting where cables and connectors were attached before disassembly.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> A personal computer is built from a set of core internal components that work together to run software and store data. Most troubleshooting and installation tasks come down to identifying the right component, using the correct connector, and confirming the system recognizes the device. Good habits—like ESD protection and taking photos before unplugging anything—prevent accidental damage and make reassembly faster. Understanding the basics of the PC layout helps you diagnose problems logically instead of guessing.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Peripheral Devices</h2>
+        <ul>
+          <li>Peripherals are external devices that add input (keyboard, mouse, scanner), output (monitor, printer, speakers), or storage/communication capabilities.</li>
+          <li>They connect through ports such as USB, audio jacks, video outputs, and sometimes specialized connectors depending on the device and age.</li>
+          <li>Compatibility depends on the interface standard (data rate, signaling) and the connector type (shape/pinout), so “fits” does not always mean “works.”</li>
+          <li>When troubleshooting, isolate whether the issue follows the peripheral, the cable/adapter, the port, or the OS/driver layer by swapping known-good parts.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> Peripherals extend what a computer can do, but they rely on correct cabling, correct ports, and correct interface support. Many “device not detected” issues are simple: bad cables, wrong ports, or insufficient power. Swapping one variable at a time (device, cable, port) is the quickest way to prove where the fault really is. Knowing the common connector families makes it easier to choose the right fix on the first try.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Connector and Interface Basics</h2>
+        <ul>
+          <li>A <em>port</em> is the receptacle on a computer or device, while a <em>connector</em> is the plug on the cable that mates with the port.</li>
+          <li>An interface standard defines how devices communicate (signaling, protocol, speed, power), not just what the connector looks like.</li>
+          <li>Internal connections often use <em>headers</em> on the motherboard (for front USB/audio/power buttons), which must be oriented correctly.</li>
+          <li>Adapters and dongles can change connector types and sometimes convert signals, but signal conversion only works when the adapter supports the required protocol.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> Connectors are the physical “shape,” but interfaces are the rules the data must follow. This is why a cable might fit and still fail—because the port and device don’t speak the same protocol. Internal headers add another layer of risk because they can be miswired or reversed if you don’t document placement. If you can separate “physical fit” from “protocol compatibility,” you’ll troubleshoot connections much faster.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Universal Serial Bus (USB) Overview</h2>
+        <ul>
+          <li>USB is the most common peripheral interface because it supports data transfer and (often) power over a single connection.</li>
+          <li>USB devices are generally hot-swappable, meaning you can connect/disconnect them while the system is running.</li>
+          <li>USB can attach many device classes such as human interface devices, storage devices, cameras, and audio interfaces.</li>
+          <li>Real-world performance depends on the slowest link in the chain: the host port, the cable, the hub/dock, and the device itself.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> USB simplifies connectivity by standardizing both data and power delivery for a huge range of devices. In troubleshooting, you always want to confirm the whole chain supports the needed USB generation and power requirements. A cheap cable or an older hub can silently drop you to slower speeds or unstable power. Understanding how USB versions and power work keeps you from “fixing” the wrong thing.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>USB Connector Types</h2>
+        <ul>
+          <li>Common connector families include Type-A (host-side on many PCs), Type-B (often printers), Mini-USB/Micro-USB (older mobile devices), and USB-C (modern, reversible).</li>
+          <li>USB-C is reversible and is used for data, charging, docking, and some video output modes depending on the device.</li>
+          <li>Connector shape does not guarantee the USB generation—USB-C can carry slow USB 2.0 or very fast USB4 depending on the implementation.</li>
+          <li>Damaged pins, loose ports, or debris inside USB-C ports are common physical causes of intermittent disconnects and charging issues.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> USB connectors come in multiple shapes, but USB-C is now the most important because it can be used for charging, high-speed data, and docking. The tricky part is that USB-C is a connector, not a speed rating. When devices behave inconsistently, inspect the physical port and cable first, then verify the port’s supported standard. Matching the right cable to the right capability is a big exam and real-world skill.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>USB Standards and Speed Naming</h2>
+        <ul>
+          <li>USB 2.0 is commonly used for keyboards/mice and supports up to 480 Mbps, while USB 3.x generations support much higher throughput for storage and docks.</li>
+          <li>USB naming can be confusing because “USB 3.2 Gen” labels map to different speeds; always verify the actual Gbps rating if it matters.</li>
+          <li>USB4 can provide very high bandwidth and is often paired with USB-C, but device and cable support must match to achieve full performance.</li>
+          <li>For troubleshooting, confirm whether a port is USB 2.0-only, USB 3.x, or USB4, since plugging into the wrong port can mimic a “slow device” problem.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> USB performance depends heavily on the generation supported by both the host and the device. Because USB branding can be inconsistent, the safest approach is to verify the actual speed capability (Mbps/Gbps) and use a certified cable. Many “my external drive is slow” complaints are really “it’s plugged into a slower port.” Once you treat speed as a capability you must confirm, USB issues become much easier to diagnose.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>USB Power Delivery and Cable Considerations</h2>
+        <ul>
+          <li>USB can supply power to peripherals, but higher-power charging (USB Power Delivery) requires compatible ports, cables, and devices.</li>
+          <li>Not all USB-C cables support the same power or data rates; some are charge-only, while others are rated for high-speed data and video.</li>
+          <li>Longer or poor-quality cables can cause charging drops, disconnects, or reduced data rates, especially at higher USB generations.</li>
+          <li>If a device charges slowly or disconnects under load, test with a known-good cable and a known-good port before blaming the device.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> USB is convenient because it carries power, but that convenience creates lots of “it kind of works” scenarios when the cable isn’t up to spec. USB-C cables vary widely in capability, so swapping a cable is often the fastest diagnostic step. Power Delivery adds another compatibility layer that must be supported on both ends. In practice, the cable is frequently the hidden bottleneck.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Display Types</h2>
+        <ul>
+          <li>Common display outputs include monitors, TVs, projectors, and specialized displays such as VR headsets.</li>
+          <li>Displays may use different signal standards and connectors (HDMI, DisplayPort, DVI, VGA), so matching the right cable matters.</li>
+          <li>Some systems provide integrated graphics outputs on the motherboard, while others rely on a discrete GPU with its own ports.</li>
+          <li>When diagnosing display issues, isolate whether the problem is the source (PC/GPU), the cable/adapter, or the display device itself.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> Displays all do the same job—show an image—but they don’t all accept the same type of signal. A mismatched connector or incompatible adapter can look like a GPU failure when it’s really just the wrong interface. Troubleshooting is faster when you test with a known-good monitor and cable. Always confirm which output you’re using (motherboard vs GPU) before chasing deeper problems.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Display Components</h2>
+        <ul>
+          <li>Modern displays are usually flat panels with a controller, a pixel matrix, and (for many LCDs) a backlight that provides illumination.</li>
+          <li>Resolution and pixel density determine detail and sharpness, while refresh rate and response time influence smoothness and motion clarity.</li>
+          <li>Color depth, brightness, and contrast contribute to image quality, especially for HDR-capable panels.</li>
+          <li>Many issues that look like “bad video” are actually panel settings (wrong input, wrong refresh rate) rather than a failing computer component.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> Displays combine electronics, a pixel grid, and (often) a backlight to produce an image. Understanding the difference between resolution, refresh rate, and response time helps you interpret symptoms like blur, flicker, and ghosting. A display can still power on and show an image while being configured poorly for the signal it’s receiving. Checking settings is a low-effort win before replacing hardware.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>HDMI (Video + Audio)</h2>
+        <ul>
+          <li>HDMI carries digital video and audio over one cable, making it common for TVs, monitors, and projectors.</li>
+          <li>Many HDMI features depend on device support, such as HDCP for protected content, CEC for device control, and ARC/eARC for audio return.</li>
+          <li>Cable quality and bandwidth matter more at higher resolutions/refresh rates, where low-grade cables can cause flicker or signal dropouts.</li>
+          <li>If you must convert HDMI to an analog standard (like VGA), you typically need an active adapter that performs signal conversion.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> HDMI is popular because it combines audio and video in a single digital link. Most real-world HDMI problems come from bandwidth limits (bad cable) or compatibility limits (unsupported features or wrong adapter type). For troubleshooting, swap the cable and test a different display input first. If conversion is involved, assume you need active conversion when the signal types don’t match.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>DisplayPort</h2>
+        <ul>
+          <li>DisplayPort is a common PC-oriented digital video standard and is widely used on GPUs and business-class monitors.</li>
+          <li>It supports high bandwidth and often supports features like daisy-chaining multiple displays (MST) when both the GPU and monitor support it.</li>
+          <li>Some DisplayPort cables include a locking connector to prevent accidental unplugging in workstation setups.</li>
+          <li>As with other standards, the achievable resolution and refresh rate depend on the port version, the cable rating, and the display capability.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> DisplayPort is designed for high-performance PC display workflows and can support high resolution/refresh configurations. It’s also flexible for multi-monitor setups when MST is available. Many “random black screen” issues come from poor cables or partially seated connectors, so reseating and swapping cables is a smart first step. Treat bandwidth as a requirement you must validate end-to-end.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Thunderbolt Interface</h2>
+        <ul>
+          <li>Thunderbolt uses a USB-C connector on modern systems and can carry PCIe data plus DisplayPort video, enabling high-performance docks and external devices.</li>
+          <li>It is commonly used for docking stations, external storage, and multi-display setups with a single cable.</li>
+          <li>Not all USB-C ports support Thunderbolt; you must confirm the port capability and the device requirement.</li>
+          <li>When troubleshooting docks, verify the cable is rated for Thunderbolt, test direct connections, and confirm the port is enabled and supported.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> Thunderbolt is essentially “USB-C with extra capability,” letting one cable handle fast peripherals and displays. The biggest gotcha is assuming all USB-C ports are equal when many devices require Thunderbolt specifically. If a dock only partially works (video but no storage, or vice versa), suspect a capability mismatch first. Confirming port and cable certification prevents a lot of wasted time.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Lightning Interface</h2>
+        <ul>
+          <li>Lightning is Apple’s compact, reversible connector used on many iPhones and older iPads for charging and data.</li>
+          <li>It supports accessories and syncing, but compatibility depends on the Apple device model and accessory certification.</li>
+          <li>Lightning is being phased out in favor of USB-C in many product lines due to standardization, regulatory pressure, and improved USB-C capability.</li>
+          <li>When integrating Apple devices, plan for adapter needs (USB-C to Lightning) and confirm power requirements for charging stability.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> Lightning remains common in the field, but USB-C is the direction the industry is moving. That means techs often need to support both, especially in mixed-device environments. Many charging issues come down to mismatched chargers, cables, or low-quality accessories. Treat Lightning support as a practical compatibility topic rather than a long-term standard.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Serial ATA (SATA) Interface</h2>
+        <ul>
+          <li>SATA is the traditional internal interface for connecting storage drives in desktops, using a compact 7-pin data connector per device.</li>
+          <li>The SATA data cable does not provide power; drives also require a separate 15-pin SATA power connector (or Molex on legacy devices).</li>
+          <li>SATA revisions increased throughput (commonly referenced as 150/300/600 MBps over successive revisions), but real performance depends on drive type.</li>
+          <li>Loose SATA data or power connections are common causes of missing drives, intermittent boot issues, and random I/O errors.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> SATA storage relies on two separate connections—data and power—so troubleshooting must check both. A drive can appear “dead” if either cable is loose, even if the other is fine. SATA revision numbers can be useful for expectations, but the drive technology (SSD vs HDD) usually dominates performance. When storage behaves oddly, reseat cables and test different ports before assuming the drive failed.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Molex Power Connectors</h2>
+        <ul>
+          <li>Legacy internal devices often use a 4-pin Molex power connector from the PSU instead of SATA power.</li>
+          <li>Molex wiring uses color-coded voltages: red is 5V DC, yellow is 12V DC, and black wires are ground.</li>
+          <li>Because the connector is bulky and can be tight, it’s easy to partially seat it, causing intermittent device power loss.</li>
+          <li>Adapters exist (Molex-to-SATA, SATA-to-Molex), but poor-quality adapters can be unreliable and should be used cautiously.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> Molex is still seen on older drives, fans, and accessories, so it’s important to recognize it and understand its voltage lines. Most problems are physical: connectors that aren’t fully seated, or adapters that fail under load. If a legacy device cuts out randomly, suspect the Molex connection before replacing the device. Knowing the voltage colors also helps you reason about what the connector is powering.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>External SATA (eSATA / eSATAp)</h2>
+        <ul>
+          <li>eSATA is designed for external storage connections and uses better shielding than internal SATA to support longer cable lengths (up to about 2 meters).</li>
+          <li>Internal SATA cables are not compatible with external eSATA ports, so you must use the proper eSATA cable.</li>
+          <li>Standard eSATA does not provide bus power, which is a limitation compared to USB for portable external drives.</li>
+          <li>Some vendors offer eSATAp (powered eSATA), a nonstandard combo that can work with both USB and SATA using an eSATAp cable.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> eSATA exists to extend SATA outside the case with better shielding and longer cable support. The practical drawback is power: many setups require an external power source, unlike USB drives. That’s why eSATAp is sometimes used, but it’s not universal, so you must confirm port and cable compatibility. In troubleshooting, first verify you’re using the correct cable type and that the drive has adequate power.</p>`,
+      images: []
+    },
+
+    { content: `<h2>Lesson 2B: Motherboards</h2>`, images: [] },
+
+    {
+      content: `<h2>Motherboard Overview</h2>
+        <ul>
+          <li>The motherboard is the main circuit board that interconnects the CPU, memory, storage, expansion cards, and I/O ports.</li>
+          <li>Key onboard areas include the CPU socket, DIMM slots, storage connectors (SATA/M.2), expansion slots, and rear I/O ports.</li>
+          <li>The motherboard’s design determines what parts fit (socket type, RAM type, form factor) and how many devices can be added.</li>
+          <li>Identifying connectors correctly is critical, because many are physically similar but carry different signals and power requirements.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> The motherboard is the hub that everything plugs into, so compatibility starts here. If a CPU or RAM type doesn’t match what the board supports, the system won’t work no matter what you do in software. Most installation mistakes are mechanical—wrong connector, wrong header orientation, or wrong slot selection. Learning the motherboard layout makes the rest of PC hardware much easier.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Motherboard Form Factors</h2>
+        <ul>
+          <li>The form factor defines the motherboard’s physical size, mounting points, layout, and what case/power supply it fits.</li>
+          <li>ATX is a common full-size desktop standard (12 × 9.6 inches) and often supports up to seven expansion slots.</li>
+          <li>Micro-ATX (9.6 × 9.6 inches) typically supports fewer expansion slots, and many micro-ATX boards can mount in ATX cases.</li>
+          <li>Mini-ITX (6.7 × 6.7 inches) is used for small form factor systems and generally provides one expansion slot.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> Form factor decides what fits in the case and how much expansion a system can support. Bigger boards generally allow more slots and headers, while smaller boards trade expansion for compact builds. A common field detail is that many smaller boards can fit in larger cases, but not the other way around. Always match the board to the chassis and PSU standards before you start a build.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Motherboard Installation Basics</h2>
+        <ul>
+          <li>Start by reviewing the documentation, confirming any required settings, and protecting components from electrostatic discharge (ESD).</li>
+          <li>Install the I/O shield (if it’s not integrated) so rear ports line up correctly with the case opening.</li>
+          <li>Use standoffs that match the motherboard mounting holes; extra standoffs in the wrong place can short the board.</li>
+          <li>Many techs pre-install CPU, RAM, and the CPU cooler before mounting the board because access is easier outside the case.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> Motherboard installation is mostly about clean, careful mechanical steps. The biggest “silent killer” is incorrect standoff placement, which can cause shorts that look like a dead system. Installing CPU and RAM before mounting the board often reduces mistakes because you can see what you’re doing. If you follow the checklist and avoid rushing, most installs go smoothly.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>CPU Socket and Chipset</h2>
+        <ul>
+          <li>Motherboards support a limited range of CPUs, and compatibility is defined by the socket type and the board’s firmware support.</li>
+          <li>The CPU socket is typically a distinctive square area that secures the CPU and interfaces it with the motherboard.</li>
+          <li>The chipset manages data transfer between the CPU and devices, and it helps determine supported RAM type/maximum capacity and onboard interfaces.</li>
+          <li>Chipsets are soldered and not upgradeable, so expanding features often means adding adapter cards or choosing a different motherboard.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> The CPU socket answers “will the processor physically fit,” but the chipset and firmware answer “will it actually run correctly.” Because the chipset is fixed, it heavily influences the system’s long-term upgrade path. If the board can’t support a new CPU generation or RAM type, you’re looking at a platform change. Understanding socket/chipset roles helps you avoid costly compatibility mistakes.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>System Memory (DIMM) Slots</h2>
+        <ul>
+          <li>System RAM is volatile memory used for active program code and data, usual
