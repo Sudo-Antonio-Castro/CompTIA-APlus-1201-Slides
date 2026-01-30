@@ -1,11 +1,10 @@
-
 <!doctype html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CompTIA A+ 1201 - Motherboards and Connectors</title>
-  <meta name="description" content="CompTIA A+ 1201 Motherboards and Connectors" />
+  <title>CompTIA A+ 220-1201 — Motherboards and Connectors</title>
+  <meta name="description" content="CompTIA A+ 220-1201 Motherboards and Connectors." />
   <style>
     :root{
       --bg: #ffffff;
@@ -608,4 +607,262 @@
     {
       content: `<h2>System Memory (DIMM) Slots</h2>
         <ul>
-          <li>System RAM is volatile memory used for active program code and data, usual
+          <li>System RAM is volatile memory used for active program code and data, usually installed as DIMMs in slots near the CPU.</li>
+          <li>DIMM slots often have retention clips and are numbered and/or color-coded to indicate preferred installation order for multi-channel operation.</li>
+          <li>DDR generations (DDR3/DDR4/DDR5) use different physical DIMM forms and are not interchangeable between slots.</li>
+          <li>Maximum RAM depends on the memory controller and available slots, so always check the motherboard’s supported capacities and speeds.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> RAM installation seems simple, but details like DDR generation and slot order matter. Mixing the wrong module type won’t work, and using the wrong slots can reduce performance or prevent dual-channel operation. Many memory issues are just modules that aren’t fully seated, so a firm, even press is important. When diagnosing instability, RAM seating and compatibility checks are high-value first steps.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Storage Connectors (SATA and M.2)</h2>
+        <ul>
+          <li>Motherboards commonly provide multiple SATA ports for HDDs/SSDs and optical drives, with each SATA port typically serving one device.</li>
+          <li>M.2 SSDs install directly on the motherboard, insert at an angle, and are secured with a screw; many M.2 drives get power from the slot.</li>
+          <li>M.2 modules come in different lengths (for example 42/60/80/110 mm), so you must match the drive size to the board’s supported standoff positions.</li>
+          <li>Some boards also expose legacy storage interfaces (such as PATA/IDE) for older devices, but these are increasingly uncommon on modern builds.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> SATA and M.2 are the two big storage connection styles you’ll see on A+ builds. SATA requires both a data cable and a power cable, while M.2 often eliminates cabling entirely by mounting on the board. The most common M.2 mistakes are using the wrong length standoff or not fully inserting the module before fastening it. Storage troubleshooting gets easier when you can quickly identify which connector type the drive is using.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Front Panel, USB, and Audio Headers</h2>
+        <ul>
+          <li>Case buttons, LEDs, and front ports connect to motherboard headers, so correct placement and orientation matter.</li>
+          <li>Front panel connectors include power button, reset switch, and HDD activity LED; holding the power button can force power off if needed.</li>
+          <li>Front audio typically uses an HD Audio header (AC&#39;97 on older systems), and front USB often uses internal headers rather than rear I/O ports.</li>
+          <li>Internal USB 2 commonly uses 9-pin headers (supporting two ports), while USB 3 headers often use a 20-pin (2×10) format for faster ports.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> Headers are small connectors with big consequences—miswiring them can prevent a system from powering on or make front ports fail. Because labels can be tiny, taking photos or drawing a quick diagram during disassembly saves time on reassembly. USB header formats differ by generation, so you must match the header type to the case cable. If the front panel isn’t working, headers are one of the first places to check.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Power and Fan Connectors</h2>
+        <ul>
+          <li>The motherboard uses dedicated power connectors from the PSU, including a main 24-pin connector for overall board power.</li>
+          <li>Fans commonly use 3-pin connectors (voltage-based speed control) or 4-pin connectors that support PWM for more precise control.</li>
+          <li>3-pin fans can often run on 4-pin headers, but you may lose automatic speed control without the right configuration.</li>
+          <li>4-pin fans can run on 3-pin headers, but PWM control will not function, which can affect cooling behavior under load.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> Power and cooling connectors are essential for stability because a system that can’t power consistently or cool properly will behave unpredictably. Knowing the difference between 3-pin and 4-pin fan control helps you predict whether speed control will work. Many boot or shutdown issues traced to “mystery problems” are actually loose power connectors. Always confirm power seating and fan operation early in a diagnostic.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Expansion Slots: PCIe and Legacy PCI</h2>
+        <ul>
+          <li>PCI Express (PCIe) is the modern expansion interface for GPUs and add-in cards, with slot sizes like x1, x4, x8, and x16.</li>
+          <li>Slots may be physically large but electrically limited (for example a x16 slot operating at x8), so labels and specs matter.</li>
+          <li>Some systems still include legacy PCI slots for older hardware; PCI uses parallel communication and has much lower throughput than PCIe.</li>
+          <li>Cards must match the slot type—PCI cards cannot fit in PCIe slots, and PCIe cards require compatible PCIe slot support.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> Expansion slots let you add capabilities like better graphics, more ports, or specialized capture/networking. PCIe is the standard you’ll see most, but you still need to understand lane sizing and that “physical x16” doesn’t always mean “electrical x16.” Legacy PCI shows up mostly for older systems and specialized equipment. Matching the card to the correct slot type is an easy way to avoid expensive mistakes.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Add-on Cards and Video Cards</h2>
+        <ul>
+          <li>Expansion cards add functions a motherboard may not provide, such as sound, capture, additional ports, or networking features.</li>
+          <li>Video cards generate the display signal, and systems may use integrated graphics (onboard) or discrete GPUs installed in PCIe slots.</li>
+          <li>A GPU is optimized for 2D/3D rendering, and discrete cards usually include dedicated graphics memory (GDDR) to handle textures and frame buffers.</li>
+          <li>High-performance workloads (gaming, CAD, creative work) often require discrete GPUs, while basic office tasks may work fine on integrated graphics.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> Add-on cards are a primary way to upgrade or extend a system without replacing the entire motherboard. Video cards are the most common example, ranging from basic integrated solutions to powerful discrete GPUs with large amounts of dedicated memory. When diagnosing display or performance issues, it matters whether the system is using integrated or discrete graphics. Understanding what each card type does helps you choose the right upgrade or troubleshooting step.</p>`,
+      images: []
+    },
+
+    { content: `<h2>Lesson 2C: Legacy Cables</h2>`, images: [] },
+
+    {
+      content: `<h2>DVI (Digital Visual Interface)</h2>
+        <ul>
+          <li>DVI is an older display interface that can support digital signals, analog signals, or both depending on the connector type.</li>
+          <li>DVI-I supports both analog and digital, DVI-D supports digital only, and DVI-A supports analog only.</li>
+          <li>Single-link vs dual-link indicates available bandwidth, which affects max resolution and refresh capability.</li>
+          <li>DVI carries video only, not audio, so audio requires a separate connection if needed.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> DVI is common on older monitors and GPUs, so you still need to recognize its variants. The key is identifying whether the port supports analog, digital, or both based on the connector type. Bandwidth differences matter for higher resolutions, especially on older dual-link scenarios. Because DVI doesn’t carry audio, you must plan a separate audio path when connecting to speakers or TVs.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>VGA (Video Graphics Array)</h2>
+        <ul>
+          <li>VGA is a legacy analog video interface using a 15-pin D-sub connector secured with thumbscrews.</li>
+          <li>It was the standard for many years but is being phased out as digital standards dominate modern displays.</li>
+          <li>Image quality depends on cable quality and length, and analog signals are more susceptible to noise than digital signals.</li>
+          <li>Like DVI, VGA carries video only and requires separate audio connections when audio is needed.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> VGA is the classic analog display connection you’ll still encounter in older offices, schools, and projectors. Because it’s analog, signal quality degrades more easily, which can show up as blur, ghosting, or color issues. Tightening the screws and swapping the cable can solve many VGA problems quickly. If you’re converting from digital to VGA, you typically need an active adapter.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Serial Cables (RS-232 / COM Ports)</h2>
+        <ul>
+          <li>RS-232 is a legacy serial interface that transmits data one bit at a time and uses start/stop/parity bits for framing and verification.</li>
+          <li>Although RS-232 specifies a 25-pin interface, PCs commonly used a 9-pin DB9 connector to reduce cost and size.</li>
+          <li>In Windows, serial ports are usually identified as COM ports, and they may be used for device management on network or industrial equipment.</li>
+          <li>RS-232 is slow by modern standards (commonly cited around 115 Kbps), but it remains useful for simple management connections.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> RS-232 is “old but not dead,” especially for managing routers, switches, and specialty devices. You mainly need to recognize the DB9 connector and understand that this serial standard is very low bandwidth. Many troubleshooting tasks involve selecting the right COM port settings (speed and other parameters) rather than replacing hardware. It’s a classic example of how legacy tech still matters in the field.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>PS/2 Keyboard and Mouse Ports</h2>
+        <ul>
+          <li>PS/2 ports are legacy connectors for keyboards and mice, using a 6-pin mini-DIN format.</li>
+          <li>They are commonly color-coded: purple for keyboards and green for mice.</li>
+          <li>PS/2 can be helpful for troubleshooting systems where USB input isn’t working at boot, but modern PCs often omit PS/2 entirely.</li>
+          <li>Because the pins are delicate, plugging PS/2 devices in carelessly can bend pins and create intermittent input issues.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> PS/2 is a legacy input connection that still shows up on some desktops and motherboards. It’s mainly relevant as a fallback when USB keyboards or mice aren’t available during boot or firmware work. Color coding helps avoid plugging the wrong device into the wrong port. Handle the connectors gently because bent pins can create confusing, intermittent failures.</p>`,
+      images: []
+    },
+    {
+      content: `<h2>Adapter Cables (Active vs Passive)</h2>
+        <ul>
+          <li>Adapters exist because device ports and PC ports don’t always match, even when you’re trying to carry the same kind of signal.</li>
+          <li>Passive adapters only change the connector shape and do not convert the signal protocol.</li>
+          <li>Active adapters include circuitry to convert signals (for example digital-to-analog), which is required when the source and destination use different signaling.</li>
+          <li>A common example is HDMI (digital) to VGA (analog), which usually requires an active adapter to work reliably.</li>
+        </ul>
+        <p class="summary"><strong>Summary:</strong> Adapters are a top source of confusion because “it fits” doesn’t mean “it converts.” Passive adapters are simple and cheap, but only work when the source already supports the required signal type. If you’re crossing from digital to analog, you almost always need an active adapter. Knowing the difference saves you from wasting time troubleshooting a setup that can never work.</p>`,
+      images: []
+    }
+  ];
+
+  // Slide state
+  let index = 0;
+
+  // Carousel state (for current slide)
+  let imgIndex = 0;
+
+  // Audio state
+  let audioEnabled = false;
+
+  function audioPathForCurrentSlide() {
+    return `audio/${pad2(index + 1)}.mp3`;
+  }
+
+  async function playCurrentAudio() {
+    if (!audioEnabled) return;
+
+    const audio = document.getElementById("slideAudio");
+    audio.src = audioPathForCurrentSlide();
+    audio.currentTime = 0;
+
+    try {
+      await audio.play();
+    } catch (err) {
+      console.log("Audio play blocked or missing file:", err);
+    }
+  }
+
+  function enableAudio() {
+    audioEnabled = true;
+    document.getElementById("replayBtn").disabled = false;
+    playCurrentAudio();
+  }
+
+  function replayAudio() {
+    playCurrentAudio();
+  }
+
+  function renderCarousel() {
+    const wrap = document.getElementById("carouselWrap");
+    const imgEl = document.getElementById("carouselImg");
+    const dotsEl = document.getElementById("dots");
+    const imgCounter = document.getElementById("imgCounter");
+    const prevBtn = document.getElementById("prevImgBtn");
+    const nextBtn = document.getElementById("nextImgBtn");
+
+    const filenames = (slides[index].images || []).filter(Boolean);
+
+    if (filenames.length === 0) {
+      wrap.style.display = "none";
+      return;
+    }
+
+    wrap.style.display = "block";
+
+    if (imgIndex < 0) imgIndex = 0;
+    if (imgIndex > filenames.length - 1) imgIndex = filenames.length - 1;
+
+    imgEl.src = `images/${filenames[imgIndex]}`;
+    imgCounter.textContent = `Image ${imgIndex + 1} / ${filenames.length}`;
+
+    prevBtn.disabled = (filenames.length <= 1) || (imgIndex === 0);
+    nextBtn.disabled = (filenames.length <= 1) || (imgIndex === filenames.length - 1);
+
+    dotsEl.innerHTML = "";
+    if (filenames.length > 1) {
+      filenames.forEach((_, i) => {
+        const b = document.createElement("button");
+        b.className = "dot" + (i === imgIndex ? " active" : "");
+        b.title = `Go to image ${i + 1}`;
+        b.onclick = () => { imgIndex = i; renderCarousel(); };
+        dotsEl.appendChild(b);
+      });
+    }
+  }
+
+  function nextImage() {
+    const filenames = (slides[index].images || []).filter(Boolean);
+    if (imgIndex < filenames.length - 1) {
+      imgIndex++;
+      renderCarousel();
+    }
+  }
+
+  function prevImage() {
+    if (imgIndex > 0) {
+      imgIndex--;
+      renderCarousel();
+    }
+  }
+
+  function showSlide() {
+    document.getElementById("slide").innerHTML = slides[index].content;
+    document.getElementById("counter").textContent = `Slide ${index + 1} / ${slides.length}`;
+
+    imgIndex = 0;
+    renderCarousel();
+
+    playCurrentAudio();
+  }
+
+  function nextSlide() {
+    if (index < slides.length - 1) index++;
+    showSlide();
+  }
+
+  function prevSlide() {
+    if (index > 0) index--;
+    showSlide();
+  }
+
+  function goToFirstSlide() {
+    index = 0;
+    showSlide();
+  }
+
+  // Return Home goes back to repo root (one directory up from Module-2/)
+  function goHome() {
+    window.location.href = "../";
+  }
+
+  // Keyboard:
+  // Left/Right = slide nav
+  // A/D = image nav
+  // Home = first slide
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") nextSlide();
+    if (e.key === "ArrowLeft") prevSlide();
+    if (e.key.toLowerCase() === "d") nextImage();
+    if (e.key.toLowerCase() === "a") prevImage();
+    if (e.key === "Home") goToFirstSlide();
+  });
+
+  showSlide();
+</script>
+</body>
+</html>
