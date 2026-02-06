@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CompTIA A+ 220-1201 — Networking </title>
+  <meta name="description" content="CompTIA A+ 220-1201: Networking" />
+  <style>
+    :root{
+      --bg:#ffffff; --panel:#ffffff; --text:#0b0b0f; --muted:#5b5b66; --border:#e6e6ee;
+      --shadow:0 6px 30px rgba(0,0,0,.08);
+      --accent:#111111; --accent-2:#2b2b2b; --chip:#f2f2f7; --link:#111111;
+      --focus:0 0 0 3px rgba(0,0,0,.18);
+      --radius:14px; --radius-sm:10px; --max:980px;
+      --font:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    [data-theme="dark"]{
+      --bg:#0b0b0f; --panel:#101014; --text:#f6f6fb; --muted:#b5b5c2; --border:#262633;
+      --shadow:0 10px 40px rgba(0,0,0,.40);
+      --accent:#ffffff; --accent-2:#e7e7ef; --chip:#17171e; --link:#f6f6fb;
+      --focus:0 0 0 3px rgba(255,255,255,.18);
+    }
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{ margin:0; font-family:var(--font); color:var(--text); background:var(--bg); line-height:1.55; }
+    a{ color:var(--link); text-decoration:none; } a:hover{ text-decoration:underline; }
+    :focus-visible{ outline:none; box-shadow:var(--focus); border-radius:8px; }
+
+    header{
+      position:sticky; top:0; z-index:30;
+      background: color-mix(in oklab, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar{
+      display:flex; align-items:center; gap:12px; justify-content:space-between;
+      padding:14px 18px; max-width:var(--max); margin:0 auto;
+    }
+    .brand{ display:flex; align-items:center; gap:10px; min-width:240px; }
+    .logo{
+      width:34px; height:34px; border-radius:10px; background:var(--accent);
+      box-shadow:var(--shadow); display:grid; place-items:center; flex:0 0 auto;
+    }
+    .logo svg{ width:18px; height:18px; fill:var(--bg); }
+    [data-theme="dark"] .logo svg{ fill:#0b0b0f; }
+
+    .brand h1{ font-size:14px; margin:0; letter-spacing:.08em; text-transform:uppercase; opacity:.9; }
+    .sub{ font-size:12px; color:var(--muted); margin-top:2px; }
+
+    .controls{ display:flex; align-items:center; gap:10px; justify-content:flex-end; }
+    .btn{
+      border:1px solid var(--border);
+      background:var(--panel);
+      color:var(--text);
+      border-radius:999px;
+      padding:10px 12px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      user-select:none;
+      font-family:var(--font);
+    }
+    .btn:hover{ border-color: color-mix(in oklab, var(--border) 70%, var(--accent)); }
+    .btn svg{ width:16px; height:16px; fill:var(--text); opacity:.8; }
+    .btn:disabled{ opacity:.55; cursor:not-allowed; }
+
+    .wrap{ max-width:var(--max); margin:0 auto; padding:18px; }
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    #slide{ padding:22px; min-height:240px; }
+    #slide h2{ margin:0 0 10px; font-size:26px; letter-spacing:-0.02em; }
+    #slide p, #slide ul, #slide ol{ color: color-mix(in oklab, var(--text) 92%, var(--muted)); }
+    #slide ul, #slide ol{ margin:10px 0 10px 18px; }
+    .summary{
+      margin-top:10px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-radius:var(--radius-sm);
+      background: color-mix(in oklab, var(--chip) 65%, transparent);
+    }
+    .summary strong{ color:var(--text); }
+
+    #carouselWrap{ margin-top:14px; }
+    .carousel{ padding:14px; }
+    .carouselTop{
+      display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;
+      padding:14px 14px 10px; border-bottom:1px solid var(--border);
+    }
+    .carouselBtns{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+    .dots{ display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      border:1px solid color-mix(in oklab, var(--border) 60%, var(--accent));
+      background:transparent; cursor:pointer; padding:0;
+    }
+    .dot.active{ background:var(--accent); border-color:var(--accent); opacity:.9; }
+    .carouselImgFrame{
+      padding:14px; display:grid; place-items:center; min-height:280px;
+      background: color-mix(in oklab, var(--chip) 65%, transparent);
+      border-radius:0 0 var(--radius) var(--radius);
+    }
+    #carouselImg{
+      max-width:100%; height:auto; display:block;
+      border-radius:var(--radius-sm);
+      border:1px solid var(--border);
+      background:var(--panel);
+    }
+
+    .bar{
+      margin-top:14px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center;
+      padding:14px;
+    }
+    .group{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    #counter{
+      font-weight:700;
+      color:var(--muted);
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: color-mix(in oklab, var(--panel) 90%, transparent);
+    }
+
+    @media (max-width:720px){
+      .brand{ min-width:auto; }
+      .topbar{ padding:12px 14px; }
+      #slide{ padding:18px; }
+      #slide h2{ font-size:22px; }
+    }
+
+    @media print{
+      header, .bar, #carouselWrap, audio{ display:none !important; }
+      body{ background:#fff; color:#000; }
+      .panel{ box-shadow:none; }
+      a{ color:#000; text-decoration:underline; }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand" aria-label="Slide deck header">
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-3.8 9.7-9 10-5.2-.3-9-5-9-10V6l9-4zm0 4.2L6 8.7v3.4c0 3.7 2.7 7.1 6 7.6 3.3-.5 6-3.9 6-7.6V8.7l-6-2.5z"/></svg>
+      </div>
+      <div>
+        <h1>CompTIA A+ 220-1201</h1>
+        <div class="sub">Networking</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="themeBtn" type="button" aria-label="Toggle theme">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 18a6 6 0 110-12 6 6 0 010 12zm0 4l-1-2h2l-1 2zM12 2l1 2h-2l1-2zM2 12l2-1v2l-2-1zm20 0l-2 1v-2l2 1zM4.2 4.2l2.1.7-1.4 1.4-.7-2.1zm15.6 15.6l-2.1-.7 1.4-1.4.7 2.1zM19.8 4.2l.7 2.1-1.4-1.4 2.1-.7zM4.2 19.8l-.7-2.1 1.4 1.4-2.1.7z"/></svg>
+        <span id="themeLabel">Light</span>
+      </button>
+      <button class="btn" id="printBtn" type="button" aria-label="Print">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V2h12v7H6zm10-5H8v3h8V4zM6 22v-5h12v5H6zm2-3v1h8v-1H8zm-4-9h20v8h-4v-3H4v3H0v-8h4z"/></svg>
+        Print
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <article class="panel" aria-label="Slide">
+    <div id="slide"></div>
+  </article>
+
+  <section id="carouselWrap" class="panel" style="display:none;" aria-label="Slide images">
+    <div class="carousel">
+      <div class="carouselTop">
+        <div class="carouselBtns">
+          <button class="btn" id="prevImgBtn" onclick="prevImage()">◀ Image</button>
+          <button class="btn" id="nextImgBtn" onclick="nextImage()">Image ▶</button>
+          <span id="imgCounter" style="font-weight:700;color:var(--muted);"></span>
+        </div>
+        <div class="dots" id="dots"></div>
+      </div>
+
+      <div class="carouselImgFrame">
+        <img id="carouselImg" alt="Slide image" />
+      </div>
+    </div>
+  </section>
+
+  <div class="panel bar" aria-label="Controls">
+    <div class="group">
+      <button class="btn" onclick="goHome()">Return Home</button>
+      <button class="btn" onclick="goToFirstSlide()">First Slide</button>
+      <button class="btn" onclick="prevSlide()">Previous</button>
+      <button class="btn" onclick="nextSlide()">Next</button>
+      <span id="counter"></span>
+    </div>
+
+    <div class="group">
+      <button class="btn" id="enableAudioBtn" onclick="enableAudio()">Enable audio</button>
+      <button class="btn" id="replayBtn" onclick="replayAudio()" disabled>Replay audio</button>
+    </div>
+  </div>
+
+  <audio id="slideAudio" preload="auto"></audio>
+</main>
+
+<script>
+  // =========================
+  // meow
+  // =========================
+
+  const $ = (sel, root=document) => root.querySelector(sel);
+
+  // Theme toggle (default dark unless user saved otherwise)
+  const themeBtn = $("#themeBtn");
+  const themeLabel = $("#themeLabel");
+  const savedTheme = localStorage.getItem("kb_theme");
+  if (savedTheme === "light" || savedTheme === "dark") {
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }
+  updateThemeLabel();
+
+  themeBtn.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("kb_theme", next);
+    updateThemeLabel();
+  });
+
+  function updateThemeLabel(){
+    const current = document.documentElement.getAttribute("data-theme") || "dark";
+    themeLabel.textContent = current === "dark" ? "Light" : "Dark";
+  }
+
+  // Print
+  $("#printBtn").addEventListener("click", () => window.print());
+
+  const pad2 = (n) => String(n).padStart(2, "0");
+
+  const slides = [
+    {
+      "content": "<h2>Networking</h2><p>CompTIA A+ 220-1201</p>",
+      "images": []
+    },
+    {
+      "content": "<h2>Sections</h2><ul><li>Network Types</li><li>Network Hardware</li><li>Network Cables</li><li>Wireless Networks</li></ul>",
+      "images": []
+    },
+
+    { "content": "<h2>Network Types</h2>", "images": [] },
+
+    {
+      "content": "<h2>LAN, WAN, Wireless LAN, MAN, PAN, SAN</h2><ul><li><strong>LAN</strong> (Local Area Network): connects devices within a building/campus using Ethernet and/or Wi-Fi; typically high speed and privately managed.</li><li><strong>WAN</strong> (Wide Area Network): connects multiple LANs over large distances using service-provider links; bandwidth/cost and latency are bigger factors than on a LAN.</li><li><strong>Wireless LAN</strong> (WLAN): a LAN delivered over Wi-Fi via access points; coverage, interference, and capacity planning matter as much as raw speed.</li><li><strong>MAN</strong> (Metropolitan Area Network): connects sites across a city/metro area (often provider fiber); operationally similar to WAN because provider infrastructure is involved.</li><li><strong>PAN</strong> (Personal Area Network): short-range networking around a person (Bluetooth peripherals, phone tethering); prioritizes convenience and low power.</li><li><strong>SAN</strong> (Storage Area Network): a dedicated high-speed network for storage traffic (common in servers/data centers); designed for reliability and predictable performance.</li></ul><div class=\"summary\"><strong>Summary:</strong> Network types are mainly defined by geographic scope and purpose. LANs and WLANs serve local users, while WANs and MANs connect multiple locations through longer-distance links (often provider-managed). PANs handle very short-range device connectivity, and SANs isolate storage traffic to keep servers fast and stable. Picking the right network type helps you set realistic expectations for speed, reliability, and troubleshooting.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>SOHO and Enterprise Networks</h2><ul><li><strong>SOHO</strong> (Small Office/Home Office) networks are designed for simplicity: a single router, basic switching, and minimal segmentation are common.</li><li>SOHO focuses on affordability and ease of setup, but may have limited redundancy, monitoring, and security controls compared to larger environments.</li><li><strong>Enterprise</strong> networks prioritize scalability, security, and uptime with managed switches, VLANs, centralized authentication, and documented standards.</li><li>Enterprise designs often include redundancy (multiple switches/links), monitoring/alerting, and standardized cabling/rack layouts to reduce downtime.</li></ul><div class=\"summary\"><strong>Summary:</strong> SOHO networks emphasize easy installation and low cost, which is why they often rely on all-in-one gear and minimal configuration. Enterprise networks trade simplicity for control by using managed infrastructure, segmentation, and centralized policies. Redundancy and monitoring are common in enterprise environments because downtime is expensive. Understanding the environment helps you predict what equipment and troubleshooting processes you should expect.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Data Centers</h2><ul><li>Data centers host critical services (servers, storage, virtualization) and are built for high availability using redundant power, cooling, and network paths.</li><li>Network design typically includes segmentation (separating management, server, storage, and user traffic) to improve security and performance.</li><li>Throughput and low latency between systems is a priority; structured cabling, labeling, and change control reduce operational risk.</li><li>Support work often involves monitoring utilization, validating failover behavior, and maintaining consistent documentation across racks and links.</li></ul><div class=\"summary\"><strong>Summary:</strong> Data centers are engineered for reliability because they run the systems organizations depend on. They use redundancy and segmentation so failures don&#39;t take down the entire environment. Performance matters inside the data center, especially between servers and storage. Clear cabling standards and documentation are essential so changes and troubleshooting don&#39;t introduce new outages.</div>",
+      "images": []
+    },
+
+    { "content": "<h2>Network Hardware</h2>", "images": [] },
+
+
+    {
+      "content": "<h2>Network Interface Cards (NICs)</h2><ul><li>A NIC is the hardware that connects a host to a network segment, providing the physical interface and link signaling.</li><li>Wired NICs commonly use an RJ-45 port for twisted-pair Ethernet, while fiber NICs use optical ports and appropriate transceivers.</li><li>NICs have a unique MAC address that is used for local network communication and switching decisions.</li><li>Common troubleshooting includes checking link lights, cable/port health, driver status, and matching speed/duplex settings.</li></ul><div class=\"summary\"><strong>Summary:</strong> A NIC is the component that lets a device join a network and exchange frames on the local link. Ethernet NICs usually connect via RJ-45 copper, while higher-distance or higher-interference environments may use fiber. Because the NIC’s MAC address identifies it on the local network, it plays a key role in how switches deliver traffic. Most NIC issues are resolved by validating the physical link first, then drivers and configuration.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Patch Panels</h2><ul><li>A patch panel is a central termination point for structured cabling, letting permanent in-wall cables end cleanly in a rack or wiring closet.</li><li>Devices connect to the patch panel using short patch cords, which reduces wear on permanent cabling and makes changes easier.</li><li>Patch panels improve organization: labeling and consistent port mapping make troubleshooting and moves/adds/changes faster.</li><li>They&#39;re commonly used in office LANs and data centers to keep cabling manageable at scale.</li></ul><div class=\"summary\"><strong>Summary:</strong> Patch panels make structured cabling practical by providing a stable, labeled termination point in a closet or rack. Instead of moving permanent cables around, you change short patch cords to redirect connections. This reduces damage risk and improves airflow and organization. In troubleshooting, patch panels help you quickly trace which wall port or cable run maps to a specific switch port.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Switches and MAC Address Learning</h2><ul><li>A switch connects multiple devices on a LAN and forwards frames based on MAC addresses rather than broadcasting everything.</li><li>When a switch receives a frame, it learns the source MAC address and stores it in a MAC address table mapped to the ingress port.</li><li>For known destinations, the switch forwards only to the correct port; for unknown destinations, it floods frames until it learns the correct path.</li><li>This behavior reduces unnecessary traffic compared to hubs and improves overall LAN efficiency.</li></ul><div class=\"summary\"><strong>Summary:</strong> Switches improve LAN performance by forwarding frames only where they need to go. They do this by learning which MAC addresses live behind which ports and building a MAC address table over time. Unknown destination traffic is flooded temporarily, but the table quickly becomes accurate in a stable network. Understanding MAC learning helps explain common issues like wrong-port forwarding or unexpected flooding during changes.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Managed vs Unmanaged Switches</h2><ul><li>An unmanaged switch works out of the box with no configuration and is commonly used in small networks where simplicity is the priority.</li><li>A managed switch supports configuration and monitoring features that let you control traffic and enforce policies.</li><li>Common managed features include VLANs (traffic separation), quality of service (QoS), and port monitoring for troubleshooting.</li><li>In enterprise environments, managed switches help with scalability, security segmentation, and performance tuning.</li></ul><div class=\"summary\"><strong>Summary:</strong> Unmanaged switches are simple and inexpensive, making them a good fit for small or temporary setups. Managed switches add control, visibility, and segmentation features that become essential as networks grow. VLANs and QoS allow you to separate traffic types and prioritize important services. Choosing the right switch type depends on whether you need policy, monitoring, and long-term scalability.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Power over Ethernet (PoE)</h2><ul><li>PoE lets network devices receive electrical power over Ethernet cabling, reducing the need for nearby outlets.</li><li>Common PoE standards include 802.3af (up to 15.4 W), 802.3at (up to 25.5 W), and 802.3bt (up to 60 W or 100 W depending on type).</li><li>PoE is frequently used for access points, IP phones, and cameras, especially where clean installs and central power management matter.</li><li>When troubleshooting PoE, verify switch/injector capability, cable quality, and that the powered device’s wattage requirements match the PoE budget.</li></ul><div class=\"summary\"><strong>Summary:</strong> PoE simplifies deployments by sending both data and power through the same Ethernet run. Different PoE standards support different wattage levels, so matching the device requirement to the switch capability is critical. PoE is widely used for devices mounted away from outlets, like ceiling access points. Most PoE issues come down to insufficient power budget, incompatible standards, or cabling problems.</div>",
+      "images": []
+    },
+
+    { "content": "<h2>Network Cables</h2>", "images": [] },
+
+    {
+      "content": "<h2>Unshielded Twisted Pair (UTP)</h2><ul><li>UTP is the most common Ethernet cabling in homes and offices because it’s flexible, cost-effective, and easy to terminate.</li><li>Twisting the wire pairs helps reduce crosstalk and improves signal quality without requiring metal shielding.</li><li>Structured cabling designs typically target a maximum channel length of about 100 meters for copper Ethernet.</li><li>UTP works best when it’s routed away from high-EMI sources and installed with proper bend radius and termination practices.</li></ul><div class=\"summary\"><strong>Summary:</strong> UTP is the default choice for most Ethernet runs because it provides strong performance at a reasonable cost. The twist rate in the pairs is what helps protect the signal from internal interference. Distance and installation quality still matter, especially as speeds increase. Good routing and clean terminations prevent many of the “mystery” network problems technicians run into.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Shielded Twisted Pair (STP) and Shielding Types</h2><ul><li>Shielded cabling adds foil and/or braided screens to reduce EMI and crosstalk in noisy environments (industrial spaces, near motors, etc.).</li><li>Common styles include shielding around the whole cable, around each pair, or both (e.g., F/UTP, U/FTP, S/FTP).</li><li>Shielding can improve stability, but it usually costs more and can be less flexible than UTP.</li><li>Shielding must be properly bonded/grounded through connectors and patch panels, or it can act like an antenna and worsen interference.</li></ul><div class=\"summary\"><strong>Summary:</strong> STP is used when electrical noise could disrupt reliable Ethernet signaling. The key tradeoff is cost and installation complexity versus better noise protection. Proper grounding is required for shielded designs to work as intended. If shielding is installed incorrectly, you can end up with intermittent issues that look like random drops or poor performance.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Cat Standards (Category Ratings)</h2><ul><li>Category (Cat) ratings define the performance level of twisted-pair cabling and help predict supported speeds/distances.</li><li>Common examples: <strong>Cat 5e</strong> is common for 1 Gbps to 100 m; <strong>Cat 6</strong> improves noise margins and can support 10 Gbps at shorter distances; <strong>Cat 6A</strong> supports 10 Gbps to 100 m.</li><li>Higher categories exist for specialized environments, but cost and installation requirements increase.</li><li>The cable jacket is labeled with its category and type, which helps confirm what’s installed during upgrades or troubleshooting.</li></ul><div class=\"summary\"><strong>Summary:</strong> Cat ratings are the fastest way to estimate whether installed cabling can support an upgrade like higher-speed Ethernet. Cat 5e is still common and capable for Gigabit, while Cat 6/6A are typical when planning for stronger performance and 10G paths. The right choice depends on distance, noise, and long-term needs. Reading jacket labels and documenting cable types makes future troubleshooting much easier.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Copper Cabling Connectors</h2><ul><li><strong>RJ-45</strong> is the standard modular connector for Ethernet over twisted pair; it must match the wiring standard (T568A or T568B) end-to-end.</li><li><strong>Keystone jacks</strong> are commonly used in wall plates; cables are terminated on the back side (often with punch-down IDC) and patched on the front.</li><li><strong>Patch panels</strong> provide a central termination point so permanent cabling stays fixed while short patch cords handle changes.</li><li>Connector quality and termination technique (pair twist maintained close to the end) directly affect link stability at higher speeds.</li></ul><div class=\"summary\"><strong>Summary:</strong> Copper Ethernet relies on consistent connectors and clean terminations to meet performance targets. RJ-45 plugs are common for patch cords and some custom cables, while keystone jacks and patch panels are typical in structured installs. Using the same wiring standard and keeping twists intact near terminations reduces crosstalk. Many cable “mystery issues” trace back to rushed or low-quality terminations.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Copper Cabling Installation Tools</h2><ul><li><strong>Crimper</strong>: attaches modular connectors by pressing pins into the conductors for proper electrical contact.</li><li><strong>Punch-down tool</strong>: terminates wires into insulation displacement connectors (IDC) on jacks and patch panels.</li><li><strong>Strippers/cutters</strong>: prepare cable jackets cleanly without nicking conductors (which can cause intermittent faults).</li><li>Using the correct tool for the connector type reduces rework and improves long-term reliability.</li></ul><div class=\"summary\"><strong>Summary:</strong> Cable quality is strongly tied to proper tools and technique. Crimpers are for modular ends, while punch-down tools are for structured terminations like jacks and patch panels. Clean stripping and careful handling prevent hidden conductor damage. Good terminations reduce future troubleshooting because physical-layer failures become far less common.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Copper Cabling Test Tools</h2><ul><li><strong>Cable tester</strong>: checks continuity and pinout to catch opens, shorts, crossed pairs, and split pairs.</li><li><strong>Tone generator &amp; probe</strong>: helps identify which cable run maps to a wall port or patch panel position.</li><li><strong>Loopback plug</strong>: sends transmitted signals back to the receiver to validate a port/NIC during troubleshooting.</li><li>Advanced certifiers can validate performance against category specs (useful for new installs or after major changes).</li></ul><div class=\"summary\"><strong>Summary:</strong> Test tools let you prove whether cabling is wired correctly and whether the link layer can be trusted. Basic testers quickly catch wiring mistakes after termination. Toners help you trace cables when documentation is missing. Loopback tests help isolate whether a problem is in the cable path or the network interface itself.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Network Taps</h2><ul><li>A network tap provides a way to copy traffic from a link for monitoring and analysis without relying only on switch features.</li><li>Taps are used for troubleshooting, diagnostics, and security monitoring when packet-level visibility is needed.</li><li>Because taps sit on the physical link, they can provide a consistent copy of traffic even when configurations change.</li><li>Use taps only with authorization—captured traffic can contain sensitive data.</li></ul><div class=\"summary\"><strong>Summary:</strong> Network taps are purpose-built tools for capturing traffic visibility at the physical layer. They&#39;re especially useful when you need accurate packet data for troubleshooting or investigations. Proper placement matters so you don&#39;t disrupt the link. Since captured data can be sensitive, taps must be used responsibly and within policy.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Copper Cabling Installation Considerations</h2><ul><li><strong>Plenum-rated</strong> cable is used in air-handling spaces; it reduces smoke/toxic fumes compared to standard jackets.</li><li>Route copper away from high-EMI sources, avoid tight bends, and protect cables from pinches and heavy compression.</li><li>Maintain proper bend radius and don&#39;t untwist pairs more than necessary near terminations to preserve performance.</li><li>Label and document runs (wall port → patch panel → switch port) so troubleshooting isn&#39;t guesswork later.</li></ul><div class=\"summary\"><strong>Summary:</strong> A copper link can test “good” on day one and still fail later if it’s routed poorly or stressed mechanically. Environment and jacket rating matter, especially in plenum spaces and areas with electrical noise. Termination technique is critical for higher speeds because small mistakes increase crosstalk. Documentation and labeling are the difference between a fast fix and hours of tracing.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Optical (Fiber) Cabling</h2><ul><li>Fiber carries data as light, making it immune to EMI and ideal for long distances and high-bandwidth uplinks/backbones.</li><li><strong>Single-mode</strong> supports very long distances; <strong>multimode</strong> is common for shorter runs inside buildings/data centers.</li><li>Common connectors include <strong>LC</strong>, <strong>SC</strong>, and <strong>ST</strong>; fiber links often use transceivers (e.g., SFP modules) matched to speed, wavelength, and fiber type.</li><li>Clean connectors and proper handling (bend radius, no crushing) are critical—contamination and stress are common causes of attenuation.</li></ul><div class=\"summary\"><strong>Summary:</strong> Fiber is chosen when distance, bandwidth, or electrical noise makes copper impractical. Single-mode and multimode support different distance and equipment requirements, so matching transceivers and connectors is essential. Fiber is also sensitive to physical stress and dirty connectors, which can create intermittent or weak links. Good cleaning and handling practices are a major part of reliable fiber support.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Coaxial Cabling</h2><ul><li>Coax uses a central conductor with shielding around it, which makes it effective for RF signals and helps block interference.</li><li>It’s common for broadband Internet (cable modem handoffs), some video distribution, and certain security/media applications.</li><li>Install quality depends on tight, properly terminated connectors and correct splitter usage to avoid signal loss and noise.</li><li>Troubleshooting often includes checking connector ends, splitters, cable damage, and signal levels from the provider or source equipment.</li></ul><div class=\"summary\"><strong>Summary:</strong> Coax is still widely used even when endpoint LANs are Ethernet, especially for Internet service delivery. Its shielding helps protect RF signals, but connectors and splitters can easily degrade performance if installed poorly. Physical damage and loose connections are common causes of signal issues. When speeds or stability are poor, checking the coax path end-to-end is usually the fastest way to find the problem.</div>",
+      "images": []
+    },
+
+    { "content": "<h2>Wireless Network</h2>", "images": [] },
+
+    {
+      "content": "<h2>Access Points</h2><ul><li>Most Wi-Fi networks use <strong>infrastructure mode</strong>, where clients connect through an access point (AP) rather than directly to each other.</li><li>The AP bridges wireless clients to the wired LAN and handles client authentication/association to the SSID.</li><li>In business environments, APs are commonly powered via <strong>PoE</strong> so they can be mounted where coverage is best (often ceilings).</li><li>Troubleshooting often starts with verifying SSID settings, channel/band selection, and whether the AP is properly connected to the wired network.</li></ul><div class=\"summary\"><strong>Summary:</strong> Access points are the core building block of most Wi-Fi networks because they centralize connectivity and management. They connect wireless clients to the wired LAN and control how devices join the network. PoE makes AP placement easier, which improves coverage and user experience. Many Wi-Fi problems are solved by validating AP configuration and its wired uplink first.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Frequency Bands</h2><ul><li><strong>2.4 GHz</strong>: best range and wall penetration, but crowded and more interference-prone (Bluetooth, microwaves, neighboring Wi-Fi).</li><li><strong>5 GHz</strong>: more channels and typically better throughput, but shorter range than 2.4 GHz.</li><li><strong>6 GHz</strong>: newest Wi-Fi band (Wi-Fi 6E/7) with lots of clean spectrum and high performance, but shortest range.</li><li>Band choice is a tradeoff between coverage, capacity, and interference; dual/tri-band APs help distribute clients effectively.</li></ul><div class=\"summary\"><strong>Summary:</strong> Wi-Fi performance is heavily influenced by which band clients use. 2.4 GHz travels farther but is often noisy, while 5 GHz usually offers better capacity and less interference. 6 GHz provides even more usable spectrum, which is excellent for dense environments, but it won’t reach as far. Understanding band tradeoffs helps explain why a strong signal isn’t always a fast connection.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>IEEE 802.11a</h2><ul><li>802.11a operates in the <strong>5 GHz</strong> band and supports up to <strong>54 Mbps</strong> (legacy by today’s standards).</li><li>5 GHz offers more non-overlapping channels than 2.4 GHz, which helps reduce congestion.</li><li>Some 5 GHz channels require DFS behavior to avoid interfering with radar/satellite systems.</li><li>Knowing 802.11a helps explain why 5 GHz historically performed better than 2.4 GHz in busy environments.</li></ul><div class=\"summary\"><strong>Summary:</strong> 802.11a is an early 5 GHz Wi-Fi standard and is mostly important now for understanding band behavior. While the speed is low compared to modern Wi-Fi, its use of 5 GHz demonstrates why higher-frequency Wi-Fi can be less congested. Regulatory requirements like DFS can affect which channels are available. Many modern 5 GHz benefits build on these same concepts.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>IEEE 802.11b/g</h2><ul><li>802.11b uses <strong>2.4 GHz</strong> and supports up to <strong>11 Mbps</strong>; 802.11g also uses 2.4 GHz and supports up to <strong>54 Mbps</strong>.</li><li>2.4 GHz has fewer clean channel choices and is more likely to suffer interference and overlapping channel problems.</li><li>802.11g improved speed while maintaining backward compatibility with 802.11b devices.</li><li>2.4 GHz is still used for range and legacy support, but performance tuning often prioritizes 5 GHz/6 GHz for capacity.</li></ul><div class=\"summary\"><strong>Summary:</strong> 802.11b/g are 2.4 GHz standards that help explain why some Wi-Fi networks feel slow or unstable in crowded spaces. The band is shared with many devices, so interference is common. 802.11g improved performance but still inherits the limitations of 2.4 GHz. Modern networks often keep 2.4 GHz available while steering performance-sensitive devices to faster bands.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>IEEE 802.11n (Wi-Fi 4)</h2><ul><li>802.11n operates in <strong>2.4 GHz and/or 5 GHz</strong> and introduced <strong>MIMO</strong> (multiple antennas/streams) to improve throughput and reliability.</li><li>It can use channel bonding (20/40 MHz) to increase bandwidth, but bonding must be used carefully in crowded environments.</li><li>Real-world performance depends on stream count (1x1, 2x2, 3x3), signal quality, and interference—not just the standard name.</li><li>802.11n is common in older devices and still appears in mixed environments with newer Wi-Fi generations.</li></ul><div class=\"summary\"><strong>Summary:</strong> 802.11n was a major improvement because MIMO made Wi-Fi faster and more stable. It can use wider channels, but that can increase interference if the spectrum is busy. Two devices labeled “Wi-Fi 4” can perform very differently depending on their antenna/stream configuration. Understanding streams and band choice is key when troubleshooting older Wi-Fi clients.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Identify IEEE 802.11 Standards (Quick Map)</h2><ul><li><strong>802.11a</strong> = 5 GHz (legacy) • <strong>802.11b/g</strong> = 2.4 GHz (legacy) • <strong>802.11n</strong> = 2.4/5 GHz (Wi-Fi 4).</li><li><strong>802.11ac</strong> = 5 GHz (Wi-Fi 5) • <strong>802.11ax</strong> = 2.4/5/6 GHz (Wi-Fi 6/6E) • <strong>802.11be</strong> = 2.4/5/6 GHz (Wi-Fi 7).</li><li>Newer generations focus on better efficiency in busy networks (serving many clients well), not just peak speed.</li><li>When identifying a standard, look at band support, generation name (Wi-Fi 5/6/7), and key feature clues (MIMO, OFDMA, MLO).</li></ul><div class=\"summary\"><strong>Summary:</strong> Wi-Fi standards can be identified by their 802.11 letter and the band(s) they use. Wi-Fi generation names (5/6/7) simplify the labels and are common in product specs. Newer standards generally handle high client density better by improving how airtime is shared. A quick map like this helps students interpret router/AP specs and troubleshoot compatibility issues faster.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Wi-Fi 5 (802.11ac) and Wi-Fi 6/6E (802.11ax)</h2><ul><li><strong>Wi-Fi 5 (ac)</strong> uses 5 GHz and supports wider channels (80/160 MHz) and MU-MIMO to improve capacity and throughput.</li><li><strong>Wi-Fi 6 (ax)</strong> improves efficiency in crowded networks with features like <strong>OFDMA</strong> and better handling of many clients at once.</li><li><strong>Wi-Fi 6E</strong> extends Wi-Fi 6 into the <strong>6 GHz</strong> band, adding more clean spectrum and reducing congestion.</li><li>Real results still depend on signal strength, interference, device capabilities, and AP placement/tuning.</li></ul><div class=\"summary\"><strong>Summary:</strong> Wi-Fi 5 boosted speed mainly through 5 GHz and wider channels, making it a strong upgrade from older Wi-Fi for many homes. Wi-Fi 6 focuses more on efficiency when many devices are connected, so performance stays consistent under load. Wi-Fi 6E adds the 6 GHz band to reduce congestion and improve high-capacity deployments. Choosing between them often comes down to client device support and how crowded the environment is.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Wi-Fi 7 (802.11be)</h2><ul><li>Wi-Fi 7 expands capability across 2.4/5/6 GHz and supports very wide channels (including 320 MHz in 6 GHz where available).</li><li><strong>MLO (Multi-Link Operation)</strong> lets devices use multiple bands/links to reduce latency and improve throughput.</li><li>Designed for high-performance and high-density use cases where both speed and responsiveness matter.</li><li>To benefit fully, both the client and the AP must support Wi-Fi 7 features.</li></ul><div class=\"summary\"><strong>Summary:</strong> Wi-Fi 7 builds on Wi-Fi 6 by expanding bandwidth and improving how devices use multiple links. MLO is a key feature because it can improve responsiveness and stability when a single band is congested. Wi-Fi 7 is most noticeable in demanding environments with many devices or high-performance needs. Like any Wi-Fi upgrade, the client device capabilities determine how much improvement users will actually see.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Wireless LAN Installation Considerations</h2><ul><li>Plan SSIDs and security settings intentionally: consistent naming, modern encryption, and clear guest vs internal network separation.</li><li>Decide band strategy (same SSID across bands vs separate SSIDs) based on user needs and device behavior.</li><li>AP placement matters: ceilings, central locations, and avoiding heavy obstructions improve coverage; too much transmit power can cause sticky-client roaming problems.</li><li>Channel planning and interference awareness reduce drops and slowdowns—measure and adjust instead of guessing.</li></ul><div class=\"summary\"><strong>Summary:</strong> Wireless success is mostly design and placement, not just “buy a better router.” SSID/security decisions affect usability and risk, while band strategy influences roaming and performance. Good AP placement and sensible power levels improve real-world coverage more than raw advertised speeds. Channel planning should be based on the environment so Wi-Fi stays stable as device density increases.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Wi-Fi Analyzers</h2><ul><li>Wi-Fi analyzers measure signal strength (dBm), channel utilization, and interference sources to support better placement and tuning.</li><li>They help identify congestion (too many networks on the same channel) and coverage gaps (weak signal zones).</li><li>Signal-to-noise ratio (SNR) is critical for stability—strong signal doesn’t help if noise is also high.</li><li>Analyzer data supports changes like moving APs, adjusting channels, reducing overlap, or steering clients to less congested bands.</li></ul><div class=\"summary\"><strong>Summary:</strong> Analyzers make Wi-Fi troubleshooting measurable instead of guess-based. They show where signal is weak, where channels are crowded, and how interference impacts performance. Good Wi-Fi is a balance of signal strength and low noise, which is why SNR matters. Using analyzer data helps justify changes and improves results in busy or difficult environments.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Long-Range Fixed Wireless</h2><ul><li>Fixed wireless can connect two sites without trenching cable, often using point-to-point links with directional antennas.</li><li>Line-of-sight and precise alignment are critical; obstacles and weather can impact reliability depending on the system.</li><li>Links may use licensed spectrum (less interference) or unlicensed spectrum (shared bands like 2.4/5 GHz with higher interference risk).</li><li>Design includes power planning (dBm), antenna gain (dBi), and EIRP constraints to stay legal and reliable.</li></ul><div class=\"summary\"><strong>Summary:</strong> Long-range fixed wireless is a practical solution when running fiber or copper is too expensive or impossible. The biggest success factors are line-of-sight, solid mounting/alignment, and interference management. Spectrum choice affects reliability because unlicensed bands can be crowded. Understanding power and gain helps you design a link that works well and stays within regulations.</div>",
+      "images": []
+    },
+    {
+      "content": "<h2>Bluetooth, RFID, and NFC</h2><ul><li><strong>Bluetooth</strong> is a short-range wireless technology commonly used for keyboards, headsets, mice, and quick peripheral connections.</li><li><strong>RFID</strong> uses tags and readers to identify/track items (inventory, access badges, asset tracking) at short to moderate ranges.</li><li><strong>NFC</strong> is extremely short-range (tap-to-pay, quick pairing) and can operate with devices acting as both tag and reader.</li><li>These technologies solve different problems than Wi-Fi and are often used alongside Wi-Fi rather than replacing it.</li></ul><div class=\"summary\"><strong>Summary:</strong> Bluetooth, RFID, and NFC are common “non-Wi-Fi” wireless technologies students will see in real environments. Bluetooth connects personal devices and peripherals, usually prioritizing low power and convenience. RFID focuses on identification and tracking through tags, while NFC supports near-contact interactions like payments and tap-based pairing. Knowing range and purpose helps you choose the right tool and troubleshoot the correct layer.</div>",
+      "images": []
+    }
+  ];
+
+  // Slide state
+  let index = 0;
+  // Carousel state (for current slide)
+  let imgIndex = 0;
+  // Audio state
+  let audioEnabled = false;
+
+  function audioPathForCurrentSlide() {
+    return `audio/${pad2(index + 1)}.mp3`;
+  }
+
+  async function playCurrentAudio() {
+    if (!audioEnabled) return;
+    const audio = document.getElementById("slideAudio");
+    audio.src = audioPathForCurrentSlide();
+    audio.currentTime = 0;
+    try { await audio.play(); }
+    catch (err) { console.log("Audio play blocked or missing file:", err); }
+  }
+
+  function enableAudio() {
+    audioEnabled = true;
+    document.getElementById("replayBtn").disabled = false;
+    playCurrentAudio();
+  }
+
+  function replayAudio() { playCurrentAudio(); }
+
+  function renderCarousel() {
+    const wrap = document.getElementById("carouselWrap");
+    const imgEl = document.getElementById("carouselImg");
+    const dotsEl = document.getElementById("dots");
+    const imgCounter = document.getElementById("imgCounter");
+    const prevBtn = document.getElementById("prevImgBtn");
+    const nextBtn = document.getElementById("nextImgBtn");
+
+    const filenames = (slides[index].images || []).filter(Boolean);
+
+    if (filenames.length === 0) { wrap.style.display = "none"; return; }
+    wrap.style.display = "block";
+
+    if (imgIndex < 0) imgIndex = 0;
+    if (imgIndex > filenames.length - 1) imgIndex = filenames.length - 1;
+
+    imgEl.src = `images/${filenames[imgIndex]}`;
+    imgCounter.textContent = `Image ${imgIndex + 1} / ${filenames.length}`;
+
+    prevBtn.disabled = (filenames.length <= 1) || (imgIndex === 0);
+    nextBtn.disabled = (filenames.length <= 1) || (imgIndex === filenames.length - 1);
+
+    dotsEl.innerHTML = "";
+    if (filenames.length > 1) {
+      filenames.forEach((_, i) => {
+        const b = document.createElement("button");
+        b.className = "dot" + (i === imgIndex ? " active" : "");
+        b.title = `Go to image ${i + 1}`;
+        b.onclick = () => { imgIndex = i; renderCarousel(); };
+        dotsEl.appendChild(b);
+      });
+    }
+  }
+
+  function nextImage() {
+    const filenames = (slides[index].images || []).filter(Boolean);
+    if (imgIndex < filenames.length - 1) { imgIndex++; renderCarousel(); }
+  }
+
+  function prevImage() {
+    if (imgIndex > 0) { imgIndex--; renderCarousel(); }
+  }
+
+  function showSlide() {
+    document.getElementById("slide").innerHTML = slides[index].content;
+    document.getElementById("counter").textContent = `Slide ${index + 1} / ${slides.length}`;
+    imgIndex = 0;
+    renderCarousel();
+    playCurrentAudio();
+  }
+
+  function nextSlide() { if (index < slides.length - 1) index++; showSlide(); }
+  function prevSlide() { if (index > 0) index--; showSlide(); }
+  function goToFirstSlide() { index = 0; showSlide(); }
+
+  // Return Home goes back to repo root (one directory up from pwd/)
+  function goHome() { window.location.href = "../"; }
+
+  // Keyboard shortcuts:
+  // Left/Right = slide nav
+  // A/D = image nav
+  // Home = first slide
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") nextSlide();
+    if (e.key === "ArrowLeft") prevSlide();
+    if (e.key.toLowerCase() === "d") nextImage();
+    if (e.key.toLowerCase() === "a") prevImage();
+    if (e.key === "Home") goToFirstSlide();
+  });
+
+  showSlide();
+</script>
+</body>
+</html>
