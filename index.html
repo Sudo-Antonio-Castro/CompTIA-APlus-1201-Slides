@@ -3,192 +3,290 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CompTIA A+ 1201 Slides</title>
-  <meta name="description" content="CompTIA A+ 1201 Slides and Quizzes" />
+  <title>CompTIA A+ 220-1201 — Study Hub</title>
+  <meta name="description" content="CompTIA A+ 220-1201 study modules, quizzes, and midterm." />
   <style>
     :root{
-      --bg:#fff; --text:#0b0b0f; --muted:#5b5b66; --border:#e6e6ee;
-      --panel:#fff; --shadow:0 6px 30px rgba(0,0,0,.08);
-      --radius:14px; --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      --link:#111;
+      --bg:#ffffff; --panel:#ffffff; --text:#0b0b0f; --muted:#5b5b66; --border:#e6e6ee;
+      --shadow:0 6px 30px rgba(0,0,0,.08);
+      --accent:#111111; --accent-2:#2b2b2b; --chip:#f2f2f7; --link:#111111;
+      --focus:0 0 0 3px rgba(0,0,0,.18);
+      --radius:14px; --radius-sm:10px; --max:980px;
+      --font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
     }
-
-    /* Dark mode (still black/white) */
     [data-theme="dark"]{
-      --bg:#0b0b0f;
-      --panel:#101014;
-      --text:#f6f6fb;
-      --muted:#b5b5c2;
-      --border:#262633;
+      --bg:#0b0b0f; --panel:#101014; --text:#f6f6fb; --muted:#b5b5c2; --border:#262633;
       --shadow:0 10px 40px rgba(0,0,0,.40);
-      --link:#f6f6fb;
+      --accent:#ffffff; --accent-2:#e7e7ef; --chip:#17171e; --link:#f6f6fb;
+      --focus:0 0 0 3px rgba(255,255,255,.18);
     }
-
-    *{box-sizing:border-box}
-    body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.55}
-    .wrap{max-width:980px;margin:0 auto;padding:22px}
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{margin:0;font-family:var(--font);color:var(--text);background:var(--bg);line-height:1.55;}
+    a{color:var(--link);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:8px;}
 
     header{
-      border-bottom:1px solid var(--border);
-      position:sticky;top:0;
-      background:color-mix(in oklab, var(--bg) 88%, transparent);
+      position:sticky;top:0;z-index:30;
+      background:color-mix(in oklab,var(--bg) 88%,transparent);
       backdrop-filter:blur(10px);
-      z-index:10;
+      border-bottom:1px solid var(--border);
     }
-
     .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
+      display:flex;align-items:center;gap:12px;justify-content:space-between;
+      padding:14px 18px;max-width:var(--max);margin:0 auto;
     }
-
-    .brand h1{margin:0;font-size:18px;letter-spacing:.08em;text-transform:uppercase}
-    .brand p{color:var(--muted);margin:10px 0 0}
-
+    .brand{display:flex;align-items:center;gap:10px;}
+    .logo{
+      width:34px;height:34px;border-radius:10px;background:var(--accent);
+      box-shadow:var(--shadow);display:grid;place-items:center;flex:0 0 auto;
+    }
+    .logo svg{width:18px;height:18px;fill:var(--bg);}
+    [data-theme="dark"] .logo svg{fill:#0b0b0f;}
+    .brand h1{font-size:14px;margin:0;letter-spacing:.08em;text-transform:uppercase;opacity:.9;}
+    .sub{font-size:12px;color:var(--muted);margin-top:2px;}
     .btn{
-      border:1px solid var(--border);
-      background:var(--panel);
-      color:var(--text);
-      border-radius:999px;
-      padding:10px 12px;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      user-select:none;
+      border:1px solid var(--border);background:var(--panel);color:var(--text);
+      border-radius:999px;padding:8px 14px;cursor:pointer;
+      display:inline-flex;align-items:center;gap:8px;
+      font-family:var(--font);font-size:13px;user-select:none;
+      transition:border-color .15s;
     }
-    .btn:hover{ border-color: color-mix(in oklab, var(--border) 70%, var(--text)); }
-    .btn svg{ width:16px; height:16px; fill: var(--text); opacity:.85; }
+    .btn:hover{border-color:color-mix(in oklab,var(--border) 70%,var(--accent));}
+    .btn svg{width:16px;height:16px;fill:var(--text);opacity:.8;}
 
-    .panel{
-      margin-top:18px;background:var(--panel);border:1px solid var(--border);
-      border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px 18px;}
+
+    /* Hero */
+    .hero{
+      padding:32px 0 24px;
+      border-bottom:1px solid var(--border);
+      margin-bottom:24px;
     }
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:12px}
+    .hero-label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+    .hero h2{font-size:28px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px;}
+    .hero p{font-size:15px;color:var(--muted);margin:0;max-width:560px;}
 
+    /* Section headings */
+    .section-head{
+      display:flex;align-items:center;gap:10px;
+      margin-bottom:12px;
+    }
+    .section-head h3{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0;}
+    .section-line{flex:1;height:1px;background:var(--border);}
+
+    /* Module grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:28px;}
+
+    /* Cards */
     a.card{
-      display:block;padding:14px;border:1px solid var(--border);border-radius:var(--radius);
+      display:flex;flex-direction:column;justify-content:space-between;
+      padding:16px;border:1px solid var(--border);border-radius:var(--radius);
       color:var(--text);text-decoration:none;background:var(--panel);
+      transition:border-color .15s,box-shadow .15s;
+      min-height:110px;
     }
-    a.card:hover{border-color:color-mix(in oklab, var(--border) 60%, var(--text))}
-    .title{font-weight:700;margin:0 0 6px}
-    .meta{color:var(--muted);font-size:13px;margin:0}
+    a.card:hover{
+      border-color:color-mix(in oklab,var(--border) 55%,var(--accent));
+      box-shadow:var(--shadow);
+      text-decoration:none;
+    }
+    .card-top{}
+    .card-title{font-weight:600;font-size:15px;margin:0 0 5px;}
+    .card-desc{color:var(--muted);font-size:13px;margin:0;line-height:1.5;}
+    .card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:14px;}
     .chip{
-      display:inline-block;margin-top:10px;font-size:12px;color:var(--muted);
-      border:1px solid var(--border);border-radius:999px;padding:6px 10px;
-      background: color-mix(in oklab, var(--panel) 70%, transparent);
+      display:inline-block;font-size:11px;font-weight:500;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--muted);
+      border:1px solid var(--border);border-radius:999px;padding:4px 10px;
+      background:color-mix(in oklab,var(--chip) 70%,transparent);
+    }
+    .chip.quiz{color:var(--muted);}
+    .chip.midterm{color:var(--muted);}
+    .arrow{font-size:16px;color:var(--muted);transition:transform .15s;}
+    a.card:hover .arrow{transform:translateX(3px);}
+
+    /* Special full-width midterm card */
+    a.card.wide{grid-column:1/-1;}
+
+    footer{
+      margin-top:32px;padding-top:18px;
+      border-top:1px solid var(--border);
+      color:var(--muted);font-size:12px;
+      display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
     }
 
-    footer{margin:20px 0 0;color:var(--muted);font-size:12px;text-align:center}
+    @media(max-width:600px){
+      .hero h2{font-size:22px;}
+      .grid{grid-template-columns:1fr;}
+    }
   </style>
 </head>
 <body>
-<header>
-  <div class="wrap topbar">
-    <div class="brand">
-      <h1>CompTIA A+ 1201 Slides</h1>
-      <p>Browse modules and quizzes.</p>
-    </div>
 
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-3.8 9.7-9 10-5.2-.3-9-5-9-10V6l9-4zm0 4.2L6 8.7v3.4c0 3.7 2.7 7.1 6 7.6 3.3-.5 6-3.9 6-7.6V8.7l-6-2.5z"/></svg>
+      </div>
+      <div>
+        <h1>CompTIA A+ 220-1201</h1>
+        <div class="sub">Study Hub</div>
+      </div>
+    </div>
     <button class="btn" id="themeBtn" type="button" aria-label="Toggle theme">
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 18a6 6 0 110-12 6 6 0 010 12zm0 4l-1-2h2l-1 2zM12 2l1 2h-2l1-2zM2 12l2-1v2l-2-1zm20 0l-2 1v-2l2 1zM4.2 4.2l2.1.7-1.4 1.4-.7-2.1zm15.6 15.6l-2.1-.7 1.4-1.4.7 2.1zM19.8 4.2l.7 2.1-1.4-1.4 2.1-.7zM4.2 19.8l-.7-2.1 1.4 1.4-2.1.7z"/>
-      </svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 18a6 6 0 110-12 6 6 0 010 12zm0 4l-1-2h2l-1 2zM12 2l1 2h-2l1-2zM2 12l2-1v2l-2-1zm20 0l-2 1v-2l2 1zM4.2 4.2l2.1.7-1.4 1.4-.7-2.1zm15.6 15.6l-2.1-.7 1.4-1.4.7 2.1zM19.8 4.2l.7 2.1-1.4-1.4 2.1-.7zM4.2 19.8l-.7-2.1 1.4 1.4-2.1.7z"/></svg>
       <span id="themeLabel">Light</span>
     </button>
   </div>
 </header>
 
 <main class="wrap">
-  <section class="panel" aria-label="Modules">
-    <div class="grid">
 
-       <a class="card" href="./Motherboard-and-Connectors/">
-        <div class="title">Motherboard and Connectors</div>
-        <p class="meta">Slides for Motherboard and Connectors</p>
+  <div class="hero">
+    <div class="hero-label">CompTIA A+ 220-1201</div>
+    <h2>Study Modules &amp; Quizzes</h2>
+    <p>Select a module to study or a quiz to test your knowledge. Each module includes slides, summaries, and A+ exam tips.</p>
+  </div>
+
+  <div class="section-head">
+    <h3>Modules</h3>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="grid">
+    <a class="card" href="./Motherboard-and-Connectors/">
+      <div class="card-top">
+        <div class="card-title">Motherboard and Connectors</div>
+        <p class="card-desc">Cables, connectors, motherboard form factors, headers, expansion slots, and legacy interfaces.</p>
+      </div>
+      <div class="card-foot">
         <span class="chip">Slides</span>
-      </a>
+        <span class="arrow">→</span>
+      </div>
+    </a>
 
-      <a class="card" href="./Motherboard-and-Connectors-Quiz/">
-        <div class="title">Motherboard and Connectors Quiz</div>
-        <p class="meta">Slides for Motherboard and Connectors</p>
-        <span class="chip">Quiz</span>
-      </a>
-      
-      <a class="card" href="./System-Devices/">
-        <div class="title">Installing System Devices</div>
-        <p class="meta">Slides for power, cooling, storage, memory, and CPUs.</p>
+    <a class="card" href="./System-Devices/">
+      <div class="card-top">
+        <div class="card-title">Installing System Devices</div>
+        <p class="card-desc">Power supplies, cooling, storage, memory, and CPUs — installation and key concepts.</p>
+      </div>
+      <div class="card-foot">
         <span class="chip">Slides</span>
-      </a>
+        <span class="arrow">→</span>
+      </div>
+    </a>
 
-      <a class="card" href="./System-Devices-Quiz/">
-        <div class="title">System Devices Quiz</div>
-        <p class="meta">40-question randomized quiz (timed)</p>
-        <span class="chip">Quiz</span>
-      </a>
-
-       <a class="card" href="./Troubleshooting-Hardware/">
-        <div class="title">Troubleshooting Hardware</div>
-        <p class="meta">Slides for Troubleshooting Hardware</p>
+    <a class="card" href="./Troubleshooting-Hardware/">
+      <div class="card-top">
+        <div class="card-title">Troubleshooting Hardware</div>
+        <p class="card-desc">Diagnosing and resolving common hardware failures across motherboards, storage, display, and more.</p>
+      </div>
+      <div class="card-foot">
         <span class="chip">Slides</span>
-      </a>
+        <span class="arrow">→</span>
+      </div>
+    </a>
 
-     <a class="card" href="./Troubleshooting-Hardware-Quiz/">
-        <div class="title">Troubleshooting Hardware Quiz</div>
-        <p class="meta">30-question randomized quiz (timed</p>
-        <span class="chip">Quiz</span>
-      </a>
-
-     <a class="card" href="./Networking/">
-        <div class="title">Networking</div>
-        <p class="meta">Slides for Networking</p>
+    <a class="card" href="./Networking/">
+      <div class="card-top">
+        <div class="card-title">Networking</div>
+        <p class="card-desc">Network types, hardware, copper and fiber cabling, wireless standards, and Wi-Fi installation.</p>
+      </div>
+      <div class="card-foot">
         <span class="chip">Slides</span>
-      </a>
-    </div>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+  </div>
 
-     <a class="card" href="./Midterm/">
-        <div class="title">Midterm</div>
-        <p class="meta">Midterm</p>
-        <span class="chip">Midterm</span>
-      </a>
-    </div>
-    
-  </section>
+  <div class="section-head">
+    <h3>Quizzes</h3>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="grid">
+    <a class="card" href="./Motherboard-and-Connectors-Quiz/">
+      <div class="card-top">
+        <div class="card-title">Motherboard and Connectors Quiz</div>
+        <p class="card-desc">Test your knowledge on connectors, form factors, and motherboard components.</p>
+      </div>
+      <div class="card-foot">
+        <span class="chip quiz">Quiz</span>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a class="card" href="./System-Devices-Quiz/">
+      <div class="card-top">
+        <div class="card-title">System Devices Quiz</div>
+        <p class="card-desc">40-question randomized quiz — timed. Power, cooling, storage, memory, and CPUs.</p>
+      </div>
+      <div class="card-foot">
+        <span class="chip quiz">Quiz · 40 questions</span>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a class="card" href="./Troubleshooting-Hardware-Quiz/">
+      <div class="card-top">
+        <div class="card-title">Troubleshooting Hardware Quiz</div>
+        <p class="card-desc">30-question randomized quiz — timed. Diagnose common hardware failures.</p>
+      </div>
+      <div class="card-foot">
+        <span class="chip quiz">Quiz · 30 questions</span>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="section-head">
+    <h3>Assessment</h3>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="grid">
+    <a class="card wide" href="./Midterm/">
+      <div class="card-top">
+        <div class="card-title">Midterm</div>
+        <p class="card-desc">Comprehensive midterm assessment covering all modules studied so far.</p>
+      </div>
+      <div class="card-foot">
+        <span class="chip midterm">Midterm</span>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+  </div>
 
   <footer>
-    <span id="year"></span> CompTIA A+ 1201 Slides
+    <span>CompTIA A+ 220-1201 Study Hub</span>
+    <span id="year"></span>
   </footer>
+
 </main>
 
 <script>
-  // Year
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  // Theme toggle (default dark unless user saved otherwise)
   const themeBtn = document.getElementById("themeBtn");
   const themeLabel = document.getElementById("themeLabel");
-
-  // Default is dark via <html data-theme="dark">.
-  // If user has a saved preference, use it instead.
-  const savedTheme = localStorage.getItem("kb_theme");
-  if (savedTheme === "light" || savedTheme === "dark") {
-    document.documentElement.setAttribute("data-theme", savedTheme);
+  const saved = localStorage.getItem("kb_theme");
+  if (saved === "light" || saved === "dark") {
+    document.documentElement.setAttribute("data-theme", saved);
   }
   updateThemeLabel();
-
   themeBtn.addEventListener("click", () => {
-    const current = document.documentElement.getAttribute("data-theme") || "dark";
-    const next = current === "dark" ? "light" : "dark";
+    const cur = document.documentElement.getAttribute("data-theme") || "dark";
+    const next = cur === "dark" ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", next);
     localStorage.setItem("kb_theme", next);
     updateThemeLabel();
   });
-
   function updateThemeLabel(){
-    const current = document.documentElement.getAttribute("data-theme") || "dark";
-    // Button shows the theme you can switch to
-    themeLabel.textContent = current === "dark" ? "Light" : "Dark";
+    const cur = document.documentElement.getAttribute("data-theme") || "dark";
+    themeLabel.textContent = cur === "dark" ? "Light" : "Dark";
   }
 </script>
 </body>
